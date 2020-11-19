@@ -100,4 +100,3 @@ fabric.properties
 .vscode
 .vs
 dist
-src/infrastructure/firebase/config.js

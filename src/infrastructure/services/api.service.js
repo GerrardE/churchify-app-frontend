@@ -1,6 +1,6 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "http://localhost:5000/api/v1/";
+axios.defaults.baseURL = process.env.baseURL;
 axios.defaults.headers.post["Content-Type"] =
   "application/x-www-form-urlencoded";
 const AUTH_TOKEN = localStorage.getItem("token");
