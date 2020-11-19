@@ -11,8 +11,6 @@ const firebaseConfig = {
   appId: process.env.appId,
 };
 
-// eslint-disable-next-line no-console
-console.log(firebaseConfig);
 firebase.initializeApp(firebaseConfig);
 
 const projectFirestore = firebase.firestore();
