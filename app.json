@@ -1,0 +1,7 @@
+{
+  "name": "churchify-app-frontend",
+  "description": "Churchify App",
+  "scripts": {
+    "postdeploy": "npm run build"
+  }
+}

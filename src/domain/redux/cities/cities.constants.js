@@ -1,0 +1,11 @@
+const citiesConstants = {
+  CITY_LOADING: "CITY_LOADING",
+
+  GET_CITIES_SUCCESS: "GET_CITIES_SUCCESS",
+  GET_CITIES_FAIL: "GET_CITIES_FAIL",
+
+  GET_CITY_SUCCESS: "GET_CITY_SUCCESS",
+  GET_CITY_FAIL: "GET_CITY_FAIL",
+};
+
+export default citiesConstants;

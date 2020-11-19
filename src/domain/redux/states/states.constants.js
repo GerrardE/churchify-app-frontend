@@ -1,0 +1,11 @@
+const statesConstants = {
+  STATE_LOADING: "STATE_LOADING",
+
+  GET_STATES_SUCCESS: "GET_STATES_SUCCESS",
+  GET_STATES_FAIL: "GET_STATES_FAIL",
+
+  GET_STATE_SUCCESS: "GET_STATE_SUCCESS",
+  GET_STATE_FAIL: "GET_STATE_FAIL",
+};
+
+export default statesConstants;
