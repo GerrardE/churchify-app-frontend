@@ -60,7 +60,7 @@
     "country-state-city": "^1.0.5",
     "css-loader": "^3.4.1",
     "datatables": "1.10.13",
-    "dotenv": "^8.2.0",
+    "dotenv-webpack": "^5.1.0",
     "easy-pie-chart": "2.1.7",
     "file-loader": "^4.3.0",
     "firebase": "^7.22.0",
