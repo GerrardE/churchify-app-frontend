@@ -52,7 +52,7 @@ const EventCreate = () => {
       <div className="row">
         <div className="col-md-12 mb-2 mt-2">
           <a
-            href={`/dashboard/settings/${parameters}`}
+            href={`/settings/${parameters}`}
             className="btn btn-outline-primary float-right"
             role="button"
             aria-pressed="true"

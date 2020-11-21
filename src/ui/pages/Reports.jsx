@@ -1,12 +1,12 @@
 import React from "react";
-import { ReportsView, Dashboard } from "../components";
+import { ReportView, Dashboard } from "../components";
 
-const Transactions = (props) => {
+const Reports = (props) => {
   return (
     <Dashboard>
-      <ReportsView {...props} />
+      <ReportView {...props} />
     </Dashboard>
   );
 };
 
-export default Transactions;
+export default Reports;

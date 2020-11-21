@@ -32,7 +32,7 @@ const EventView = ({ match, ...rest }) => {
     dispatch(getItems(actions, parameters));
   }, [dispatch, parameters]);
 
-  if (!isEmpty(match.params) && match.path === `/dashboard/settings/${parameters}/:id`) {
+  if (!isEmpty(match.params) && match.path === `/settings/${parameters}/:id`) {
     const { params } = match;
     const { id } = params;
 
@@ -40,7 +40,7 @@ const EventView = ({ match, ...rest }) => {
   }
 
   if (isEmpty(match.params) &&
-    match.path === `/dashboard/settings/${parameters}/create/${parameter}`
+    match.path === `/settings/${parameters}/create/${parameter}`
   ) {
     return <EventCreate props={rest} match={match} />;
   }
@@ -48,7 +48,7 @@ const EventView = ({ match, ...rest }) => {
   return (
     <React.Fragment>
       <a
-        href={`/dashboard/settings/${parameters}/create/${parameter}`}
+        href={`/settings/${parameters}/create/${parameter}`}
         className="btn btn-outline-primary float-right"
         role="button"
         aria-pressed="true"

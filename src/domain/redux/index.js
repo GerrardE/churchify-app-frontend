@@ -11,6 +11,8 @@ import downloads from "./downloads/downloads.reducers";
 import categories from "./categories/categories.reducers";
 import branches from "./branches/branches.reducers";
 import preachers from "./preachers/preachers.reducers";
+import activities from "./activities/activities.reducers";
+import attendances from "./attendance/attendance.reducers";
 import fellowships from "./fellowships/fellowships.reducers";
 import signoutConstants from "./signout/signout.constants";
 
@@ -24,6 +26,8 @@ const appReducer = combineReducers({
   events,
   downloads,
   categories,
+  activities,
+  attendances,
   countries,
   states,
   cities,

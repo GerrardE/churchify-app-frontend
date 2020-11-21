@@ -1,7 +1,7 @@
 const constants = {
   parameters: "zones",
   parameter: "zone",
-  editurl: "/dashboard/settings/zones",
+  editurl: "/settings/zones",
   tableData: [
     {
       Header: "Id",

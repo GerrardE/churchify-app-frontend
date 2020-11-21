@@ -2,58 +2,52 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { getItem, getItems, createItem } from "@infrastructure/services/thunkService";
-import * as downloadActions from "@domain/redux/downloads/downloads.actions";
+import * as attendanceActions from "@domain/redux/attendance/attendance.actions";
 import * as configsActions from "@domain/redux/configs/configs.actions";
-import * as categoryActions from "@domain/redux/categories/categories.actions";
-import constants from "./downloads.constants";
+import * as branchActions from "@domain/redux/branches/branches.actions";
+import * as eventActions from "@domain/redux/events/events.actions";
+import * as preacherActions from "@domain/redux/preachers/preachers.actions";
+import constants from "./reports.constants";
 import { Button } from "../../atoms";
 import { AppLoader } from "../../molecules";
 import getFieldsArray from "../_helpers/fieldGenerator";
 
-const DownloadCreate = () => {
-  const { parameter, parameters, categoryparams } = constants;
+const AttendanceCreate = () => {
+  const { attendanceparam, branchesparams, eventsparams, preachersparams, parameters } = constants;
 
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(getItems(categoryActions, `${categoryparams}`));
-    
-    dispatch(getItem(configsActions, `configs/${parameters}/config`));
-  }, [dispatch, parameters, categoryparams]);
+    dispatch(getItems(branchActions, `${branchesparams}`));
+
+    dispatch(getItems(eventActions, `${eventsparams}`));
+
+    dispatch(getItems(preacherActions, `${preachersparams}`));
+
+    dispatch(getItem(configsActions, `configs/${attendanceparam}/config`));
+  }, [dispatch, attendanceparam, branchesparams, eventsparams, preachersparams]);
   
-  const { downloads, configs, categories } = useSelector((state) => state);
+  const { attendances, configs, branches, events, preachers } = useSelector((state) => state);
   
-  const { loading } = downloads;
+  const { loading } = attendances;
   
   const { config: data } = configs;
   
   const { register, handleSubmit, errors } = useForm();
 
-  const fields = getFieldsArray(data, errors, register, [{}], ()=>{}, [{}], ()=>{}, [{}], categories.categories);
+  const fields = getFieldsArray(data, errors, register, [{}], ()=>{}, [{}], ()=>{}, branches.branches, [{}], events.events, preachers.preachers);
 
   const onSubmit = (data) => {
-    dispatch(createItem(downloadActions, parameters, data));
+    dispatch(createItem(attendanceActions, `${parameters}/${attendanceparam}`, data));
   };
 
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-md-12 mb-2 mt-2">
-          <a
-            href={`/settings/${parameters}`}
-            className="btn btn-outline-primary float-right"
-            role="button"
-            aria-pressed="true"
-          >
-            BACK
-          </a>
-        </div>
-      </div>
-      <div className="row">
         <div className="col-md-2" />
         <div className="col-md-8">
           <div className="bgc-white bd bdrs-3 p-20 mB-20">
-            <h4 className="c-grey-900 mB-20">{`CREATE ${parameter.toUpperCase()}`}</h4>
+            <h4 className="c-grey-900 mB-20">{`SUBMIT ${attendanceparam.toUpperCase()}`}</h4>
             <form
               onSubmit={handleSubmit(onSubmit)}
               className="needs-validation"
@@ -90,4 +84,4 @@ const DownloadCreate = () => {
   );
 };
 
-export default DownloadCreate;
+export default AttendanceCreate;

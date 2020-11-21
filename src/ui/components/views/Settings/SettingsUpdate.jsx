@@ -117,7 +117,7 @@ const SettingsUpdate = ({ id, ...rest }) => {
                       </Button>
                       <a
                         className="btn btn-outline-danger"
-                        href="/dashboard/settings"
+                        href="/settings"
                         role="button"
                       >
                         Cancel

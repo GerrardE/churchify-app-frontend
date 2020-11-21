@@ -157,7 +157,7 @@ const Table = ({ columns, data, actions, actionItems, props, constants }) => {
                         <div className="peer">
                           {
                             actionItems.canview && (
-                              <Link className="td-n c-green-500 cH-green-500 fsz-md p-5" to={`/dashboard/${parameters}/${row.original.id}/view`}>
+                              <Link className="td-n c-green-500 cH-green-500 fsz-md p-5" to={`/${parameters}/${row.original.id}/view`}>
                                 <i className="ti-eye" />
                               </Link>
                             )

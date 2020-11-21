@@ -22,122 +22,133 @@ const routes = [
     component: Reports,
     protected: true,
   },
-  
+  /* REPORTS */
+  {
+    path: "/reports/submit/attendance",
+    component: Reports,
+    protected: true,
+  },
+  {
+    path: "/reports/submit/activity",
+    component: Reports,
+    protected: true,
+  },
+
   /* ZONES */
   {
-    path: "/dashboard/settings/zones",
+    path: "/settings/zones",
     component: Zones,
     protected: true,
   },
   {
-    path: "/dashboard/settings/zones/:id",
+    path: "/settings/zones/:id",
     component: Zones,
     protected: true,
   },
   {
-    path: "/dashboard/settings/zones/create/zone",
+    path: "/settings/zones/create/zone",
     component: Zones,
     protected: true,
   },
 
   /* BRANCHES */
   {
-    path: "/dashboard/settings/branches",
+    path: "/settings/branches",
     component: Branches,
     protected: true,
   },
   {
-    path: "/dashboard/settings/branches/:id",
+    path: "/settings/branches/:id",
     component: Branches,
     protected: true,
   },
   {
-    path: "/dashboard/settings/branches/create/branch",
+    path: "/settings/branches/create/branch",
     component: Branches,
     protected: true,
   },
   
   /* FELLOWSHIPS */
   {
-    path: "/dashboard/settings/fellowships",
+    path: "/settings/fellowships",
     component: Fellowships,
     protected: true,
   },
   {
-    path: "/dashboard/settings/fellowships/:id",
+    path: "/settings/fellowships/:id",
     component: Fellowships,
     protected: true,
   },
   {
-    path: "/dashboard/settings/fellowships/create/fellowship",
+    path: "/settings/fellowships/create/fellowship",
     component: Fellowships,
     protected: true,
   },
   
   /* PREACHERS */
   {
-    path: "/dashboard/settings/preachers",
+    path: "/settings/preachers",
     component: Preachers,
     protected: true,
   },
   {
-    path: "/dashboard/settings/preachers/:id",
+    path: "/settings/preachers/:id",
     component: Preachers,
     protected: true,
   },
   {
-    path: "/dashboard/settings/preachers/create/preacher",
+    path: "/settings/preachers/create/preacher",
     component: Preachers,
     protected: true,
   },
   
   /* DOWNLOADS */
   {
-    path: "/dashboard/settings/downloads",
+    path: "/settings/downloads",
     component: Downloads,
     protected: true,
   },
   {
-    path: "/dashboard/settings/downloads/:id",
+    path: "/settings/downloads/:id",
     component: Downloads,
     protected: true,
   },
   {
-    path: "/dashboard/settings/downloads/create/download",
+    path: "/settings/downloads/create/download",
     component: Downloads,
     protected: true,
   },
   
   /* EVENTS */
   {
-    path: "/dashboard/settings/events",
+    path: "/settings/events",
     component: Events,
     protected: true,
   },
   {
-    path: "/dashboard/settings/events/:id",
+    path: "/settings/events/:id",
     component: Events,
     protected: true,
   },
   {
-    path: "/dashboard/settings/events/create/event",
+    path: "/settings/events/create/event",
     component: Events,
     protected: true,
   },
   
   /* CATEGORIES */
   {
-    path: "/dashboard/settings/categories",
+    path: "/settings/categories",
     component: Categories,
     protected: true,
   },
   {
-    path: "/dashboard/settings/categories/:id",
+    path: "/settings/categories/:id",
     component: Categories,
     protected: true,
   },
   {
-    path: "/dashboard/settings/categories/create/category",
+    path: "/settings/categories/create/category",
     component: Categories,
     protected: true,
   },
