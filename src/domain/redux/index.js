@@ -13,7 +13,11 @@ import branches from "./branches/branches.reducers";
 import preachers from "./preachers/preachers.reducers";
 import activities from "./activities/activities.reducers";
 import attendances from "./attendance/attendance.reducers";
+import memberships from "./membership/membership.reducers";
+import groups from "./groups/groups.reducers";
 import fellowships from "./fellowships/fellowships.reducers";
+import freports from "./freports/freports.reducers";
+import trainings from "./trainings/trainings.reducers";
 import signoutConstants from "./signout/signout.constants";
 
 const appReducer = combineReducers({
@@ -28,6 +32,10 @@ const appReducer = combineReducers({
   categories,
   activities,
   attendances,
+  memberships,
+  groups,
+  freports,
+  trainings,
   countries,
   states,
   cities,

@@ -18,7 +18,7 @@ const constants = {
     },
     {
       Header: "Category",
-      accessor: "category",
+      accessor: "categoryid",
     },
     {
       Header: "Date",

@@ -14,6 +14,7 @@ const getFieldsArray = (
   categories = [{}],
   events = [{}],
   preachers = [{}],
+  fellowships = [{}],
 ) => {
   const fieldsArray = [];
 
@@ -119,6 +120,26 @@ const getFieldsArray = (
               {preachers.map((val) => (
                 <option value={val.id} key={val.id}>
                   {`${val.firstname} ${val.lastname}`}
+                </option>
+              ))}
+            </select>
+            <ErrorMessage message={errors[conf.field]?.message} />
+          </div>
+        ) : conf.field == "fellowshipid" ? (
+          <div className="form-group col-md-6" key={`${conf.field}-17`}>
+            <Label labelClassName="text-normal text-dark">FELLOWSHIP</Label>
+            <select
+              id={`${conf.field}-18`}
+              className={classnames("form-control custom-select mr-sm-2", {
+                "is-invalid": errors[conf.field],
+              })}
+              ref={register(conf.validation)}
+              name={conf.field}
+            >
+              <option value="">Choose fellowship...</option>
+              {fellowships.map((val) => (
+                <option value={val.id} key={val.id}>
+                  {val.name}
                 </option>
               ))}
             </select>

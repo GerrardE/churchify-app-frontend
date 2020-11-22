@@ -163,6 +163,15 @@ const Table = ({ columns, data, actions, actionItems, props, constants }) => {
                             )
                           }
                         </div>
+                        <div className="peer">
+                          {
+                            actionItems.candownload && (
+                              <a className="td-n c-green-500 cH-purple-500 fsz-md p-5" href={row.original.url} download>
+                                <i className="ti-cloud-down" />
+                              </a>
+                            )
+                          }
+                        </div>
                       </div>
                     </td>
                   </tr>

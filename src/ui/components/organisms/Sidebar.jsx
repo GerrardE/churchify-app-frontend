@@ -88,6 +88,18 @@ const Sidebar = ({ toggleCollapse }) => {
                     <li>
                       <a href="/reports/submit/activity">Activity</a>
                     </li>
+                    <li>
+                      <a href="/reports/submit/membership">Membership</a>
+                    </li>
+                    <li>
+                      <a href="/reports/submit/training">Training</a>
+                    </li>
+                    <li>
+                      <a href="/reports/submit/group">Group</a>
+                    </li>
+                    <li>
+                      <a href="/reports/submit/freport">Fellowship</a>
+                    </li>
                   </ul>
                 </li>
                 <li>
@@ -103,14 +115,14 @@ const Sidebar = ({ toggleCollapse }) => {
                 <span className="title">Downloads Center</span>
               </a>
             </li>
-            <li className="nav-item mT-30 actived">
+            {/* <li className="nav-item mT-30 actived">
               <a className="sidebar-link" href="/resources">
                 <span className="icon-holder">
                   <i className="c-blue-500 ti-layout-grid3" />
                 </span>
                 <span className="title">Resources</span>
               </a>
-            </li>
+            </li> */}
             <li className={classnames("nav-item mT-30 dropdown mb-4", {"open": toggle})}>
               <a className="dropdown-toggle" onClick={toggleSettings}>
                 <span className="icon-holder">

@@ -33,6 +33,26 @@ const routes = [
     component: Reports,
     protected: true,
   },
+  {
+    path: "/reports/submit/membership",
+    component: Reports,
+    protected: true,
+  },
+  {
+    path: "/reports/submit/training",
+    component: Reports,
+    protected: true,
+  },
+  {
+    path: "/reports/submit/group",
+    component: Reports,
+    protected: true,
+  },
+  {
+    path: "/reports/submit/freport",
+    component: Reports,
+    protected: true,
+  },
 
   /* ZONES */
   {
@@ -103,6 +123,11 @@ const routes = [
   },
   
   /* DOWNLOADS */
+  {
+    path: "/downloads",
+    component: Downloads,
+    protected: true,
+  },
   {
     path: "/settings/downloads",
     component: Downloads,
