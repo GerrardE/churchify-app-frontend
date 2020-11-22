@@ -11,7 +11,10 @@ const getFieldsArray = (
   cities = [{}],
   getCities,
   branches = [{}],
-  categories,
+  categories = [{}],
+  events = [{}],
+  preachers = [{}],
+  fellowships = [{}],
 ) => {
   const fieldsArray = [];
 
@@ -34,9 +37,9 @@ const getFieldsArray = (
             >
               <option value="">Choose zone...</option>
               {zonesdata &&
-                zonesdata.map((zone) => (
-                  <option value={zone.id} key={zone.id}>
-                    {zone.name}
+                zonesdata.map((val) => (
+                  <option value={val.id} key={val.id}>
+                    {val.name}
                   </option>
                 ))}
             </select>
@@ -54,19 +57,19 @@ const getFieldsArray = (
               name={conf.field}
             >
               <option value="">Choose branch...</option>
-              {branches.map((branch) => (
-                <option value={branch.id} key={branch.id}>
-                  {branch.name}
+              {branches.map((val) => (
+                <option value={val.id} key={val.id}>
+                  {val.name}
                 </option>
               ))}
             </select>
             <ErrorMessage message={errors[conf.field]?.message} />
           </div>
         ) : conf.field == "categoryid" ? (
-          <div className="form-group col-md-6" key={`${conf.field}-9`}>
+          <div className="form-group col-md-6" key={`${conf.field}-11`}>
             <Label labelClassName="text-normal text-dark">CATEGORY</Label>
             <select
-              id={`${conf.field}-10`}
+              id={`${conf.field}-12`}
               className={classnames("form-control custom-select mr-sm-2", {
                 "is-invalid": errors[conf.field],
               })}
@@ -74,9 +77,69 @@ const getFieldsArray = (
               name={conf.field}
             >
               <option value="">Choose category...</option>
-              {categories.map((category) => (
-                <option value={category.id} key={category.id}>
-                  {category.name}
+              {categories.map((val) => (
+                <option value={val.id} key={val.id}>
+                  {val.name}
+                </option>
+              ))}
+            </select>
+            <ErrorMessage message={errors[conf.field]?.message} />
+          </div>
+        ) : conf.field == "eventid" ? (
+          <div className="form-group col-md-6" key={`${conf.field}-13`}>
+            <Label labelClassName="text-normal text-dark">EVENT</Label>
+            <select
+              id={`${conf.field}-14`}
+              className={classnames("form-control custom-select mr-sm-2", {
+                "is-invalid": errors[conf.field],
+              })}
+              ref={register(conf.validation)}
+              name={conf.field}
+            >
+              <option value="">Choose event...</option>
+              {events.map((val) => (
+                <option value={val.id} key={val.id}>
+                  {val.name}
+                </option>
+              ))}
+            </select>
+            <ErrorMessage message={errors[conf.field]?.message} />
+          </div>
+        ) : conf.field == "preacherid" ? (
+          <div className="form-group col-md-6" key={`${conf.field}-15`}>
+            <Label labelClassName="text-normal text-dark">PREACHER</Label>
+            <select
+              id={`${conf.field}-16`}
+              className={classnames("form-control custom-select mr-sm-2", {
+                "is-invalid": errors[conf.field],
+              })}
+              ref={register(conf.validation)}
+              name={conf.field}
+            >
+              <option value="">Choose preacher...</option>
+              {preachers.map((val) => (
+                <option value={val.id} key={val.id}>
+                  {`${val.firstname} ${val.lastname}`}
+                </option>
+              ))}
+            </select>
+            <ErrorMessage message={errors[conf.field]?.message} />
+          </div>
+        ) : conf.field == "fellowshipid" ? (
+          <div className="form-group col-md-6" key={`${conf.field}-17`}>
+            <Label labelClassName="text-normal text-dark">FELLOWSHIP</Label>
+            <select
+              id={`${conf.field}-18`}
+              className={classnames("form-control custom-select mr-sm-2", {
+                "is-invalid": errors[conf.field],
+              })}
+              ref={register(conf.validation)}
+              name={conf.field}
+            >
+              <option value="">Choose fellowship...</option>
+              {fellowships.map((val) => (
+                <option value={val.id} key={val.id}>
+                  {val.name}
                 </option>
               ))}
             </select>
@@ -98,9 +161,9 @@ const getFieldsArray = (
             >
               <option value="">{`Choose ${conf.field}...`}</option>
               {countries &&
-                countries.map((country) => (
-                  <option value={country.id} key={country.id}>
-                    {country.name}
+                countries.map((val) => (
+                  <option value={val.id} key={val.id}>
+                    {val.name}
                   </option>
                 ))}
             </select>
@@ -121,9 +184,9 @@ const getFieldsArray = (
               onChange={(e) => getCities(e.target.value)}
             >
               <option value="">{`Choose ${conf.field}...`}</option>
-              {states.map((state) => (
-                <option value={state.id} key={state.id}>
-                  {state.name}
+              {states.map((val) => (
+                <option value={val.id} key={val.id}>
+                  {val.name}
                 </option>
               ))}
             </select>
@@ -143,9 +206,9 @@ const getFieldsArray = (
               name={conf.field}
             >
               <option value="">{`Choose ${conf.field}...`}</option>
-              {cities.map((city) => (
-                <option value={city.id} key={city.id}>
-                  {city.name}
+              {cities.map((val) => (
+                <option value={val.id} key={val.id}>
+                  {val.name}
                 </option>
               ))}
             </select>
@@ -181,7 +244,7 @@ const getFieldsArray = (
             <Inputfield
               key={conf.field}
               fieldType={conf.field == "notes" ? "textarea" : ""}
-              inputType="text"
+              inputType={conf.datatype == "integer" ? "number" : "text"}
               inputClassName={classnames("form-control", {
                 "is-invalid": errors[conf.field],
               })}

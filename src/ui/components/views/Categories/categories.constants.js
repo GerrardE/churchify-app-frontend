@@ -1,7 +1,7 @@
 const constants = {
   parameters: "categories",
   parameter: "category",
-  editurl: "/dashboard/settings/categories",
+  editurl: "/settings/categories",
   tableData: [
     {
       Header: "Id",

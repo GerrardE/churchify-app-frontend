@@ -1,4 +1,4 @@
-export { default as ReportsView } from "./Reports/ReportsView";
+export { default as ReportsView } from "./Reports/AttendanceCreate";
 export { default as SigninView } from "./Auth/SigninView";
 export { default as ZoneView } from "./Zones/ZoneView";
 export { default as BranchView } from "./Branches/BranchView";
@@ -7,3 +7,4 @@ export { default as FellowshipView } from "./Fellowships/FellowshipView";
 export { default as EventView } from "./Events/EventView";
 export { default as DownloadView } from "./Downloads/DownloadView";
 export { default as CategoryView } from "./Categories/CategoryView";
+export { default as ReportView } from "./Reports/ReportView";

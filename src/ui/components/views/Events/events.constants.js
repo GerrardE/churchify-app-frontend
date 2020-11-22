@@ -7,7 +7,7 @@ const constants = {
   stateparam: "state",
   citiesparams: "cities",
   branchesparams: "branches",
-  editurl: "/dashboard/settings/events",
+  editurl: "/settings/events",
   tableData: [
     {
       Header: "Id",

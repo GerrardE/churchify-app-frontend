@@ -2,7 +2,7 @@ const constants = {
   parameters: "downloads",
   parameter: "download",
   categoryparams: "categories",
-  editurl: "/dashboard/settings/downloads",
+  editurl: "/settings/downloads",
   tableData: [
     {
       Header: "Id",
@@ -18,7 +18,7 @@ const constants = {
     },
     {
       Header: "Category",
-      accessor: "category",
+      accessor: "categoryid",
     },
     {
       Header: "Date",

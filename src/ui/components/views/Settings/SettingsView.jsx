@@ -34,7 +34,7 @@ const SettingsView = ({ match, ...rest }) => {
     [],
   );
 
-  if (!isEmpty(match.params) && match.path === "/dashboard/settings/:id") {
+  if (!isEmpty(match.params) && match.path === "/settings/:id") {
     const { params } = match;
     const { id } = params;
 
@@ -42,14 +42,14 @@ const SettingsView = ({ match, ...rest }) => {
   }
 
   if (!isEmpty(match.params) &&
-    match.path === "/dashboard/settings/create/setting/:setting"
+    match.path === "/settings/create/setting/:setting"
   ) {
     return <SettingAdd props={rest} match={match} />;
   }
 
   const btnProps = {
     data,
-    urlFormat: "/dashboard/settings/create/setting/",
+    urlFormat: "/settings/create/setting/",
     btnType: "settings",
     btnTitle: "Create Setting",
     btnGroupClassName: "float-right",

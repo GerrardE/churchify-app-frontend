@@ -1,0 +1,8 @@
+const activitiesConstants = {
+  ACTIVITY_LOADING: "ACTIVITY_LOADING",
+  
+  CREATE_ACTIVITY_SUCCESS: "CREATE_ACTIVITY_SUCCESS",
+  CREATE_ACTIVITY_FAIL: "CREATE_ACTIVITY_FAIL",
+};
+
+export default activitiesConstants;

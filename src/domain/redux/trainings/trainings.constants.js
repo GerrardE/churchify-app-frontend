@@ -1,0 +1,8 @@
+const trainingConstants = {
+  TRAINING_LOADING: "TRAINING_LOADING",
+  
+  CREATE_TRAINING_SUCCESS: "CREATE_TRAINING_SUCCESS",
+  CREATE_TRAINING_FAIL: "CREATE_TRAINING_FAIL",
+};
+
+export default trainingConstants;
