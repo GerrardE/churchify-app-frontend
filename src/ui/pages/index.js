@@ -9,3 +9,5 @@ export { default as Fellowships } from "./Fellowships";
 export { default as Events } from "./Events";
 export { default as Downloads } from "./Downloads";
 export { default as Categories } from "./Categories";
+export { default as Roles } from "./Roles";
+export { default as Permissions } from "./Permissions";

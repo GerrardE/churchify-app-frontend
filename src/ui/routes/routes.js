@@ -10,6 +10,8 @@ import {
   Events,
   Downloads,
   Categories,
+  Roles,
+  Permissions as Permission,
 } from "../pages";
 
 const routes = [
@@ -175,6 +177,40 @@ const routes = [
   {
     path: "/settings/categories/create/category",
     component: Categories,
+    protected: true,
+  },
+  
+  /* ROLES */
+  {
+    path: "/roles",
+    component: Roles,
+    protected: true,
+  },
+  {
+    path: "/roles/:id",
+    component: Roles,
+    protected: true,
+  },
+  {
+    path: "/roles/create/role",
+    component: Roles,
+    protected: true,
+  },
+  
+  /* PERMISSIONS */
+  {
+    path: "/permissions",
+    component: Permission,
+    protected: true,
+  },
+  {
+    path: "/permissions/:id",
+    component: Permission,
+    protected: true,
+  },
+  {
+    path: "/permissions/create/permission",
+    component: Permission,
     protected: true,
   },
   

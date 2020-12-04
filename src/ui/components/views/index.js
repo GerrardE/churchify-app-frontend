@@ -8,3 +8,5 @@ export { default as EventView } from "./Events/EventView";
 export { default as DownloadView } from "./Downloads/DownloadView";
 export { default as CategoryView } from "./Categories/CategoryView";
 export { default as ReportView } from "./Reports/ReportView";
+export { default as RoleView } from "./Roles/RoleView";
+export { default as PermissionView } from "./Permissions/PermissionView";
