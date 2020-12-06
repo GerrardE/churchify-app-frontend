@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const InfoCard = ({ title, value }) => {
+const InfoCard = ({ title, value, infoCardIcon }) => {
   return (
     <div className="col-md-3">
       <div className="layers bd bgc-white p-20">
@@ -11,7 +11,7 @@ const InfoCard = ({ title, value }) => {
         <div className="layer w-100">
           <div className="peers ai-sb fxw-nw">
             <div className="peer peer-greed">
-              <span id="sparklinedash" />
+              <i className={`size-30 ${infoCardIcon}`} />
             </div>
             <div className="peer">
               <span className="d-ib lh-0 va-m fw-600 bdrs-10em pX-15 pY-15 bgc-green-50 c-green-500">
@@ -28,6 +28,7 @@ const InfoCard = ({ title, value }) => {
 InfoCard.propTypes = {
   title: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
+  infoCardIcon: PropTypes.string.isRequired,
 };
 
 export default InfoCard;

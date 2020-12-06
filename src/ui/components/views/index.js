@@ -10,3 +10,4 @@ export { default as CategoryView } from "./Categories/CategoryView";
 export { default as ReportView } from "./Reports/ReportView";
 export { default as RoleView } from "./Roles/RoleView";
 export { default as PermissionView } from "./Permissions/PermissionView";
+export { default as DashboardView } from "./Dashboard/DashboardView";

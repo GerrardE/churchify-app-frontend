@@ -8,6 +8,7 @@ const constants = {
   membershipparam: "membership",
   submitparam: "submit",
   branchesparams: "branches",
+  zonesparams: "zones",
   eventsparams: "events",
   fellowshipsparams: "fellowships",
   preachersparams: "preachers",

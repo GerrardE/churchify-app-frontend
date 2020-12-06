@@ -11,3 +11,4 @@ export { default as Downloads } from "./Downloads";
 export { default as Categories } from "./Categories";
 export { default as Roles } from "./Roles";
 export { default as Permissions } from "./Permissions";
+export { default as Dashboard } from "./Dashboard";

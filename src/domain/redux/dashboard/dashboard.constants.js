@@ -1,0 +1,7 @@
+const dashboardConstants = {
+  DASHBOARD_LOADING: "DASHBOARD_LOADING",
+  GET_DASHBOARD_SUCCESS: "GET_DASHBOARD_SUCCESS",
+  GET_DASHBOARD_FAIL: "GET_DASHBOARD_FAIL",
+};
+
+export default dashboardConstants;

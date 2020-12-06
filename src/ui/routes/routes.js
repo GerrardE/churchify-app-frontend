@@ -1,6 +1,7 @@
 import {
   Signin,
   Reports,
+  Dashboard,
   Notfound,
   ServerError,
   Zones,
@@ -21,7 +22,7 @@ const routes = [
   },
   {
     path: "/dashboard",
-    component: Reports,
+    component: Dashboard,
     protected: true,
   },
   /* REPORTS */

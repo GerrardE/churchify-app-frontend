@@ -20,6 +20,7 @@ import roles from "./roles/roles.reducers";
 import fellowships from "./fellowships/fellowships.reducers";
 import freports from "./freports/freports.reducers";
 import trainings from "./trainings/trainings.reducers";
+import dashboard from "./dashboard/dashboard.reducers";
 import signoutConstants from "./signout/signout.constants";
 
 const appReducer = combineReducers({
@@ -31,6 +32,7 @@ const appReducer = combineReducers({
   fellowships,
   events,
   downloads,
+  dashboard,
   categories,
   activities,
   attendances,

@@ -5,27 +5,32 @@ import { getItem, getItems, createItem } from "@infrastructure/services/thunkSer
 import * as membershipActions from "@domain/redux/membership/membership.actions";
 import * as configsActions from "@domain/redux/configs/configs.actions";
 import * as branchActions from "@domain/redux/branches/branches.actions";
+import * as zonesActions from "@domain/redux/zones/zones.actions";
 import constants from "./reports.constants";
 import { Button } from "../../atoms";
 import { AppLoader } from "../../molecules";
 import getFieldsArray from "../_helpers/fieldGenerator";
 
 const MembershipCreate = () => {
-  const { membershipparam, branchesparams, parameters } = constants;
+  const { membershipparam, branchesparams, parameters, zonesparams } = constants;
 
   const dispatch = useDispatch();
 
   React.useEffect(() => {
     dispatch(getItems(branchActions, `${branchesparams}`));
 
+    dispatch(getItems(zonesActions, `${zonesparams}`));
+
     dispatch(getItem(configsActions, `configs/${membershipparam}/config`));
-  }, [dispatch, membershipparam, branchesparams]);
+  }, [dispatch, membershipparam, branchesparams, zonesparams]);
   
-  const { memberships, configs, branches } = useSelector((state) => state);
+  const { memberships, configs, branches, zones } = useSelector((state) => state);
   
   const { loading } = memberships;
   
   const { config: data } = configs;
+
+  data.zonesdata = zones.zones;
   
   const { register, handleSubmit, errors } = useForm();
 
@@ -63,7 +68,7 @@ const MembershipCreate = () => {
                         buttonType="submit"
                         buttonClassName="btn btn-primary mr-2"
                       >
-                        Save
+                        Submit
                       </Button>
                     </div>
                   </div>
