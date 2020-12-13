@@ -214,23 +214,6 @@ const getFieldsArray = (
             </select>
             <ErrorMessage message={errors[conf.field]?.message} />
           </div>
-        ) : conf.field == "date" ? (
-          <div className="form-group col-md-6">
-            <Label labelClassName="text-normal text-dark">
-              {conf.field.toUpperCase()}
-            </Label>
-            <Inputfield
-              key={conf.field}
-              inputType="date"
-              inputClassName={classnames("form-control", {
-                "is-invalid": errors[conf.field],
-              })}
-              defaultValue={defaults && defaults[conf.field]?.toString()}
-              inputName={conf.field}
-              inputRef={register(conf.validation)}
-            />
-            <ErrorMessage message={errors[conf.field]?.message} />
-          </div>
         ) : (
           <div
             className={classnames("form-group col-md-6", {
@@ -244,7 +227,7 @@ const getFieldsArray = (
             <Inputfield
               key={conf.field}
               fieldType={conf.field == "notes" ? "textarea" : ""}
-              inputType={conf.datatype == "integer" ? "number" : "text"}
+              inputType={conf.datatype == "integer" ? "number" : (conf.field.includes("password") ? "password" : (conf.field.includes("date") ? "date" : "text"))}
               inputClassName={classnames("form-control", {
                 "is-invalid": errors[conf.field],
               })}

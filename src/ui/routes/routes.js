@@ -1,5 +1,6 @@
 import {
   Signin,
+  Signup,
   Reports,
   Dashboard,
   Notfound,
@@ -12,6 +13,7 @@ import {
   Downloads,
   Categories,
   Roles,
+  Users,
   Permissions as Permission,
 } from "../pages";
 
@@ -21,11 +23,41 @@ const routes = [
     component: Signin,
   },
   {
+    path: "/signup",
+    component: Signup,
+  },
+  {
     path: "/dashboard",
     component: Dashboard,
     protected: true,
   },
+  /* USERS */
+  {
+    path: "/users",
+    component: Users,
+    protected: true,
+  },
+  {
+    path: "/users/:id",
+    component: Users,
+    protected: true,
+  },
+  {
+    path: "/users/create/user",
+    component: Users,
+    protected: true,
+  },
+  {
+    path: "/users/:id/details",
+    component: Users,
+    protected: true,
+  },
   /* REPORTS */
+  {
+    path: "/reports/generate",
+    component: Reports,
+    protected: true,
+  },
   {
     path: "/reports/submit/attendance",
     component: Reports,

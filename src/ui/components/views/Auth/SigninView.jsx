@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import classnames from "classnames";
 import PropTypes from "prop-types";
-import {signin, signinWithGoogle} from "@domain/redux/signin/signin.thunks";
+import { signin } from "@domain/redux/signin/signin.thunks";
 import { Label, Inputfield, Button, ErrorMessage } from "../../atoms";
 import { emailSchema, passwordSchema } from "../_validations/schema";
 import AppLoader from "../../molecules/AppLoader";
@@ -19,12 +19,12 @@ const SigninView = ({ history }) => {
     dispatch(signin(data, history));
   };
 
-  const handleGoogleSignin = () => {dispatch(signinWithGoogle(history));};
+  // const handleGoogleSignin = () => {dispatch(signinWithGoogle(history));};
 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="needs-validation"
+      className="needs-validation mt-10"
       noValidate
     >
       <div className="form-group">
@@ -82,7 +82,7 @@ const SigninView = ({ history }) => {
               </Button>
             </div>
           </div>
-          <center>
+          {/* <center>
             <div className="peer">
               <Button
                 buttonType="button"
@@ -92,7 +92,7 @@ const SigninView = ({ history }) => {
                 Login with Google
               </Button>
             </div>
-          </center>
+          </center> */}
         </div>
       )}
     </form>

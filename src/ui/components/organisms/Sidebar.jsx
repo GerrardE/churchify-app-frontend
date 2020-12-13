@@ -173,6 +173,14 @@ const Sidebar = ({ toggleCollapse }) => {
                 <span className="title">Roles</span>
               </a>
             </li>
+            <li className="nav-item mT-30 actived">
+              <a className="sidebar-link" href="/users">
+                <span className="icon-holder">
+                  <i className="c-blue-500 ti-user" />
+                </span>
+                <span className="title">Users</span>
+              </a>
+            </li>
           </ul>
         </div>
       </div>

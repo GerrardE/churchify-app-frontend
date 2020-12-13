@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 import storage from "redux-persist/lib/storage";
 import signin from "./signin/signin.reducers";
+import users from "./users/users.reducers";
 import zones from "./zones/zones.reducers";
 import countries from "./countries/countries.reducers";
 import cities from "./cities/cities.reducers";
@@ -25,6 +26,7 @@ import signoutConstants from "./signout/signout.constants";
 
 const appReducer = combineReducers({
   signin,
+  users,
   zones,
   configs,
   branches,
