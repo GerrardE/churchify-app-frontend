@@ -13,7 +13,7 @@ import * as branchActions from "@domain/redux/branches/branches.actions";
 import * as zonesActions from "@domain/redux/zones/zones.actions";
 import * as statesActions from "@domain/redux/states/states.actions";
 import * as countriesActions from "@domain/redux/countries/countries.actions";
-import { Label, Inputfield, Button } from "../../atoms";
+import { Button } from "../../atoms";
 import AppLoader from "../../molecules/AppLoader";
 import constants from "./auth.constants";
 import getFieldsArray from "../_helpers/fieldGenerator";
@@ -92,22 +92,7 @@ const SignupView = () => {
       ) : (
         <div className="form-group">
           <div className="peers ai-c jc-sb fxw-nw">
-            <div className="peer">
-              <div className="checkbox checkbox-circle checkbox-info peers ai-c">
-                <Inputfield
-                  inputType="checkbox"
-                  inputClassName="peer"
-                  inputName="rememberMe"
-                  inputRef={register}
-                />
-                <Label
-                  htmlFor="rememberMe"
-                  labelClassName="peers peer-greed js-sb ai-c"
-                >
-                  <span className="peer peer-greed">Remember Me</span>
-                </Label>
-              </div>
-            </div>
+            <div className="peer" />
             <div className="peer">
               <Button buttonType="submit" buttonClassName="btn btn-primary">
                 Register

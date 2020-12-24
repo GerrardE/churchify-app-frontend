@@ -1,6 +1,7 @@
 const constants = {
   parameters: "roles",
   parameter: "role",
+  permissionparams: "permissions",
   editurl: "/roles",
   tableData: [
     {

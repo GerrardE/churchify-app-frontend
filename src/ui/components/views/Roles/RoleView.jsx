@@ -9,6 +9,7 @@ import RoleUpdate from "./RoleUpdate";
 import RoleCreate from "./RoleCreate";
 import { isEmpty } from "../_validations/schema";
 import constants from "./roles.constants";
+import RoleDetails from "./RoleDetails";
 
 const RoleView = ({ match, ...rest }) => {
   const { parameter, parameters, tableData } = constants;
@@ -18,7 +19,7 @@ const RoleView = ({ match, ...rest }) => {
   const { roles: data, loading } = useSelector((state) => state.roles);
 
   const actionItems = {
-    canview: false,
+    canview: true,
     canedit: true,
     candelete: true,
   };
@@ -37,6 +38,13 @@ const RoleView = ({ match, ...rest }) => {
     const { id } = params;
 
     return <RoleUpdate id={id} props={rest} />;
+  }
+
+  if (!isEmpty(match.params) && match.path === `/${parameters}/:id/details`) {
+    const { params } = match;
+    const { id } = params;
+
+    return <RoleDetails id={id} props={rest} />;
   }
 
   if (isEmpty(match.params) &&

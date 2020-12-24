@@ -8,6 +8,7 @@ const constants = {
   statesparams: "states",
   stateparam: "state",
   zonesparams: "zones",
+  rolesparams: "roles",
   tableData: [
     {
       Header: "Id",
@@ -28,6 +29,10 @@ const constants = {
     {
       Header: "Phone",
       accessor: "phone",
+    },
+    {
+      Header: "Joined",
+      accessor: "createdAt",
     },
   ],
 };

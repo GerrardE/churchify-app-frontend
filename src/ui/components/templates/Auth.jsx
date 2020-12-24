@@ -29,15 +29,15 @@ const Auth = ({ children, title }) => {
         </h3>
         <h4 className="fw-300 c-grey-900">{title}</h4>
         {title === "Signin" ? (
-          <small className="mB-40">
+          <p className="mB-40">
             Don&apos;t have an account?
             <a href="/signup"> Signup</a>
-          </small>
+          </p>
         ) : (
-          <small className="mb-10">
+          <p className="mb-10">
             Already have an account?
             <a href="/"> Signin</a>
-          </small>
+          </p>
         )}
         {children}
       </div>

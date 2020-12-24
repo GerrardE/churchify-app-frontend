@@ -229,6 +229,11 @@ const routes = [
     component: Roles,
     protected: true,
   },
+  {
+    path: "/roles/:id/details",
+    component: Roles,
+    protected: true,
+  },
   
   /* PERMISSIONS */
   {
