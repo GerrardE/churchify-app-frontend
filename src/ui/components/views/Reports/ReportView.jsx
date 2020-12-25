@@ -34,7 +34,7 @@ const ReportView = ({ match, ...rest }) => {
   const { attendances } = useSelector((state) => state);
 
   // eslint-disable-next-line no-unused-vars
-  const { attendance: { fulfillmentValue } } = attendances;
+  const { attendance } = attendances;
 
   if (
     isEmpty(match.params) &&

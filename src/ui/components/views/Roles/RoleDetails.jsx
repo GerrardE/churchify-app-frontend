@@ -7,7 +7,6 @@ import {
   getItem,
   getItems,
   createItem,
-  deleteItem,
 } from "@infrastructure/services/thunkService";
 import * as roleActions from "@domain/redux/roles/roles.actions";
 import * as permissionActions from "@domain/redux/permissions/permissions.actions";
@@ -54,21 +53,25 @@ const RoleDetail = ({ id, ...rest }) => {
 
     data.unassign = { permission: toUnassign };
 
-    dispatch(
-      createItem(
-        permissionActions,
-        `${parameters}/${permissionparams}/${id}`,
-        data.assign,
-      ),
-    );
+    if (selectedPermissions.length > 0) {
+      dispatch(
+        createItem(
+          permissionActions,
+          `${parameters}/${permissionparams}/${id}`,
+          data.assign,
+        ),
+      );
+    }
 
-    dispatch(
-      deleteItem(
-        permissionActions,
-        `${parameters}/${permissionparams}/${id}`,
-        data.unassign,
-      ),
-    );
+    if (deselectedPermissions.length > 0) {
+      dispatch(
+        createItem(
+          permissionActions,
+          `${parameters}/${permissionparams}/${id}/delete`,
+          data.unassign,
+        ),
+      );
+    }
   };
 
   const updatePerms = (e) => {

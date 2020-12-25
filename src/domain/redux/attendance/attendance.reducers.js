@@ -19,6 +19,7 @@ const attendanceReducer = (state = initialState, action) => {
   case attendanceConstants.CREATE_ATTENDANCE_SUCCESS:
     return {
       ...state,
+      attendance: action.payload,
     };
 
   case attendanceConstants.CREATE_ATTENDANCE_FAIL:
