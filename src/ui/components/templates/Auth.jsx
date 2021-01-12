@@ -25,7 +25,7 @@ const Auth = ({ children, title }) => {
       >
         <h3>
           <img className="mr-2" src={Logo} alt="" />
-          TREM Admin Panel
+          TREM
         </h3>
         <h4 className="fw-300 c-grey-900">{title}</h4>
         {title === "Signin" ? (

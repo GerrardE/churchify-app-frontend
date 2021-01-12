@@ -32,7 +32,7 @@ const Sidebar = ({ toggleCollapse }) => {
                       </div>
                     </div>
                     <div className="peer peer-greed">
-                      <h5 className="lh-1 mB-0 logo-text">Trem Admin</h5>
+                      <h5 className="lh-1 mB-0 logo-text">TREM</h5>
                     </div>
                   </div>
                 </a>
@@ -123,6 +123,30 @@ const Sidebar = ({ toggleCollapse }) => {
                 <span className="title">Resources</span>
               </a>
             </li> */}
+            <li className="nav-item mT-30 actived">
+              <a className="sidebar-link" href="/permissions">
+                <span className="icon-holder">
+                  <i className="c-yellow-500 ti-key" />
+                </span>
+                <span className="title">Permissions</span>
+              </a>
+            </li>
+            <li className="nav-item mT-30 actived">
+              <a className="sidebar-link" href="/roles">
+                <span className="icon-holder">
+                  <i className="c-green-500 ti-android" />
+                </span>
+                <span className="title">Roles</span>
+              </a>
+            </li>
+            <li className="nav-item mT-30 actived">
+              <a className="sidebar-link" href="/users">
+                <span className="icon-holder">
+                  <i className="c-blue-500 ti-user" />
+                </span>
+                <span className="title">Users</span>
+              </a>
+            </li>
             <li className={classnames("nav-item mT-30 dropdown mb-4", {"open": toggle})}>
               <a className="dropdown-toggle" onClick={toggleSettings}>
                 <span className="icon-holder">
@@ -156,30 +180,6 @@ const Sidebar = ({ toggleCollapse }) => {
                   <a className='sidebar-link' href="/settings/downloads">Downloads</a>
                 </li>
               </ul>
-            </li>
-            <li className="nav-item mT-30 actived">
-              <a className="sidebar-link" href="/permissions">
-                <span className="icon-holder">
-                  <i className="c-yellow-500 ti-key" />
-                </span>
-                <span className="title">Permissions</span>
-              </a>
-            </li>
-            <li className="nav-item mT-30 actived">
-              <a className="sidebar-link" href="/roles">
-                <span className="icon-holder">
-                  <i className="c-green-500 ti-android" />
-                </span>
-                <span className="title">Roles</span>
-              </a>
-            </li>
-            <li className="nav-item mT-30 actived">
-              <a className="sidebar-link" href="/users">
-                <span className="icon-holder">
-                  <i className="c-blue-500 ti-user" />
-                </span>
-                <span className="title">Users</span>
-              </a>
             </li>
           </ul>
         </div>

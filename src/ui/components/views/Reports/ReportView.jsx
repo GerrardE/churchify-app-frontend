@@ -1,16 +1,21 @@
-import React from "react";
+import React, { useMemo } from "react";
 import PropTypes from "prop-types";
+import classnames from "classnames";
+import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { createItem } from "@infrastructure/services/thunkService";
-import * as attendanceActions from "@domain/redux/attendance/attendance.actions";
+import * as actions from "@domain/redux/attendance/attendance.actions";
+import { AppLoader } from "../../molecules";
+import { Button, ErrorMessage } from "../../atoms";
 import AttendanceCreate from "./AttendanceCreate";
 import ActivityCreate from "./ActivityCreate";
 import MembershipCreate from "./MembershipCreate";
 import TrainingCreate from "./TrainingCreate";
 import GroupCreate from "./GroupCreate";
 import FreportCreate from "./FreportCreate";
-import { isEmpty } from "../_validations/schema";
+import { isEmpty, fieldSchema } from "../_validations/schema";
 import constants from "./reports.constants";
+import Table from "../../molecules/Table";
 
 const ReportView = ({ match, ...rest }) => {
   const {
@@ -18,23 +23,38 @@ const ReportView = ({ match, ...rest }) => {
     submitparam,
     parameters,
     activityparam,
+    attendanceparams,
     membershipparam,
     trainingparam,
     freportparam,
     groupparam,
+    tableData,
+    days,
+    years,
   } = constants;
+
+  const {
+    attendances: { payload: data },
+    loading,
+  } = useSelector((state) => state.attendances);
 
   const dispatch = useDispatch();
 
-  // eslint-disable-next-line no-unused-vars
-  const retrieveAttendance = (data) => {
-    dispatch(createItem(attendanceActions, `${parameters}/synodattendance`, data));
+  const { register, handleSubmit, errors } = useForm();
+
+  const { day, year } = errors;
+
+  const onSubmit = (data) => {
+    dispatch(createItem(actions, `${parameters}/${attendanceparams}`, data));
   };
 
-  const { attendances } = useSelector((state) => state);
+  const columns = useMemo(() => tableData, [tableData]);
 
-  // eslint-disable-next-line no-unused-vars
-  const { attendance } = attendances;
+  const actionItems = {
+    canview: false,
+    canedit: false,
+    candelete: false,
+  };
 
   if (
     isEmpty(match.params) &&
@@ -78,76 +98,93 @@ const ReportView = ({ match, ...rest }) => {
     return <FreportCreate props={rest} match={match} />;
   }
 
+  const handleDropDown = (items, title) => {
+    return (
+      <select
+        className={classnames("form-control custom-select mr-sm-2", {
+          "is-invalid": errors[title],
+        })}
+        ref={register(fieldSchema({ title }))}
+        name={title}
+      >
+        <option value="" disabled>{title}</option>
+        {items &&
+          items.map((val) => (
+            <option value={val.value} key={val.id}>
+              {title === "day" ? val.key : val.value}
+            </option>
+          ))}
+      </select>
+    );
+  };
+
   return (
     <React.Fragment>
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-md-2" />
-          <div className="col-md-8">
-            <div className="bgc-white bd bdrs-3 p-20 mB-20">
-              <h4 className="c-grey-900 mB-20">
-                GRAND SUMMARY OF REGULAR ATTENDANCE 2018 - 2019
-              </h4>
-              <table
-                id="tablePreview"
-                className="table table-hover table-striped table-bordered"
-              >
-                <thead>
-                  <tr>
-                    <th />
-                    <th colSpan="3">Tuesdays</th>
-                    <th />
-                    <th colSpan="3">Sundays</th>
-                  </tr>
-                  <tr>
-                    <th />
-                    <th>2018</th>
-                    <th>2019</th>
-                    <th>2020</th>
-                    <th />
-                    <th>2018</th>
-                    <th>2019</th>
-                    <th>2020</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>HQ</td>
-                    <td>Otto</td>
-                    <td>Otto</td>
-                    <th />
-                    <td>@mdo</td>
-                    <td>Mark</td>
-                    <td>Mark</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>HQ Annex</td>
-                    <td>Thornton</td>
-                    <td>Thornton</td>
-                    <th />
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>Mark</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Ejigbo</td>
-                    <td>the Bird</td>
-                    <td>the Bird</td>
-                    <th />
-                    <td>@twitter</td>
-                    <td>@twitter</td>
-                    <td>Mark</td>
-                  </tr>
-                </tbody>
-              </table>
+      {loading ? (
+        <AppLoader loaderWidth="15%" loaderClassName="app-loader mt-15" />
+      ) : (
+        <div className="container-fluid">
+          <h4 className="c-grey-900 mT-10 mB-30">
+            {constants.attendanceparam.toUpperCase()}
+          </h4>
+          <div className="row my-auto">
+            <div className="col-md-12">
+              <div className="bgc-white bd bdrs-3 p-20 mB-20 print">
+                <h4 className="c-grey-900 mB-20">SUMMARY OF ATTENDANCE BY ZONE</h4>
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                  className="needs-validation mt-10"
+                  noValidate
+                >
+                  <div className="row mx-auto">
+                    <div className="form-group mr-2">
+                      {handleDropDown(days, "day")}
+
+                      <ErrorMessage message={day?.message} />
+                    </div>
+                    <div className="form-group mr-2">
+                      {handleDropDown(years, "year")}
+                      <ErrorMessage message={year?.message} />
+                    </div>
+                    {loading ? (
+                      <center>
+                        <AppLoader />
+                      </center>
+                    ) : (
+                      <div className="form-group">
+                        <Button
+                          buttonType="submit"
+                          buttonClassName="btn btn-primary"
+                        >
+                          Save
+                        </Button>
+                      </div>
+                    )}
+                  </div>
+                </form>
+                <span>
+                  <i className="ti-printer" onClick={() => window.print()} />
+                </span>
+                {
+                  data
+                    ?
+                    (
+                      <Table
+                        columns={columns}
+                        data={data}
+                        actions={actions}
+                        // props={props}
+                        constants={constants}
+                        actionItems={actionItems}
+                      />
+                    )
+                    :<p>Please choose day and year...</p>
+                }
+              </div>
             </div>
           </div>
-          <div className="col-md-2" />
         </div>
-      </div>
+      )}
     </React.Fragment>
   );
 };

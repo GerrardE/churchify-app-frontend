@@ -69,3 +69,24 @@
 .size-30 {
   font-size: 30px;
 }
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .print * {
+    visibility: visible;
+  }
+  .print {
+      background-color: white;
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      margin: 0;
+      padding: 15px;
+      font-size: 14px;
+      line-height: 18px;
+  }
+}
