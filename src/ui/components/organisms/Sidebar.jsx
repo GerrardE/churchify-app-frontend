@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import classnames from "classnames";
 import PropTypes from "prop-types";
@@ -11,11 +12,13 @@ const Sidebar = ({ toggleCollapse }) => {
 
   const [multiRep, setToggleMultiRep] = React.useState(false);
 
-  const toggleSettings = () => setToggle(prevState => !prevState);
+  const toggleSettings = () => setToggle((prevState) => !prevState);
 
-  const toggleReports = () => setToggleRep(prevState => !prevState);
+  const toggleReports = () => setToggleRep((prevState) => !prevState);
 
-  const toggleMultiRep = () => setToggleMultiRep(prevState => !prevState);
+  const toggleMultiRep = () => setToggleMultiRep((prevState) => !prevState);
+
+  const { user } = useSelector((state) => state.signin);
 
   return (
     <React.Fragment>
@@ -61,7 +64,11 @@ const Sidebar = ({ toggleCollapse }) => {
                 <span className="title">Dashboard</span>
               </a>
             </li>
-            <li className={classnames("nav-item mT-30 dropdown actived", {"open": toggleRep})}>
+            <li
+              className={classnames("nav-item mT-30 dropdown actived", {
+                open: toggleRep,
+              })}
+            >
               <a className="dropdown-toggle" onClick={toggleReports}>
                 <span className="icon-holder">
                   <i className="c-green-500 ti-clipboard" />
@@ -72,11 +79,13 @@ const Sidebar = ({ toggleCollapse }) => {
                 </span>
               </a>
               <ul className="dropdown-menu">
-                <li className={classnames("nav-item dropdown", {"open": multiRep})}>
-                  <a className='sidebar-link' onClick={toggleMultiRep}>
-                    <span>
-                      Submit
-                    </span>
+                <li
+                  className={classnames("nav-item dropdown", {
+                    open: multiRep,
+                  })}
+                >
+                  <a className="sidebar-link" onClick={toggleMultiRep}>
+                    <span>Submit</span>
                     <span className="arrow">
                       <i className="ti-angle-right" />
                     </span>
@@ -103,7 +112,9 @@ const Sidebar = ({ toggleCollapse }) => {
                   </ul>
                 </li>
                 <li>
-                  <a className='sidebar-link' href="/reports/generate">Generate</a>
+                  <a className="sidebar-link" href="/reports/generate">
+                    Generate
+                  </a>
                 </li>
               </ul>
             </li>
@@ -115,72 +126,77 @@ const Sidebar = ({ toggleCollapse }) => {
                 <span className="title">Downloads Center</span>
               </a>
             </li>
-            {/* <li className="nav-item mT-30 actived">
-              <a className="sidebar-link" href="/resources">
-                <span className="icon-holder">
-                  <i className="c-blue-500 ti-layout-grid3" />
-                </span>
-                <span className="title">Resources</span>
-              </a>
-            </li> */}
-            <li className="nav-item mT-30 actived">
-              <a className="sidebar-link" href="/permissions">
-                <span className="icon-holder">
-                  <i className="c-yellow-500 ti-key" />
-                </span>
-                <span className="title">Permissions</span>
-              </a>
-            </li>
-            <li className="nav-item mT-30 actived">
-              <a className="sidebar-link" href="/roles">
-                <span className="icon-holder">
-                  <i className="c-green-500 ti-android" />
-                </span>
-                <span className="title">Roles</span>
-              </a>
-            </li>
-            <li className="nav-item mT-30 actived">
-              <a className="sidebar-link" href="/users">
-                <span className="icon-holder">
-                  <i className="c-blue-500 ti-user" />
-                </span>
-                <span className="title">Users</span>
-              </a>
-            </li>
-            <li className={classnames("nav-item mT-30 dropdown mb-4", {"open": toggle})}>
-              <a className="dropdown-toggle" onClick={toggleSettings}>
-                <span className="icon-holder">
-                  <i className="c-orange-500 ti-settings" />
-                </span>
-                <span className="title">Settings</span>
-                <span className="arrow">
-                  <i className="ti-angle-right" />
-                </span>
-              </a>
-              <ul className="dropdown-menu">
-                <li>
-                  <a className='sidebar-link' href="/settings/zones">Zones</a>
-                </li>
-                <li>
-                  <a className='sidebar-link' href="/settings/branches">Branches</a>
-                </li>
-                <li>
-                  <a className='sidebar-link' href="/settings/preachers">Preachers</a>
-                </li>
-                <li>
-                  <a className='sidebar-link' href="/settings/fellowships">Fellowships</a>
-                </li>
-                <li>
-                  <a className='sidebar-link' href="/settings/events">Events</a>
-                </li>
-                <li>
-                  <a className='sidebar-link' href="/settings/categories">Categories</a>
-                </li>
-                <li>
-                  <a className='sidebar-link' href="/settings/downloads">Downloads</a>
-                </li>
-              </ul>
-            </li>
+            {(user.role === "admin") | (user.role === "super:admin") ? (
+              <li
+                className={classnames("nav-item mT-30 dropdown mb-4", {
+                  open: toggle,
+                })}
+              >
+                <a className="dropdown-toggle" onClick={toggleSettings}>
+                  <span className="icon-holder">
+                    <i className="c-orange-500 ti-settings" />
+                  </span>
+                  <span className="title">Settings</span>
+                  <span className="arrow">
+                    <i className="ti-angle-right" />
+                  </span>
+                </a>
+                <ul className="dropdown-menu">
+                  <li>
+                    <a className="sidebar-link" href="/settings/users">
+                      Users
+                    </a>
+                  </li>
+                  <li>
+                    <a className="sidebar-link" href="/settings/roles">
+                      Roles
+                    </a>
+                  </li>
+                  <li>
+                    <a className="sidebar-link" href="/settings/permissions">
+                      Permissions
+                    </a>
+                  </li>
+                  <li>
+                    <a className="sidebar-link" href="/settings/zones">
+                      Zones
+                    </a>
+                  </li>
+                  <li>
+                    <a className="sidebar-link" href="/settings/branches">
+                      Branches
+                    </a>
+                  </li>
+                  <li>
+                    <a className="sidebar-link" href="/settings/preachers">
+                      Preachers
+                    </a>
+                  </li>
+                  <li>
+                    <a className="sidebar-link" href="/settings/fellowships">
+                      Fellowships
+                    </a>
+                  </li>
+                  <li>
+                    <a className="sidebar-link" href="/settings/events">
+                      Events
+                    </a>
+                  </li>
+                  <li>
+                    <a className="sidebar-link" href="/settings/categories">
+                      Categories
+                    </a>
+                  </li>
+                  <li>
+                    <a className="sidebar-link" href="/settings/downloads">
+                      Downloads
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            ) : (
+              ""
+            )}
           </ul>
         </div>
       </div>

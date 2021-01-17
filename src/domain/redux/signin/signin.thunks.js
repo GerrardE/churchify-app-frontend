@@ -15,8 +15,8 @@ const signin = (data, history) => async (dispatch) => {
     const response = await postResource("auth/signin", data);
     dispatch(signinActions.signinSuccess(response.user));
     localStorage.setItem("token", response.user.token);
-    toast.success(response.message);
     history.push("/dashboard");
+    toast.success(response.message);
     dispatch(getItems(countriesActions, signinConstants.countryparams));
     dispatch(signinActions.signinLoading(false));
   } catch (errors) {

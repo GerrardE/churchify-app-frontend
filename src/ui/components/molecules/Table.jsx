@@ -159,7 +159,7 @@ const Table = ({ columns, data, actions, actionItems, props, constants }) => {
                             {actionItems.canview && (
                               <Link
                                 className="td-n c-green-500 cH-green-500 fsz-md p-5"
-                                to={`/${parameters}/${row.original.id}/details`}
+                                to={`/settings/${parameters}/${row.original.id}/details`}
                               >
                                 <i className="ti-eye" />
                               </Link>

@@ -33,14 +33,14 @@ const UserView = ({ match, ...rest }) => {
     dispatch(getItems(actions, parameters));
   }, [dispatch, parameters]);
 
-  if (!isEmpty(match.params) && match.path === `/${parameters}/:id`) {
+  if (!isEmpty(match.params) && match.path === `/settings/${parameters}/:id`) {
     const { params } = match;
     const { id } = params;
 
     return <UserUpdate id={id} props={rest} />;
   }
 
-  if (!isEmpty(match.params) && match.path === `/${parameters}/:id/details`) {
+  if (!isEmpty(match.params) && match.path === `/settings/${parameters}/:id/details`) {
     const { params } = match;
     const { id } = params;
 
@@ -48,7 +48,7 @@ const UserView = ({ match, ...rest }) => {
   }
 
   if (isEmpty(match.params) &&
-    match.path === `/${parameters}/create/${parameter}`
+    match.path === `/settings/${parameters}/create/${parameter}`
   ) {
     return <UserCreate props={rest} match={match} />;
   }
@@ -56,7 +56,7 @@ const UserView = ({ match, ...rest }) => {
   return (
     <React.Fragment>
       <a
-        href={`/${parameters}/create/${parameter}`}
+        href={`/settings/${parameters}/create/${parameter}`}
         className="btn btn-outline-primary float-right"
         role="button"
         aria-pressed="true"

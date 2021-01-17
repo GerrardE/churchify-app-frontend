@@ -29,7 +29,7 @@ const RoleDetail = ({ id, ...rest }) => {
 
   const { history } = props;
 
-  if (!id) history.push(`/${parameters}`);
+  if (!id) history.push(`/settings/${parameters}`);
 
   const { roles: data, permissions: permData } = useSelector((state) => state);
 
@@ -257,7 +257,7 @@ const RoleDetail = ({ id, ...rest }) => {
                           <span className="text-muted float-right">
                             <a
                               className="btn btn-outline-danger"
-                              href={`/${parameters}`}
+                              href={`/settings/${parameters}`}
                               role="button"
                             >
                               Back

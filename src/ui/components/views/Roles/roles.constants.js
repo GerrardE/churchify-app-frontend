@@ -2,7 +2,8 @@ const constants = {
   parameters: "roles",
   parameter: "role",
   permissionparams: "permissions",
-  editurl: "/roles",
+  editurl: "/settings/roles",
+  actions: true,
   tableData: [
     {
       Header: "Id",

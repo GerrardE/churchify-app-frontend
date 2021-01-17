@@ -1,7 +1,8 @@
 const constants = {
   parameters: "permissions",
   parameter: "permission",
-  editurl: "/permissions",
+  editurl: "/settings/permissions",
+  actions: true,
   tableData: [
     {
       Header: "Id",

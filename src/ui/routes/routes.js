@@ -33,22 +33,22 @@ const routes = [
   },
   /* USERS */
   {
-    path: "/users",
+    path: "/settings/users",
     component: Users,
     protected: true,
   },
   {
-    path: "/users/:id",
+    path: "/settings/users/:id",
     component: Users,
     protected: true,
   },
   {
-    path: "/users/create/user",
+    path: "/settings/users/create/user",
     component: Users,
     protected: true,
   },
   {
-    path: "/users/:id/details",
+    path: "/settings/users/:id/details",
     component: Users,
     protected: true,
   },
@@ -215,39 +215,39 @@ const routes = [
   
   /* ROLES */
   {
-    path: "/roles",
+    path: "/settings/roles",
     component: Roles,
     protected: true,
   },
   {
-    path: "/roles/:id",
+    path: "/settings/roles/:id",
     component: Roles,
     protected: true,
   },
   {
-    path: "/roles/create/role",
+    path: "/settings/roles/create/role",
     component: Roles,
     protected: true,
   },
   {
-    path: "/roles/:id/details",
+    path: "/settings/roles/:id/details",
     component: Roles,
     protected: true,
   },
   
   /* PERMISSIONS */
   {
-    path: "/permissions",
+    path: "/settings/permissions",
     component: Permission,
     protected: true,
   },
   {
-    path: "/permissions/:id",
+    path: "/settings/permissions/:id",
     component: Permission,
     protected: true,
   },
   {
-    path: "/permissions/create/permission",
+    path: "/settings/permissions/create/permission",
     component: Permission,
     protected: true,
   },

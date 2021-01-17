@@ -63,30 +63,65 @@
 }
 
 .is-invisible {
-  display: none
+  display: none;
+}
+
+.is-visible {
+  display: block;
 }
 
 .size-30 {
   font-size: 30px;
 }
 
+.print {
+  width: 80%;
+  padding: 1rem;
+  margin: auto;
+  border: 1px #D3D3D3 solid;
+  border-radius: 5px;
+  background: white;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+@page {
+  size: A4;
+  margin: 0;
+}
+
 @media print {
-  body * {
+  body {
     visibility: hidden;
   }
   .print * {
     visibility: visible;
   }
+
+  .dataTables_length, .dataTables_paginate, .dataTables_filter {
+    display: none;
+  }
+
+  .page-container {
+    padding: 0;
+  }
+
   .print {
       background-color: white;
       height: 100%;
-      width: 100%;
       position: absolute;
       top: 0;
       left: 0;
+      right: 0;
       margin: 0;
-      padding: 15px;
       font-size: 14px;
       line-height: 18px;
+      margin: 0;
+      border: initial;
+      border-radius: initial;
+      width: initial;
+      min-height: initial;
+      box-shadow: initial;
+      background: initial;
+      page-break-after: always;
   }
 }

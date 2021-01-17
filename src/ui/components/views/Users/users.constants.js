@@ -1,7 +1,7 @@
 const constants = {
   parameters: "users",
   parameter: "user",
-  editurl: "/users",
+  editurl: "/settings/users",
   branchesparams: "branches",
   countryparams: "countries",
   countryparam: "country",
@@ -9,6 +9,7 @@ const constants = {
   stateparam: "state",
   zonesparams: "zones",
   rolesparams: "roles",
+  actions: true,
   tableData: [
     {
       Header: "Id",

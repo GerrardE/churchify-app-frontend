@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import { useForm } from "react-hook-form";
@@ -44,7 +44,12 @@ const ReportView = ({ match, ...rest }) => {
 
   const { day, year } = errors;
 
+  const [ d, setData ] = useState({day: 0, year: 2020});
+  const [ dy, setDy ] = useState("Sunday");
+
   const onSubmit = (data) => {
+    setData(data);
+    returnDay(data.day, days);
     dispatch(createItem(actions, `${parameters}/${attendanceparams}`, data));
   };
 
@@ -98,6 +103,12 @@ const ReportView = ({ match, ...rest }) => {
     return <FreportCreate props={rest} match={match} />;
   }
 
+  const returnDay = (i, jj) => {
+    const dy = jj.find( j => j.value == i).key;
+    setDy(dy);
+    return dy;
+  };
+
   const handleDropDown = (items, title) => {
     return (
       <select
@@ -129,8 +140,7 @@ const ReportView = ({ match, ...rest }) => {
           </h4>
           <div className="row my-auto">
             <div className="col-md-12">
-              <div className="bgc-white bd bdrs-3 p-20 mB-20 print">
-                <h4 className="c-grey-900 mB-20">SUMMARY OF ATTENDANCE BY ZONE</h4>
+              <div className="bgc-white bd bdrs-3 p-20 mB-20">
                 <form
                   onSubmit={handleSubmit(onSubmit)}
                   className="needs-validation mt-10"
@@ -160,26 +170,32 @@ const ReportView = ({ match, ...rest }) => {
                         </Button>
                       </div>
                     )}
+                    <span className="icon-holder ml-auto">
+                      <i className="ti-printer c-red-500 h3" onClick={() => window.print()} />
+                    </span>
                   </div>
                 </form>
-                <span>
-                  <i className="ti-printer" onClick={() => window.print()} />
-                </span>
-                {
-                  data
-                    ?
-                    (
-                      <Table
-                        columns={columns}
-                        data={data}
-                        actions={actions}
-                        // props={props}
-                        constants={constants}
-                        actionItems={actionItems}
-                      />
-                    )
-                    :<p>Please choose day and year...</p>
-                }
+                
+                <div className="print">
+                  <h4 className="c-grey-900 mB-20">SUMMARY OF ATTENDANCE BY ZONE</h4>
+                  <p>{`Day: ${dy}`}</p>
+                  <p>{`Year: ${d.year}`}</p>
+                  {
+                    data
+                      ?
+                      (
+                        <Table
+                          columns={columns}
+                          data={data}
+                          actions={actions}
+                          // props={props}
+                          constants={constants}
+                          actionItems={actionItems}
+                        />
+                      )
+                      :<p>Please choose day and year...</p>
+                  }
+                </div>
               </div>
             </div>
           </div>

@@ -2,6 +2,7 @@ const constants = {
   parameters: "zones",
   parameter: "zone",
   editurl: "/settings/zones",
+  actions: true,
   tableData: [
     {
       Header: "Id",
