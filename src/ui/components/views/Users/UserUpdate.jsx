@@ -11,7 +11,6 @@ import * as usersActions from "@domain/redux/users/users.actions";
 import * as configsActions from "@domain/redux/configs/configs.actions";
 import * as branchActions from "@domain/redux/branches/branches.actions";
 import * as zonesActions from "@domain/redux/zones/zones.actions";
-import * as statesActions from "@domain/redux/states/states.actions";
 import constants from "./users.constants";
 import { Button } from "../../atoms";
 import { AppLoader } from "../../molecules";
@@ -23,9 +22,8 @@ const UserUpdate = ({ id }) => {
     zonesparams,
     parameter,
     parameters,
-    statesparams,
-    countryparam,
     countryparams,
+    parametersupdate,
   } = constants;
 
   const dispatch = useDispatch();
@@ -37,38 +35,25 @@ const UserUpdate = ({ id }) => {
 
     dispatch(getItem(usersActions, `${parameters}/${id}`));
 
-    dispatch(getItem(configsActions, `configs/${parameters}/config`));
-  }, [dispatch, parameters, branchesparams, zonesparams, countryparams, id]);
+    dispatch(getItem(configsActions, `configs/${parametersupdate}/config`));
+  }, [dispatch, parameters, parametersupdate, branchesparams, zonesparams, countryparams, id]);
   
   const { register, handleSubmit, errors } = useForm();
   
-  const { users, configs, branches, countries, states, zones } = useSelector(
+  const { users, configs } = useSelector(
     (state) => state,
   );
 
   const { config: data } = configs;
 
   const { user: defaults, loading } = users;
-
-  data.zonesdata = zones.zones;
-
-  data.countries = countries.countries;
   
   data.defaults = defaults;
-
-  const getStates = (id) => {
-    dispatch(getItems(statesActions, `${statesparams}/${id}/${countryparam}`));
-  };
 
   const fields = getFieldsArray(
     data,
     errors,
     register,
-    states.states_,
-    getStates,
-    [{}],
-    () => {},
-    branches.branches,
   );
 
   const onSubmit = (data) => {

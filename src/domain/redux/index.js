@@ -54,6 +54,7 @@ const rootReducer = (state, action) => {
     localStorage.removeItem("token");
     storage.removeItem("persist:signin");
     state = undefined;
+    window.location.href === "/";
   }
 
   return appReducer(state, action);

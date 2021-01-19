@@ -1,5 +1,6 @@
 const constants = {
   parameters: "users",
+  parametersupdate: "users:admin:update",
   parameter: "user",
   editurl: "/settings/users",
   branchesparams: "branches",

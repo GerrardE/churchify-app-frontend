@@ -16,12 +16,12 @@ const signin = (data, history) => async (dispatch) => {
     dispatch(signinActions.signinSuccess(response.user));
     localStorage.setItem("token", response.user.token);
     history.push("/dashboard");
-    toast.success(response.message);
     dispatch(getItems(countriesActions, signinConstants.countryparams));
     dispatch(signinActions.signinLoading(false));
   } catch (errors) {
     dispatch(signinActions.signinFail(errors));
     dispatch(signinActions.signinLoading(false));
+    toast.error(errors.errors);
   }
 };
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import classnames from "classnames";
@@ -126,7 +126,7 @@ const Sidebar = ({ toggleCollapse }) => {
                 <span className="title">Downloads Center</span>
               </a>
             </li>
-            {(user.role === "admin") | (user.role === "super:admin") ? (
+            {user.role.includes("admin") ? (
               <li
                 className={classnames("nav-item mT-30 dropdown mb-4", {
                   open: toggle,
@@ -142,21 +142,30 @@ const Sidebar = ({ toggleCollapse }) => {
                   </span>
                 </a>
                 <ul className="dropdown-menu">
-                  <li>
-                    <a className="sidebar-link" href="/settings/users">
-                      Users
-                    </a>
-                  </li>
-                  <li>
-                    <a className="sidebar-link" href="/settings/roles">
-                      Roles
-                    </a>
-                  </li>
-                  <li>
-                    <a className="sidebar-link" href="/settings/permissions">
-                      Permissions
-                    </a>
-                  </li>
+                  {user.role === "super:admin" ? (
+                    <Fragment>
+                      <li>
+                        <a className="sidebar-link" href="/settings/users">
+                          Users
+                        </a>
+                      </li>
+                      <li>
+                        <a className="sidebar-link" href="/settings/roles">
+                          Roles
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          className="sidebar-link"
+                          href="/settings/permissions"
+                        >
+                          Permissions
+                        </a>
+                      </li>
+                    </Fragment>
+                  ) : (
+                    ""
+                  )}
                   <li>
                     <a className="sidebar-link" href="/settings/zones">
                       Zones
