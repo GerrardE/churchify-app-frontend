@@ -11,6 +11,7 @@ import * as configsActions from "@domain/redux/configs/configs.actions";
 import * as branchActions from "@domain/redux/branches/branches.actions";
 import * as zonesActions from "@domain/redux/zones/zones.actions";
 import * as statesActions from "@domain/redux/states/states.actions";
+import * as citiesActions from "@domain/redux/cities/cities.actions";
 import constants from "./users.constants";
 import { Button } from "../../atoms";
 import { AppLoader } from "../../molecules";
@@ -25,6 +26,8 @@ const UserCreate = () => {
     statesparams,
     countryparam,
     countryparams,
+    stateparam,
+    citiesparams,
   } = constants;
 
   const dispatch = useDispatch();
@@ -37,7 +40,7 @@ const UserCreate = () => {
     dispatch(getItem(configsActions, `configs/${parameters}/config`));
   }, [dispatch, parameters, branchesparams, zonesparams, countryparams]);
   
-  const { users, configs, branches, countries, states, zones } = useSelector(
+  const { users, configs, branches, countries, states, cities, zones } = useSelector(
     (state) => state,
   );
 
@@ -55,14 +58,18 @@ const UserCreate = () => {
     dispatch(getItems(statesActions, `${statesparams}/${id}/${countryparam}`));
   };
 
+  const getCities = (id) => {
+    dispatch(getItems(citiesActions, `${citiesparams}/${id}/${stateparam}`));
+  };
+
   const fields = getFieldsArray(
     data,
     errors,
     register,
     states.states_,
     getStates,
-    [{}],
-    () => {},
+    cities.cities,
+    getCities,
     branches.branches,
   );
   

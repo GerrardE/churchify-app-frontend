@@ -12,11 +12,15 @@ const Sidebar = ({ toggleCollapse }) => {
 
   const [multiRep, setToggleMultiRep] = React.useState(false);
 
+  const [multiRepGen, setToggleMultiRepGen] = React.useState(false);
+
   const toggleSettings = () => setToggle((prevState) => !prevState);
 
   const toggleReports = () => setToggleRep((prevState) => !prevState);
 
   const toggleMultiRep = () => setToggleMultiRep((prevState) => !prevState);
+
+  const toggleMultiRepGen = () => setToggleMultiRepGen((prevState) => !prevState);
 
   const { user } = useSelector((state) => state.signin);
 
@@ -64,60 +68,77 @@ const Sidebar = ({ toggleCollapse }) => {
                 <span className="title">Dashboard</span>
               </a>
             </li>
-            <li
-              className={classnames("nav-item mT-30 dropdown actived", {
-                open: toggleRep,
-              })}
-            >
-              <a className="dropdown-toggle" onClick={toggleReports}>
-                <span className="icon-holder">
-                  <i className="c-green-500 ti-clipboard" />
-                </span>
-                <span className="title">Reports</span>
-                <span className="arrow">
-                  <i className="ti-angle-right" />
-                </span>
-              </a>
-              <ul className="dropdown-menu">
-                <li
-                  className={classnames("nav-item dropdown", {
-                    open: multiRep,
-                  })}
-                >
-                  <a className="sidebar-link" onClick={toggleMultiRep}>
-                    <span>Submit</span>
-                    <span className="arrow">
-                      <i className="ti-angle-right" />
-                    </span>
-                  </a>
-                  <ul className="dropdown-menu">
-                    <li>
-                      <a href="/reports/submit/attendance">Attendance</a>
-                    </li>
-                    <li>
-                      <a href="/reports/submit/activity">Activity</a>
-                    </li>
-                    <li>
-                      <a href="/reports/submit/membership">Membership</a>
-                    </li>
-                    <li>
-                      <a href="/reports/submit/training">Training</a>
-                    </li>
-                    <li>
-                      <a href="/reports/submit/group">Group</a>
-                    </li>
-                    <li>
-                      <a href="/reports/submit/freport">Fellowship</a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <a className="sidebar-link" href="/reports/generate">
-                    Generate
-                  </a>
-                </li>
-              </ul>
-            </li>
+            {user.role.includes("admin") ? (
+              <li
+                className={classnames("nav-item mT-30 dropdown actived", {
+                  open: toggleRep,
+                })}
+              >
+                <a className="dropdown-toggle" onClick={toggleReports}>
+                  <span className="icon-holder">
+                    <i className="c-green-500 ti-clipboard" />
+                  </span>
+                  <span className="title">Reports</span>
+                  <span className="arrow">
+                    <i className="ti-angle-right" />
+                  </span>
+                </a>
+                <ul className="dropdown-menu">
+                  <li
+                    className={classnames("nav-item dropdown", {
+                      open: multiRep,
+                    })}
+                  >
+                    <a className="sidebar-link" onClick={toggleMultiRep}>
+                      <span>Submit</span>
+                      <span className="arrow">
+                        <i className="ti-angle-right" />
+                      </span>
+                    </a>
+                    <ul className="dropdown-menu">
+                      <li>
+                        <a href="/reports/submit/attendance">Attendance</a>
+                      </li>
+                      <li>
+                        <a href="/reports/submit/activity">Activity</a>
+                      </li>
+                      <li>
+                        <a href="/reports/submit/membership">Membership</a>
+                      </li>
+                      <li>
+                        <a href="/reports/submit/training">Training</a>
+                      </li>
+                      <li>
+                        <a href="/reports/submit/group">Group</a>
+                      </li>
+                      <li>
+                        <a href="/reports/submit/freport">Fellowship</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li
+                    className={classnames("nav-item dropdown", {
+                      open: multiRepGen,
+                    })}
+                  >
+                    <a className="sidebar-link" onClick={toggleMultiRepGen}>
+                      <span>Generate</span>
+                      <span className="arrow">
+                        <i className="ti-angle-right" />
+                      </span>
+                    </a>
+                    <ul className="dropdown-menu">
+                      <li>
+                        <a href="/reports/generate/zones">Zone</a>
+                      </li>
+                      <li>
+                        <a href="/reports/generate/branches">Branch</a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            ) : ""}
             <li className="nav-item mT-30 actived">
               <a className="sidebar-link" href="/downloads">
                 <span className="icon-holder">

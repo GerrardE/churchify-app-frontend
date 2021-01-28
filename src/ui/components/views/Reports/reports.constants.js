@@ -77,6 +77,32 @@ const constants = {
       accessor: "zoneattendance",
     },
   ],
+  branchTableData: [
+    {
+      Header: "Branch Id",
+      accessor: "id",
+    },
+    {
+      Header: "Branch",
+      accessor: "name",
+    },
+    {
+      Header: "Men",
+      accessor: "men",
+    },
+    {
+      Header: "Women",
+      accessor: "women",
+    },
+    {
+      Header: "Children",
+      accessor: "children",
+    },
+    {
+      Header: "Total",
+      accessor: "branchattendance",
+    },
+  ],
 };
 
 export default constants;

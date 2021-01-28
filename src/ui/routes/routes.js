@@ -54,7 +54,12 @@ const routes = [
   },
   /* REPORTS */
   {
-    path: "/reports/generate",
+    path: "/reports/generate/zones",
+    component: Reports,
+    protected: true,
+  },
+  {
+    path: "/reports/generate/branches",
     component: Reports,
     protected: true,
   },

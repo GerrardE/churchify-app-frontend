@@ -7,30 +7,19 @@ import { createItem } from "@infrastructure/services/thunkService";
 import * as actions from "@domain/redux/attendance/attendance.actions";
 import { AppLoader, ButtonGroup } from "../../molecules";
 import { Button, ErrorMessage } from "../../atoms";
-import AttendanceCreate from "./AttendanceCreate";
-import ActivityCreate from "./ActivityCreate";
 import MembershipCreate from "./MembershipCreate";
-import TrainingCreate from "./TrainingCreate";
-import GroupCreate from "./GroupCreate";
-import FreportCreate from "./FreportCreate";
-import BranchReportView from "./BranchReportView";
 import { isEmpty, fieldSchema } from "../_validations/schema";
 import constants from "./reports.constants";
 import Table from "../../molecules/Table";
 
-const ReportView = ({ match, ...rest }) => {
+const BranchReportView = ({ match, ...rest }) => {
   const {
-    attendanceparam,
     submitparam,
     parameters,
-    activityparam,
     attendanceparams,
     branchesparams,
     membershipparam,
-    trainingparam,
-    freportparam,
-    groupparam,
-    tableData,
+    branchTableData,
     days,
     years,
   } = constants;
@@ -52,10 +41,10 @@ const ReportView = ({ match, ...rest }) => {
   const onSubmit = (data) => {
     setData(data);
     returnDay(data.day, days);
-    dispatch(createItem(actions, `${parameters}/${attendanceparams}`, data));
+    dispatch(createItem(actions, `${parameters}/${attendanceparams}/${branchesparams}`, data));
   };
 
-  const columns = useMemo(() => tableData, [tableData]);
+  const columns = useMemo(() => branchTableData, [branchTableData]);
 
   const actionItems = {
     canview: false,
@@ -65,51 +54,9 @@ const ReportView = ({ match, ...rest }) => {
 
   if (
     isEmpty(match.params) &&
-    match.path === `/${parameters}/${submitparam}/${attendanceparam}`
-  ) {
-    return <AttendanceCreate props={rest} match={match} />;
-  }
-
-  if (
-    isEmpty(match.params) &&
-    match.path === `/${parameters}/${submitparam}/${activityparam}`
-  ) {
-    return <ActivityCreate props={rest} match={match} />;
-  }
-
-  if (
-    isEmpty(match.params) &&
     match.path === `/${parameters}/${submitparam}/${membershipparam}`
   ) {
     return <MembershipCreate props={rest} match={match} />;
-  }
-
-  if (
-    isEmpty(match.params) &&
-    match.path === `/${parameters}/${submitparam}/${trainingparam}`
-  ) {
-    return <TrainingCreate props={rest} match={match} />;
-  }
-
-  if (
-    isEmpty(match.params) &&
-    match.path === `/${parameters}/${submitparam}/${groupparam}`
-  ) {
-    return <GroupCreate props={rest} match={match} />;
-  }
-
-  if (
-    isEmpty(match.params) &&
-    match.path === `/${parameters}/${submitparam}/${freportparam}`
-  ) {
-    return <FreportCreate props={rest} match={match} />;
-  }
-
-  if (
-    isEmpty(match.params) &&
-    match.path === `/${parameters}/generate/${branchesparams}`
-  ) {
-    return <BranchReportView props={rest} match={match} />;
   }
 
   const returnDay = (i, jj) => {
@@ -142,7 +89,7 @@ const ReportView = ({ match, ...rest }) => {
     btnGroupClassName: "btn-outline-primary float-right",
     btnTitle: "REPORT TYPE",
     urlFormat: "",
-    data: [{name: "zone"}],
+    data: [{name: branchesparams}],
   };
 
   return (
@@ -195,7 +142,7 @@ const ReportView = ({ match, ...rest }) => {
                 </form>
                 
                 <div className="print">
-                  <h4 className="c-grey-900 mB-20">SUMMARY OF ATTENDANCE BY ZONE</h4>
+                  <h4 className="c-grey-900 mB-20">SUMMARY OF ATTENDANCE BY BRANCH</h4>
                   <p>{`Day: ${dy}`}</p>
                   <p>{`Year: ${d.year}`}</p>
                   {
@@ -211,7 +158,7 @@ const ReportView = ({ match, ...rest }) => {
                           actionItems={actionItems}
                         />
                       )
-                      :<p>Please choose day and year...</p>
+                      :<p>Please choose day, month or year ...</p>
                   }
                 </div>
               </div>
@@ -223,12 +170,12 @@ const ReportView = ({ match, ...rest }) => {
   );
 };
 
-ReportView.propTypes = {
+BranchReportView.propTypes = {
   match: PropTypes.oneOfType([PropTypes.object]),
 };
 
-ReportView.defaultProps = {
+BranchReportView.defaultProps = {
   match: {},
 };
 
-export default ReportView;
+export default BranchReportView;

@@ -1,7 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-// import PropTypes from "prop-types";
 import {
   getItem,
   getItems,
@@ -13,6 +12,7 @@ import * as branchActions from "@domain/redux/branches/branches.actions";
 import * as zonesActions from "@domain/redux/zones/zones.actions";
 import * as statesActions from "@domain/redux/states/states.actions";
 import * as countriesActions from "@domain/redux/countries/countries.actions";
+import * as citiesActions from "@domain/redux/cities/cities.actions";
 import { Button } from "../../atoms";
 import AppLoader from "../../molecules/AppLoader";
 import constants from "./auth.constants";
@@ -24,6 +24,8 @@ const SignupView = () => {
     zonesparams,
     parameters,
     statesparams,
+    stateparam,
+    citiesparams,
     countryparam,
     countryparams,
   } = constants;
@@ -40,7 +42,7 @@ const SignupView = () => {
     dispatch(getItem(configsActions, `configs/${parameters}/config`));
   }, [dispatch, parameters, branchesparams, zonesparams, countryparams]);
 
-  const { users, configs, branches, countries, states, zones } = useSelector(
+  const { users, configs, branches, countries, states, cities, zones } = useSelector(
     (state) => state,
   );
 
@@ -58,14 +60,18 @@ const SignupView = () => {
     dispatch(getItems(statesActions, `${statesparams}/${id}/${countryparam}`));
   };
 
+  const getCities = (id) => {
+    dispatch(getItems(citiesActions, `${citiesparams}/${id}/${stateparam}`));
+  };
+
   const fields = getFieldsArray(
     data,
     errors,
     register,
     states.states_,
     getStates,
-    [{}],
-    () => {},
+    cities.cities,
+    getCities,
     branches.branches,
   );
 
