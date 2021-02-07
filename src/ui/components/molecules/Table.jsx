@@ -89,7 +89,6 @@ const Table = ({ columns, data, actions, actionItems, props, constants }) => {
                 </option>
               ))}
             </select>
-            {" "}
             entries
           </label>
         </div>
@@ -114,7 +113,7 @@ const Table = ({ columns, data, actions, actionItems, props, constants }) => {
                       {column.render("Header")}
                     </th>
                   ))}
-                  {actions && <th>Actions</th>}
+                  {constants.actions && <th>Actions</th>}
                 </tr>
               ))}
             </thead>
@@ -130,19 +129,21 @@ const Table = ({ columns, data, actions, actionItems, props, constants }) => {
                         </td>
                       );
                     })}
-                    <td>
-                      <div className="peers mR-15">
-                        {
-                          actionItems.canedit && (
+                    {constants.actions && (
+                      <td>
+                        <div className="peers mR-15">
+                          {actionItems.canedit && (
                             <div className="peer">
-                              <Link className="td-n c-deep-purple-500 cH-blue-500 fsz-md p-5" to={`${editurl}/${row.original.id}`}>
+                              <Link
+                                className="td-n c-deep-purple-500 cH-blue-500 fsz-md p-5"
+                                to={`${editurl}/${row.original.id}`}
+                              >
                                 <i className="ti-pencil" />
                               </Link>
                             </div>
                           )}
-                        <div className="peer">
-                          {
-                            actionItems.candelete && (
+                          <div className="peer">
+                            {actionItems.candelete && (
                               <a className="td-n c-red-500 cH-blue-500 fsz-md p-5">
                                 <i
                                   className="ti-trash"
@@ -153,27 +154,31 @@ const Table = ({ columns, data, actions, actionItems, props, constants }) => {
                                 />
                               </a>
                             )}
-                        </div>
-                        <div className="peer">
-                          {
-                            actionItems.canview && (
-                              <Link className="td-n c-green-500 cH-green-500 fsz-md p-5" to={`/${parameters}/${row.original.id}/view`}>
+                          </div>
+                          <div className="peer">
+                            {actionItems.canview && (
+                              <Link
+                                className="td-n c-green-500 cH-green-500 fsz-md p-5"
+                                to={`/settings/${parameters}/${row.original.id}/details`}
+                              >
                                 <i className="ti-eye" />
                               </Link>
-                            )
-                          }
-                        </div>
-                        <div className="peer">
-                          {
-                            actionItems.candownload && (
-                              <a className="td-n c-green-500 cH-purple-500 fsz-md p-5" href={row.original.url} download>
+                            )}
+                          </div>
+                          <div className="peer">
+                            {actionItems.candownload && (
+                              <a
+                                className="td-n c-green-500 cH-purple-500 fsz-md p-5"
+                                href={row.original.url}
+                                download
+                              >
                                 <i className="ti-cloud-down" />
                               </a>
-                            )
-                          }
+                            )}
+                          </div>
                         </div>
-                      </div>
-                    </td>
+                      </td>
+                    )}
                   </tr>
                 );
               })}

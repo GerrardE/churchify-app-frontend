@@ -5,6 +5,7 @@ import { getItem, getItems, createItem } from "@infrastructure/services/thunkSer
 import * as attendanceActions from "@domain/redux/attendance/attendance.actions";
 import * as configsActions from "@domain/redux/configs/configs.actions";
 import * as branchActions from "@domain/redux/branches/branches.actions";
+import * as zonesActions from "@domain/redux/zones/zones.actions";
 import * as eventActions from "@domain/redux/events/events.actions";
 import * as preacherActions from "@domain/redux/preachers/preachers.actions";
 import constants from "./reports.constants";
@@ -13,25 +14,29 @@ import { AppLoader } from "../../molecules";
 import getFieldsArray from "../_helpers/fieldGenerator";
 
 const AttendanceCreate = () => {
-  const { attendanceparam, branchesparams, eventsparams, preachersparams, parameters } = constants;
+  const { attendanceparam, branchesparams, zonesparams, eventsparams, preachersparams, parameters } = constants;
 
   const dispatch = useDispatch();
 
   React.useEffect(() => {
     dispatch(getItems(branchActions, `${branchesparams}`));
 
+    dispatch(getItems(zonesActions, `${zonesparams}`));
+
     dispatch(getItems(eventActions, `${eventsparams}`));
 
     dispatch(getItems(preacherActions, `${preachersparams}`));
 
     dispatch(getItem(configsActions, `configs/${attendanceparam}/config`));
-  }, [dispatch, attendanceparam, branchesparams, eventsparams, preachersparams]);
+  }, [dispatch, attendanceparam, branchesparams, eventsparams, preachersparams, zonesparams]);
   
-  const { attendances, configs, branches, events, preachers } = useSelector((state) => state);
+  const { attendances, configs, branches, events, preachers, zones } = useSelector((state) => state);
   
   const { loading } = attendances;
   
   const { config: data } = configs;
+
+  data.zonesdata = zones.zones;
   
   const { register, handleSubmit, errors } = useForm();
 
@@ -69,7 +74,7 @@ const AttendanceCreate = () => {
                         buttonType="submit"
                         buttonClassName="btn btn-primary mr-2"
                       >
-                        Save
+                        Submit
                       </Button>
                     </div>
                   </div>

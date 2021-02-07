@@ -20,16 +20,25 @@ const Auth = ({ children, title }) => {
         </div>
       </div>
       <div
-        className="col-12 col-md-4 peer pX-40 pY-80 h-100 bgc-white scrollable pos-r"
+        className="col-12 col-md-4 peer pX-40 pY-40 h-100 bgc-white scrollable pos-r"
         style={{ minWidth: "320px" }}
       >
-        <h1>
+        <h3>
           <img className="mr-2" src={Logo} alt="" />
           TREM
-        </h1>
-        <h3>Reports Admin Panel</h3>
-        <br />
-        <h4 className="fw-300 c-grey-900 mB-40">{title}</h4>
+        </h3>
+        <h4 className="fw-300 c-grey-900">{title}</h4>
+        {title === "Signin" ? (
+          <p className="mB-40">
+            Don&apos;t have an account?
+            <a href="/signup"> Signup</a>
+          </p>
+        ) : (
+          <p className="mb-10">
+            Already have an account?
+            <a href="/"> Signin</a>
+          </p>
+        )}
         {children}
       </div>
     </div>

@@ -5,27 +5,32 @@ import { getItem, getItems, createItem } from "@infrastructure/services/thunkSer
 import * as groupActions from "@domain/redux/groups/groups.actions";
 import * as configsActions from "@domain/redux/configs/configs.actions";
 import * as branchActions from "@domain/redux/branches/branches.actions";
+import * as zonesActions from "@domain/redux/zones/zones.actions";
 import constants from "./reports.constants";
 import { Button } from "../../atoms";
 import { AppLoader } from "../../molecules";
 import getFieldsArray from "../_helpers/fieldGenerator";
 
 const GroupCreate = () => {
-  const { groupparam, branchesparams, parameters } = constants;
+  const { groupparam, branchesparams, parameters, zonesparams } = constants;
 
   const dispatch = useDispatch();
 
   React.useEffect(() => {
     dispatch(getItems(branchActions, `${branchesparams}`));
 
+    dispatch(getItems(zonesActions, `${zonesparams}`));
+
     dispatch(getItem(configsActions, `configs/${groupparam}/config`));
-  }, [dispatch, groupparam, branchesparams]);
+  }, [dispatch, groupparam, branchesparams, zonesparams]);
   
-  const { groups, configs, branches } = useSelector((state) => state);
+  const { groups, configs, branches, zones } = useSelector((state) => state);
   
   const { loading } = groups;
   
   const { config: data } = configs;
+
+  data.zonesdata = zones.zones;
   
   const { register, handleSubmit, errors } = useForm();
 
@@ -63,7 +68,7 @@ const GroupCreate = () => {
                         buttonType="submit"
                         buttonClassName="btn btn-primary mr-2"
                       >
-                        Save
+                        Submit
                       </Button>
                     </div>
                   </div>

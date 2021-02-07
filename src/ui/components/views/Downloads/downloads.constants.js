@@ -3,6 +3,7 @@ const constants = {
   parameter: "download",
   categoryparams: "categories",
   editurl: "/settings/downloads",
+  actions: true,
   tableData: [
     {
       Header: "Id",

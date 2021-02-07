@@ -5,27 +5,32 @@ import { getItem, getItems, createItem } from "@infrastructure/services/thunkSer
 import * as trainingActions from "@domain/redux/trainings/trainings.actions";
 import * as configsActions from "@domain/redux/configs/configs.actions";
 import * as branchActions from "@domain/redux/branches/branches.actions";
+import * as zonesActions from "@domain/redux/zones/zones.actions";
 import constants from "./reports.constants";
 import { Button } from "../../atoms";
 import { AppLoader } from "../../molecules";
 import getFieldsArray from "../_helpers/fieldGenerator";
 
 const TrainingCreate = () => {
-  const { trainingparam, branchesparams, parameters } = constants;
+  const { trainingparam, branchesparams, parameters, zonesparams } = constants;
 
   const dispatch = useDispatch();
 
   React.useEffect(() => {
     dispatch(getItems(branchActions, `${branchesparams}`));
 
+    dispatch(getItems(zonesActions, `${zonesparams}`));
+
     dispatch(getItem(configsActions, `configs/${trainingparam}/config`));
-  }, [dispatch, trainingparam, branchesparams]);
+  }, [dispatch, trainingparam, branchesparams, zonesparams]);
   
-  const { trainings, configs, branches } = useSelector((state) => state);
+  const { trainings, configs, branches, zones } = useSelector((state) => state);
   
   const { loading } = trainings;
   
   const { config: data } = configs;
+
+  data.zonesdata = zones.zones;
   
   const { register, handleSubmit, errors } = useForm();
 
@@ -63,7 +68,7 @@ const TrainingCreate = () => {
                         buttonType="submit"
                         buttonClassName="btn btn-primary mr-2"
                       >
-                        Save
+                        Submit
                       </Button>
                     </div>
                   </div>

@@ -1,11 +1,16 @@
 export { default as Reports } from "./Reports";
 export { default as Signin } from "./Signin";
+export { default as Signup } from "./Signup";
 export { default as ServerError } from "./ServerError";
 export { default as Notfound } from "./Notfound";
 export { default as Zones } from "./Zones";
+export { default as Users } from "./Users";
 export { default as Branches } from "./Branches";
 export { default as Preachers } from "./Preachers";
 export { default as Fellowships } from "./Fellowships";
 export { default as Events } from "./Events";
 export { default as Downloads } from "./Downloads";
 export { default as Categories } from "./Categories";
+export { default as Roles } from "./Roles";
+export { default as Permissions } from "./Permissions";
+export { default as Dashboard } from "./Dashboard";

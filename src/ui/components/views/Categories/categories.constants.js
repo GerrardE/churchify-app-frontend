@@ -2,6 +2,7 @@ const constants = {
   parameters: "categories",
   parameter: "category",
   editurl: "/settings/categories",
+  actions: true,
   tableData: [
     {
       Header: "Id",

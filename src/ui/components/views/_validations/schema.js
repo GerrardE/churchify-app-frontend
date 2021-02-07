@@ -31,6 +31,14 @@ const numberFieldSchema = {
   maxLength: { value: 20, message: "min. of 20 numbers required" },
 };
 
+const fieldSchema = (data) => {
+  return {
+    required: `${data.title} is required`,
+    minLength: { value: data?.minvalue, message: `min. ${data?.minvalue} characters required` },
+    maxLength: { value: data?.maxvalue, message: `max. ${data?.minvalue} characters required` },
+  };
+};
+
 const isEmpty = (obj) => {
   for (var key in obj) {
     if (obj.hasOwnProperty(key)) return false;
@@ -38,18 +46,12 @@ const isEmpty = (obj) => {
   return true;
 };
 
-const accountNumberSchema = {
-  required: "account number is required",
-  minLength: { value: 10, message: "min. of 10 numbers required" },
-  maxLength: { value: 10, message: "max. of 10 numbers required" },
-};
-
 export {
   emailSchema,
   urlSchema,
   passwordSchema,
   textFieldSchema,
+  fieldSchema,
   isEmpty,
-  accountNumberSchema,
   numberFieldSchema,
 };

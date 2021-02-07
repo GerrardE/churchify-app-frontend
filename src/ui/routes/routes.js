@@ -1,6 +1,8 @@
 import {
   Signin,
+  Signup,
   Reports,
+  Dashboard,
   Notfound,
   ServerError,
   Zones,
@@ -10,6 +12,9 @@ import {
   Events,
   Downloads,
   Categories,
+  Roles,
+  Users,
+  Permissions as Permission,
 } from "../pages";
 
 const routes = [
@@ -18,11 +23,46 @@ const routes = [
     component: Signin,
   },
   {
+    path: "/signup",
+    component: Signup,
+  },
+  {
     path: "/dashboard",
-    component: Reports,
+    component: Dashboard,
+    protected: true,
+  },
+  /* USERS */
+  {
+    path: "/settings/users",
+    component: Users,
+    protected: true,
+  },
+  {
+    path: "/settings/users/:id",
+    component: Users,
+    protected: true,
+  },
+  {
+    path: "/settings/users/create/user",
+    component: Users,
+    protected: true,
+  },
+  {
+    path: "/settings/users/:id/details",
+    component: Users,
     protected: true,
   },
   /* REPORTS */
+  {
+    path: "/reports/generate/zones",
+    component: Reports,
+    protected: true,
+  },
+  {
+    path: "/reports/generate/branches",
+    component: Reports,
+    protected: true,
+  },
   {
     path: "/reports/submit/attendance",
     component: Reports,
@@ -175,6 +215,45 @@ const routes = [
   {
     path: "/settings/categories/create/category",
     component: Categories,
+    protected: true,
+  },
+  
+  /* ROLES */
+  {
+    path: "/settings/roles",
+    component: Roles,
+    protected: true,
+  },
+  {
+    path: "/settings/roles/:id",
+    component: Roles,
+    protected: true,
+  },
+  {
+    path: "/settings/roles/create/role",
+    component: Roles,
+    protected: true,
+  },
+  {
+    path: "/settings/roles/:id/details",
+    component: Roles,
+    protected: true,
+  },
+  
+  /* PERMISSIONS */
+  {
+    path: "/settings/permissions",
+    component: Permission,
+    protected: true,
+  },
+  {
+    path: "/settings/permissions/:id",
+    component: Permission,
+    protected: true,
+  },
+  {
+    path: "/settings/permissions/create/permission",
+    component: Permission,
     protected: true,
   },
   

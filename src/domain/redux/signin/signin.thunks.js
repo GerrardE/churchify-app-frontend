@@ -15,13 +15,13 @@ const signin = (data, history) => async (dispatch) => {
     const response = await postResource("auth/signin", data);
     dispatch(signinActions.signinSuccess(response.user));
     localStorage.setItem("token", response.user.token);
-    toast.success(response.message);
     history.push("/dashboard");
     dispatch(getItems(countriesActions, signinConstants.countryparams));
     dispatch(signinActions.signinLoading(false));
   } catch (errors) {
     dispatch(signinActions.signinFail(errors));
     dispatch(signinActions.signinLoading(false));
+    toast.error(errors.errors);
   }
 };
 
