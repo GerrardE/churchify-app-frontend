@@ -85,7 +85,7 @@ const DashboardView = () => {
   return (
     <React.Fragment>
       {loading ? (
-        <AppLoader loaderWidth="15%" loaderClassName="app-loader" />
+        <AppLoader loaderWidth="15%" loaderClassName="app-loader-central" />
       ) : (
         <div className="row gap-20 masonry pos-r">
           <div className="masonry-sizer col-md-6" />

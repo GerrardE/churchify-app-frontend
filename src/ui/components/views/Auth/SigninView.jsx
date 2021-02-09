@@ -34,7 +34,8 @@ const SigninView = ({ history }) => {
           inputClassName={classnames("form-control", {
             "is-invalid": email,
           })}
-          inputPlaceholder="dinma@gmail.com"
+          inputId="useremail"
+          inputPlaceholder="user@email.com"
           inputName="email"
           inputRef={register(emailSchema)}
         />
@@ -44,6 +45,7 @@ const SigninView = ({ history }) => {
         <Label labelClassName="text-normal text-dark">Password</Label>
         <Inputfield
           inputType="password"
+          inputId="userpass"
           inputClassName={classnames("form-control", {
             "is-invalid": password,
           })}
@@ -66,6 +68,7 @@ const SigninView = ({ history }) => {
                   inputType="checkbox"
                   inputClassName="peer"
                   inputName="rememberMe"
+                  inputId="checkme"
                   inputRef={register}
                 />
                 <Label
@@ -77,7 +80,7 @@ const SigninView = ({ history }) => {
               </div>
             </div>
             <div className="peer">
-              <Button buttonType="submit" buttonClassName="btn btn-primary">
+              <Button buttonType="submit" buttonId="login" buttonClassName="btn btn-primary">
                 Login
               </Button>
             </div>
