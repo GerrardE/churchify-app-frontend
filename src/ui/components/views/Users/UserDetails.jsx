@@ -37,8 +37,8 @@ const UserDetails = ({ id, ...rest }) => {
     dispatch(getItems(roleActions, `/${rolesparams}`));
   }, [dispatch, id, rolesparams]);
 
-  const onSubmit = (role) => {
-    const data = { role };
+  const onSubmit = (role, id) => {
+    const data = { role, id };
     dispatch(createItem(roleActions, `/${rolesparams}`, data));
   };
 
@@ -107,25 +107,31 @@ const UserDetails = ({ id, ...rest }) => {
                               {keys.map((key) => (
                                 <tr key={uuidv4()}>
                                   <td>
-                                    <h6 className="mb-0">{key.toUpperCase()}</h6>
+                                    <h6 className="mb-0">
+                                      {key.toUpperCase()}
+                                    </h6>
                                   </td>
-                                  {(key == "createdAt" || key == "updatedAt") ? (
-                                    <td>{moment(user[key]).format("DD/MM/YYYY")}</td>
+                                  {key == "createdAt" || key == "updatedAt" ? (
+                                    <td>
+                                      {moment(user[key]).format("DD/MM/YYYY")}
+                                    </td>
                                   ) : (
                                     <td>{user[key].toUpperCase()}</td>
                                   )}
                                 </tr>
                               ))}
                               <tr>
-                                <td><h6 className="mb-0">MANAGE ROLE</h6></td>
+                                <td>
+                                  <h6 className="mb-0">MANAGE ROLE</h6>
+                                </td>
                                 <td>
                                   <div className="row">
-                                    <div
-                                      className="form-group col-md-6"
-                                    >
+                                    <div className="form-group col-md-6">
                                       <select
                                         className="form-control custom-select mr-sm-2"
-                                        onChange={(e) => setRole(e.target.value)}
+                                        onChange={(e) =>
+                                          setRole(e.target.value)
+                                        }
                                         name="role"
                                       >
                                         <option value="">Choose role...</option>
@@ -137,20 +143,20 @@ const UserDetails = ({ id, ...rest }) => {
                                           ))}
                                       </select>
                                     </div>
-                                    <div
-                                      className="form-group col-md-6"
-                                    >
-                                      {
-                                        loadingRoles ?
-                                          <p>loading...</p> : (
-                                            <Button
-                                              buttonType="submit"
-                                              buttonClassName="btn btn-primary"
-                                              buttonOnClick={() => onSubmit(roleData)}
-                                            >
-                                              Save
-                                            </Button>
-                                          )}
+                                    <div className="form-group col-md-6">
+                                      {loadingRoles ? (
+                                        <p>loading...</p>
+                                      ) : (
+                                        <Button
+                                          buttonType="submit"
+                                          buttonClassName="btn btn-primary"
+                                          buttonOnClick={() =>
+                                            onSubmit(roleData, user["id"])
+                                          }
+                                        >
+                                          Save
+                                        </Button>
+                                      )}
                                     </div>
                                   </div>
                                 </td>

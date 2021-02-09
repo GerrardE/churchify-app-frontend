@@ -15,7 +15,7 @@ const InfoCard = ({ title, value, infoCardIcon }) => {
             </div>
             <div className="peer">
               <span className="d-ib lh-0 va-m fw-600 bdrs-10em pX-15 pY-15 bgc-green-50 c-green-500">
-                {value}
+                {value ?? 0}
               </span>
             </div>
           </div>
@@ -27,8 +27,12 @@ const InfoCard = ({ title, value, infoCardIcon }) => {
 
 InfoCard.propTypes = {
   title: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.number,
   infoCardIcon: PropTypes.string.isRequired,
+};
+
+InfoCard.defaultProps = {
+  value: 0,
 };
 
 export default InfoCard;
