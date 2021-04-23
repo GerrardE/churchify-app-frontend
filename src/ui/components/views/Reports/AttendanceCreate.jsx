@@ -30,12 +30,13 @@ const AttendanceCreate = () => {
     dispatch(getItem(configsActions, `configs/${attendanceparam}/config`));
   }, [dispatch, attendanceparam, branchesparams, eventsparams, preachersparams, zonesparams]);
   
-  const { attendances, configs, branches, events, preachers, zones } = useSelector((state) => state);
+  const { attendances, configs, branches, events, preachers, zones, signin: { user } } = useSelector((state) => state);
   
   const { loading } = attendances;
   
   const { config: data } = configs;
 
+  data.user = user;
   data.zonesdata = zones.zones;
   
   const { register, handleSubmit, errors } = useForm();

@@ -5,8 +5,8 @@ import PropTypes from "prop-types";
 
 const ProtectedRoute = ({ path, component }) => {
   const Component = component;
+  
   const { isAuthenticated, user: { role } } = useSelector((state) => state.signin);
-
   if (!isAuthenticated) return <Redirect to="/" />;
 
   return (role === "super:admin") ? (

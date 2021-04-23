@@ -1,9 +1,8 @@
 const constants = {
-  parameters: "roles",
-  parameter: "role",
-  permissionparams: "permissions",
-  editurl: "/settings/roles",
-  viewurl: "settings",
+  parameters: "configs",
+  parameter: "config",
+  editurl: "/system/configs",
+  viewurl: "system",
   actions: true,
   tableData: [
     {
@@ -15,8 +14,8 @@ const constants = {
       accessor: "name",
     },
     {
-      Header: "Notes",
-      accessor: "notes",
+      Header: "Type",
+      accessor: "type",
     },
   ],
 };

@@ -1,17 +1,18 @@
 import React, { Fragment } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { routes, ProtectedRoute } from "@ui/routes";
 import { store, persistor } from "@application/config/store/store";
 import "@ui/assets/styles/index.scss";
 import "@ui/assets/styles/custom.css";
-import "react-toastify/dist/ReactToastify.css";
 import "@ui/assets/scripts/index";
 
 export default function App() {
   return (
     <Fragment>
+      <Toaster position="top-right" reverseOrder />
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <Router history={history}>

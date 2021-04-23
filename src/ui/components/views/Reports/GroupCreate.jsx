@@ -24,12 +24,13 @@ const GroupCreate = () => {
     dispatch(getItem(configsActions, `configs/${groupparam}/config`));
   }, [dispatch, groupparam, branchesparams, zonesparams]);
   
-  const { groups, configs, branches, zones } = useSelector((state) => state);
+  const { groups, configs, branches, zones, signin: { user } } = useSelector((state) => state);
   
   const { loading } = groups;
   
   const { config: data } = configs;
-
+  
+  data.user = user;
   data.zonesdata = zones.zones;
   
   const { register, handleSubmit, errors } = useForm();

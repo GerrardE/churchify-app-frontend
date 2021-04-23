@@ -24,12 +24,13 @@ const TrainingCreate = () => {
     dispatch(getItem(configsActions, `configs/${trainingparam}/config`));
   }, [dispatch, trainingparam, branchesparams, zonesparams]);
   
-  const { trainings, configs, branches, zones } = useSelector((state) => state);
+  const { trainings, configs, branches, zones, signin: { user } } = useSelector((state) => state);
   
   const { loading } = trainings;
   
   const { config: data } = configs;
 
+  data.user = user;
   data.zonesdata = zones.zones;
   
   const { register, handleSubmit, errors } = useForm();

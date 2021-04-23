@@ -1,4 +1,4 @@
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import * as firebase from "firebase";
 import { postResource } from "@infrastructure/services/api.service";
 import { authProvider } from "@infrastructure/firebase/config";
@@ -7,21 +7,20 @@ import * as signinActions from "./signin.actions";
 import * as countriesActions from "../countries/countries.actions";
 import signinConstants from "./signin.constants";
 
-toast.configure();
-
 const signin = (data, history) => async (dispatch) => {
   try {
     dispatch(signinActions.signinLoading(true));
-    const response = await postResource("auth/signin", data);
-    dispatch(signinActions.signinSuccess(response.user));
-    localStorage.setItem("token", response.user.token);
-    history.push("/dashboard");
+    const response = await postResource("users/auth/signin", data);
+    dispatch(signinActions.signinSuccess(response.payload));
+    if(response.message === "Login successful"){
+      history.push("/dashboard");
+    }
     dispatch(getItems(countriesActions, signinConstants.countryparams));
     dispatch(signinActions.signinLoading(false));
   } catch (errors) {
     dispatch(signinActions.signinFail(errors));
     dispatch(signinActions.signinLoading(false));
-    toast.error(errors.errors);
+    toast.error(errors.message);
   }
 };
 
