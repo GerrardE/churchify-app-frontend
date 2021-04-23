@@ -15,6 +15,8 @@ import {
   Roles,
   Users,
   Permissions as Permission,
+  ApiLogs,
+  Configs,
 } from "../pages";
 
 const routes = [
@@ -240,6 +242,18 @@ const routes = [
     protected: true,
   },
   
+  /* APILOGS */
+  {
+    path: "/system/apilogs",
+    component: ApiLogs,
+    protected: true,
+  },
+  {
+    path: "/system/apilogs/:id/details",
+    component: ApiLogs,
+    protected: true,
+  },
+  
   /* PERMISSIONS */
   {
     path: "/settings/permissions",
@@ -256,7 +270,29 @@ const routes = [
     component: Permission,
     protected: true,
   },
-  
+
+  /* CONFIGS */
+  {
+    path: "/system/configs",
+    component: Configs,
+    protected: true,
+  },
+  {
+    path: "/system/configs/:id",
+    component: Configs,
+    protected: true,
+  },
+  {
+    path: "/system/configs/create/config",
+    component: Configs,
+    protected: true,
+  },
+  {
+    path: "/system/configs/:id/details",
+    component: Configs,
+    protected: true,
+  },
+
   /* DEFAULTS */
   {
     path: "/servererror",

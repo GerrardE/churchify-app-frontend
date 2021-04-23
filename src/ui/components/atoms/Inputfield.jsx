@@ -12,6 +12,8 @@ const Inputfield = ({
   readOnly,
   defaultValue,
   inputDisabled,
+  inputRows,
+  inputColumns,
 }) => {
   if (fieldType == "textarea") {
     return (
@@ -25,6 +27,8 @@ const Inputfield = ({
         readOnly={readOnly}
         defaultValue={defaultValue}
         disabled={inputDisabled}
+        rows={inputRows}
+        columns={inputColumns}
       />
     );
   }
@@ -55,6 +59,8 @@ Inputfield.propTypes = {
   readOnly: PropTypes.oneOfType([PropTypes.bool]),
   defaultValue: PropTypes.string,
   inputDisabled: PropTypes.oneOfType([PropTypes.bool]),
+  inputRows: PropTypes.number,
+  inputColumns: PropTypes.number,
 };
 
 Inputfield.defaultProps = {
@@ -66,6 +72,8 @@ Inputfield.defaultProps = {
   readOnly: false,
   defaultValue: "",
   inputDisabled: false,
+  inputRows: 6,
+  inputColumns: 2,
 };
 
 export default Inputfield;

@@ -77,7 +77,7 @@ const SignupView = () => {
 
   const onSubmit = (data) => {
     dispatch(
-      createItem(usersActions, "auth/signup", data),
+      createItem(usersActions, "users/auth/signup", data),
     );
   };
 

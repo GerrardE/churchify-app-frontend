@@ -10,6 +10,8 @@ export { default as DownloadView } from "./Downloads/DownloadView";
 export { default as CategoryView } from "./Categories/CategoryView";
 export { default as ReportView } from "./Reports/ReportView";
 export { default as RoleView } from "./Roles/RoleView";
+export { default as ApiLogView } from "./ApiLogs/ApiLogView";
 export { default as PermissionView } from "./Permissions/PermissionView";
 export { default as DashboardView } from "./Dashboard/DashboardView";
 export { default as SignupView } from "./Auth/SignupView";
+export { default as ConfigView } from "./Configs/ConfigView";

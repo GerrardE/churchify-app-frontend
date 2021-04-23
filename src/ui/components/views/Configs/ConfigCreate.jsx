@@ -1,53 +1,58 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { getItem, getItems, createItem } from "@infrastructure/services/thunkService";
-import * as activityActions from "@domain/redux/activities/activities.actions";
-import * as configsActions from "@domain/redux/configs/configs.actions";
-import * as branchActions from "@domain/redux/branches/branches.actions";
-import * as zonesActions from "@domain/redux/zones/zones.actions";
-import constants from "./reports.constants";
+import { getItem, createItem } from "@infrastructure/services/thunkService";
+import * as configActions from "@domain/redux/configs/configs.actions";
+import constants from "./configs.constants";
 import { Button } from "../../atoms";
 import { AppLoader } from "../../molecules";
 import getFieldsArray from "../_helpers/fieldGenerator";
 
-const ActivityCreate = () => {
-  const { activityparam, branchesparams, zonesparams, parameters } = constants;
+const ConfigCreate = () => {
+  const { parameter, parameters } = constants;
 
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(getItems(branchActions, `${branchesparams}`));
+    dispatch(getItem(configActions, `configs/${parameters}/config`));
+  }, [dispatch, parameters]);
+  
+  const { configs } = useSelector((state) => state);
 
-    dispatch(getItems(zonesActions, `${zonesparams}`));
+  const { loading, config: data } = configs;
 
-    dispatch(getItem(configsActions, `configs/${activityparam}/config`));
-  }, [dispatch, activityparam, branchesparams, zonesparams]);
-  
-  const { activities, configs, branches, zones, signin: { user } } = useSelector((state) => state);
-  
-  const { loading } = activities;
-  
-  const { config: data } = configs;
-
-  data.user = user;
-  data.zonesdata = zones.zones;
-  
   const { register, handleSubmit, errors } = useForm();
 
-  const fields = getFieldsArray(data, errors, register, [{}], ()=>{}, [{}], ()=>{}, branches.branches);
-
+  const fields = getFieldsArray(data, errors, register);
+  
   const onSubmit = (data) => {
-    dispatch(createItem(activityActions, `${parameters}/${activityparam}`, data));
+    data.config = JSON.parse(data.config);
+
+    dispatch(createItem(configActions, parameters, data));
   };
 
   return (
     <div className="container-fluid">
       <div className="row">
+        <div className="col-md-6">
+          <h4 className="c-grey-900 mT-10 mB-30">{parameters.toUpperCase()}</h4>
+        </div>
+        <div className="col-md-6">
+          <a
+            href={`/system/${parameters}`}
+            className="btn btn-outline-primary float-right"
+            role="button"
+            aria-pressed="true"
+          >
+            BACK
+          </a>
+        </div>
+      </div>
+      <div className="row">
         <div className="col-md-2" />
         <div className="col-md-8">
           <div className="bgc-white bd bdrs-3 p-20 mB-20">
-            <h4 className="c-grey-900 mB-20">{`SUBMIT ${activityparam.toUpperCase()}`}</h4>
+            <h4 className="c-grey-900 mB-20">{`CREATE ${parameter.toUpperCase()}`}</h4>
             <form
               onSubmit={handleSubmit(onSubmit)}
               className="needs-validation"
@@ -69,7 +74,7 @@ const ActivityCreate = () => {
                         buttonType="submit"
                         buttonClassName="btn btn-primary mr-2"
                       >
-                        Submit
+                        Save
                       </Button>
                     </div>
                   </div>
@@ -84,4 +89,4 @@ const ActivityCreate = () => {
   );
 };
 
-export default ActivityCreate;
+export default ConfigCreate;

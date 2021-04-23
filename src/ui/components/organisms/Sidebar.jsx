@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import Logo from "@ui/assets/static/images/logo.png";
 
 const Sidebar = ({ toggleCollapse }) => {
+  // TODO: needs refactoring
   const [toggle, setToggle] = React.useState(false);
 
   const [toggleRep, setToggleRep] = React.useState(false);
@@ -14,13 +15,18 @@ const Sidebar = ({ toggleCollapse }) => {
 
   const [multiRepGen, setToggleMultiRepGen] = React.useState(false);
 
+  const [systems, setToggleSystems] = React.useState(false);
+
+  
   const toggleSettings = () => setToggle((prevState) => !prevState);
-
+  
   const toggleReports = () => setToggleRep((prevState) => !prevState);
-
+  
   const toggleMultiRep = () => setToggleMultiRep((prevState) => !prevState);
-
+  
   const toggleMultiRepGen = () => setToggleMultiRepGen((prevState) => !prevState);
+  
+  const toggleSystems = () => setToggleSystems((prevState) => !prevState);
 
   const { user } = useSelector((state) => state.signin);
 
@@ -220,6 +226,39 @@ const Sidebar = ({ toggleCollapse }) => {
                   <li>
                     <a className="sidebar-link" href="/settings/downloads">
                       Downloads
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            ) : (
+              ""
+            )}
+            {user.role.includes("admin") ? (
+              <li
+                className={classnames("nav-item mT-30 dropdown mb-4", {
+                  open: systems,
+                })}
+              >
+                <a className="dropdown-toggle" onClick={toggleSystems}>
+                  <span className="icon-holder">
+                    <i className="c-blue-500 ti-pulse" />
+                  </span>
+                  <span className="title">System</span>
+                  <span className="arrow">
+                    <i className="ti-angle-right" />
+                  </span>
+                </a>
+                <ul className="dropdown-menu">
+                  {user.role === "super:admin" ? (
+                    <li>
+                      <a className="sidebar-link" href="/system/configs">
+                        Configs
+                      </a>
+                    </li>
+                  ) : ("")}
+                  <li>
+                    <a className="sidebar-link" href="/system/apilogs">
+                      ApiLogs
                     </a>
                   </li>
                 </ul>

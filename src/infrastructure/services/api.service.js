@@ -1,50 +1,68 @@
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 axios.defaults.baseURL = process.env.baseURL;
 axios.defaults.headers.post["Content-Type"] =
   "application/x-www-form-urlencoded";
-const AUTH_TOKEN = localStorage.getItem("token");
-axios.defaults.headers.common["Authorization"] = AUTH_TOKEN;
 
-const getResource = async (path) => {
+const getResource = async (path, token="token") => {
   try {
-    const response = await axios.get(path);
+    const response = await axios.get(path, {
+      headers: {
+        Authorization: token,
+      },
+    });
+    // toast.success(response.data.message);
     return response.data.payload;
   } catch (error) {
+    toast.error(error.response.data.message);
     throw error.response.data;
   }
 };
 
-const postResource = async (path, body) => {
+const postResource = async (path, body, token="token") => {
   try {
-    const response = await axios.post(path, body);
+    const response = await axios.post(path, body, {
+      headers: {
+        Authorization: token,
+      },
+    });
+    toast.success(response.data.message);
     return response.data;
   } catch (error) {
+    toast.error(error.response.data.message);
     throw error.response.data;
   }
 };
 
-const putResource = async (path, body) => {
+const putResource = async (path, body, token="token") => {
   try {
-    const response = await axios.put(path, body);
+    const response = await axios.put(path, body, {
+      headers: {
+        Authorization: token,
+      },
+    });
+    toast.success(response.data.message);
     return response.data;
   } catch (error) {
+    toast.error(error.response.data.message);
     throw error.response.data;
   }
 };
 
-const deleteResource = async (path) => {
+const deleteResource = async (path, token="token") => {
   try {
-    const response = await axios.delete(path);
+    const response = await axios.delete(path, {
+      headers: {
+        Authorization: token,
+      },
+    });
+    toast.success(response.data.message);
     return response.data;
   } catch (error) {
+    toast.error(error.response.data.message);
     throw error.response.data;
   }
 };
 
-export {
-  getResource,
-  postResource,
-  putResource,
-  deleteResource,
-};
+export { getResource, postResource, putResource, deleteResource };

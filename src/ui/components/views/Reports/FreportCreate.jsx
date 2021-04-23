@@ -27,12 +27,13 @@ const FreportCreate = () => {
     dispatch(getItem(configsActions, `configs/${freportparam}/config`));
   }, [dispatch, freportparam, fellowshipsparams, branchesparams, zonesparams]);
   
-  const { freports, configs, fellowships, zones, branches } = useSelector((state) => state);
+  const { freports, configs, fellowships, zones, branches, signin: { user } } = useSelector((state) => state);
   
   const { loading } = freports;
   
   const { config: data } = configs;
 
+  data.user = user;
   data.zonesdata = zones.zones;
   
   const { register, handleSubmit, errors } = useForm();

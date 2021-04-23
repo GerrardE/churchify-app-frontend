@@ -18,8 +18,10 @@ const getFieldsArray = (
 ) => {
   const fieldsArray = [];
 
+  
   if (data.config != undefined) {
-    const { defaults, zonesdata, countries } = data;
+    const { defaults, zonesdata, countries, user } = data;
+
     data.config.map((conf) => {
       fieldsArray.push(
         conf.field.includes("userid") ? (
@@ -38,7 +40,7 @@ const getFieldsArray = (
               <option value="">Choose zone...</option>
               {zonesdata &&
                 zonesdata.map((val) => (
-                  <option value={val.id} key={val.id}>
+                  <option value={val.id} key={val.id} selected={user && user.zone.id === val.id}>
                     {val.name}
                   </option>
                 ))}
@@ -58,7 +60,7 @@ const getFieldsArray = (
             >
               <option value="">Choose branch...</option>
               {branches.map((val) => (
-                <option value={val.id} key={val.id}>
+                <option value={val.id} key={val.id} selected={user && user.branch.id === val.id}>
                   {val.name}
                 </option>
               ))}
@@ -226,12 +228,13 @@ const getFieldsArray = (
             </Label>
             <Inputfield
               key={conf.field}
-              fieldType={conf.field == "notes" ? "textarea" : ""}
+              inputRows={conf.field == "config" ? 16 : 6}
+              fieldType={conf.field == "notes" ? "textarea" : (conf.field == "config" ? "textarea" : "")}
               inputType={conf.datatype == "integer" ? "number" : (conf.field.includes("password") ? "password" : (conf.field.includes("date") ? "date" : "text"))}
               inputClassName={classnames("form-control", {
                 "is-invalid": errors[conf.field],
               })}
-              defaultValue={defaults && defaults[conf.field]?.toString()}
+              defaultValue={(defaults) ? ((typeof defaults[conf.field] == "object") ? (JSON.stringify(defaults[conf.field])) : defaults[conf.field]?.toString()) : ""}
               // inputDisabled={conf.field.includes("id") ? true : false}
               inputName={conf.field}
               inputRef={register(conf.validation)}
@@ -242,7 +245,6 @@ const getFieldsArray = (
       );
     });
   }
-
   return fieldsArray;
 };
 

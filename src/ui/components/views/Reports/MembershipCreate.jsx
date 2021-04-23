@@ -24,12 +24,13 @@ const MembershipCreate = () => {
     dispatch(getItem(configsActions, `configs/${membershipparam}/config`));
   }, [dispatch, membershipparam, branchesparams, zonesparams]);
   
-  const { memberships, configs, branches, zones } = useSelector((state) => state);
+  const { memberships, configs, branches, zones, signin: { user } } = useSelector((state) => state);
   
   const { loading } = memberships;
   
   const { config: data } = configs;
 
+  data.user = user;
   data.zonesdata = zones.zones;
   
   const { register, handleSubmit, errors } = useForm();

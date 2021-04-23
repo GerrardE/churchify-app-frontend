@@ -3,6 +3,7 @@ const constants = {
   parametersupdate: "users:admin:update",
   parameter: "user",
   editurl: "/settings/users",
+  viewurl: "settings",
   branchesparams: "branches",
   countryparams: "countries",
   countryparam: "country",

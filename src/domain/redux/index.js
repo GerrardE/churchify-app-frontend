@@ -23,6 +23,7 @@ import freports from "./freports/freports.reducers";
 import trainings from "./trainings/trainings.reducers";
 import dashboard from "./dashboard/dashboard.reducers";
 import signoutConstants from "./signout/signout.constants";
+import apilogs from "./apilogs/apilogs.reducers";
 
 const appReducer = combineReducers({
   signin,
@@ -47,6 +48,7 @@ const appReducer = combineReducers({
   countries,
   states,
   cities,
+  apilogs,
 });
 
 const rootReducer = (state, action) => {

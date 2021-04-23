@@ -1,2 +1,2 @@
-export { default as ZoneView } from "./RoleView";
-export { default as ZoneUpdate } from "./RoleUpdate";
+export { default as RoleView } from "./RoleView";
+export { default as RoleUpdate } from "./RoleUpdate";
