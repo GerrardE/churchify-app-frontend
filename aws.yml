@@ -40,7 +40,7 @@ Parameters:
  
   GitSourceRepo:
     Type: String
-    Description: GitHub source repository - must contain a Dockerfile and buildspec.yml in the base
+    Description: GitHub source repository
     Default: churchify-app-frontend
     MinLength: 1
     MaxLength: 100
@@ -134,7 +134,7 @@ Resources:
               commands:
                 - npm run build
           artifacts:
-            baseDirectory: dist/
+            baseDirectory: /dist
             files:
               - '**/*'
           cache:
