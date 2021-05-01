@@ -39,7 +39,7 @@ const UserDetails = ({ id, ...rest }) => {
 
   const onSubmit = (role, id) => {
     const data = { role, id };
-    dispatch(createItem(roleActions, `/${rolesparams}`, data));
+    dispatch(createItem(roleActions, `${parameters}/${rolesparams}`, data));
   };
 
   return (
