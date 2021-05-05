@@ -1,7 +1,7 @@
 ---
 AWSTemplateFormatVersion: 2010-09-09
 
-Description: Deployment configurations for projectchurchifyfrontend
+Description: Deployment configurations for projectchurchifyfrontend with aws amplify
 
 # Parameters are like the environment variables
 Parameters:
