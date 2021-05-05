@@ -1,0 +1,33 @@
+---
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 12
+    commands:
+      - echo Initializing...
+      - pip install --upgrade pip
+      - pip install --upgrade awscli
+
+  pre_build:
+    commands:
+      - echo Installing source frontend dependencies...
+      - npm install
+      - echo Source frontend dependencies installed.
+
+  build:
+    commands:
+      - echo Building source frontend...
+      - npm run build
+
+  post_build:
+    commands:
+      - echo "Build completed"
+      - echo "Uploading frontend artifacts to S3..."
+      - aws s3 cp --recursive --acl public-read dist/ s3://projectchurchifyfrontend-bucket
+      - echo "Upload frontend artifacts done"
+
+artifacts:
+  files:
+    - dist

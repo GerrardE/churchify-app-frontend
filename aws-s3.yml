@@ -1,0 +1,281 @@
+---
+AWSTemplateFormatVersion: 2010-09-09
+
+Description: Deployment configurations for projectchurchifyfrontend
+
+# Parameters are like the environment variables
+Parameters:
+  FirebaseApiKey:
+    NoEcho: "true"
+    Description: The app apikey for firebase
+    Type: String
+  FirebaseAuthDomain:
+    NoEcho: "true"
+    Description: The app authDomain for firebase
+    Type: String
+  FirebaseDatabaseURL:
+    NoEcho: "true"
+    Description: The app databaseUrl for firebase
+    Type: String
+  FirebaseProjectId:
+    NoEcho: "true"
+    Description: The app projectId for firebase
+    Type: String
+  FirebaseStorageBucket:
+    NoEcho: "true"
+    Description: The app storageBucket for firebase
+    Type: String
+  FirebaseMessagingSenderId:
+    NoEcho: "true"
+    Description: The app messagingSenderId for firebase
+    Type: String
+  FirebaseAppId:
+    NoEcho: "true"
+    Description: The app appId for firebase
+    Type: String
+  BaseURL:
+    NoEcho: "true"
+    Description: The app baseURL for AWS projectchurchify apis on EB
+    Type: String
+ 
+  GitSourceRepo:
+    Type: String
+    Description: GitHub source repository
+    Default: churchify-app-frontend
+    MinLength: 1
+    MaxLength: 100
+    ConstraintDescription: GitHub repository name
+
+  GitBranch:
+    Type: String
+    Default: develop
+    Description: GitHub git repository branch - change triggers a new build
+    MinLength: 1
+    MaxLength: 100
+    ConstraintDescription: GitHub repository branch name is required
+
+  GitHubToken:
+    Type: String
+    NoEcho: true
+    Description: GitHub API or personal access token - see https://github.com/blog/1509-personal-api-tokens
+    MinLength: 3
+    MaxLength: 100
+    ConstraintDescription: GitHub personal access token is required
+
+  GitHubUser:
+    Type: String
+    Default: GerrardE
+    Description: GitHub username or organization
+    MinLength: 3
+    MaxLength: 100
+    ConstraintDescription: GitHub username or organization is required
+
+  OperatorEmail:
+    Description: Email address to notify if there are any operational issues
+    Type: String
+    AllowedPattern: "([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)"
+    ConstraintDescription: must be a valid email address.
+
+# Resources include all aws services required to run the project
+Resources:
+  # S3 bucket
+  ArtifactBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: projectchurchifyfrontend-bucket
+      AccessControl: PublicRead
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: error.html
+
+  # Code build service role
+  CodeBuildServiceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      Path: /
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: codebuild.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: root
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Resource: "*"
+                Effect: Allow
+                Action:
+                  - ssm:GetParameters
+              - Resource: "*"
+                Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+              - Resource: !Sub arn:aws:s3:::${ArtifactBucket}/*
+                Effect: Allow
+                Action:
+                  - s3:GetObject
+                  - s3:GetObjectAcl
+                  - s3:PutObject
+                  - s3:PutObjectAcl
+                  - s3:GetObjectVersion
+    DependsOn:
+      - ArtifactBucket
+
+  # Codebuild project
+  CodeBuildProject:
+    Type: AWS::CodeBuild::Project
+    Properties:
+      Name: projectchurchify-frontend-project
+      Artifacts:
+        Type: CODEPIPELINE
+      Source:
+        BuildSpec: buildspec.yml
+        Type: CODEPIPELINE
+      Environment:
+        ComputeType: BUILD_GENERAL1_SMALL
+        Type: LINUX_CONTAINER
+        Image: aws/codebuild/amazonlinux2-x86_64-standard:2.0
+        EnvironmentVariables:
+          - Name: REPOSITORY_NAME
+            Value: !Ref GitSourceRepo
+          - Name: REPOSITORY_BRANCH
+            Value: !Ref GitBranch
+          - Name: apiKey
+            Value: !Ref FirebaseApiKey
+          - Name: authDomain
+            Value: !Ref FirebaseAuthDomain
+          - Name: databaseURL
+            Value: !Ref FirebaseDatabaseURL
+          - Name: projectId
+            Value: !Ref FirebaseProjectId
+          - Name: storageBucket
+            Value: !Ref FirebaseStorageBucket
+          - Name: messagingSenderId
+            Value: !Ref FirebaseMessagingSenderId
+          - Name: appId
+            Value: !Ref FirebaseAppId
+          - Name: baseURL
+            Value: !Ref BaseURL
+      ServiceRole: !GetAtt CodeBuildServiceRole.Arn
+
+  # Codepipeline service role
+  CodePipelineServiceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      Path: /
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: codepipeline.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: codepipeline-access
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Resource: "*"
+                Effect: Allow
+                Action:
+                  - codebuild:StartBuild
+                  - codebuild:BatchGetBuilds
+                  - codecommit:GetBranch
+                  - codecommit:GetCommit
+                  - codecommit:UploadArchive
+                  - codecommit:GetUploadArchiveStatus
+                  - codecommit:CancelUploadArchive
+                  - iam:PassRole
+              - Resource: "*"
+                Effect: Allow
+                Action:
+                  - s3:GetObject
+                  - s3:GetObjectVersion
+                  - s3:GetBucketVersioning
+              - Resource:
+                  - arn:aws:s3:::codepipeline*
+                Effect: Allow
+                Action:
+                  - s3:PutObject
+              - Resource: "*"
+                Effect: Allow
+                Action:
+                  - cloudformation:GetTemplate
+                  - cloudformation:DescribeStackResource
+                  - cloudformation:DescribeStackResources
+                  - cloudformation:DescribeStackEvents
+                  - cloudformation:DescribeStacks
+                  - cloudformation:UpdateStack
+                  - sns:ListSubscriptionsByTopic
+              - Resource: !Sub arn:aws:s3:::${ArtifactBucket}/*
+                Effect: Allow
+                Action:
+                  - s3:GetObject
+                  - s3:GetObjectAcl
+                  - s3:PutObject
+                  - s3:PutObjectAcl
+                  - s3:GetObjectVersion
+    DependsOn:
+      - ArtifactBucket
+
+  # Codepipeline
+  CodePipeline:
+    Type: AWS::CodePipeline::Pipeline
+    Properties:
+      RoleArn: !GetAtt CodePipelineServiceRole.Arn
+      ArtifactStore:
+        Type: S3
+        Location: !Ref ArtifactBucket
+      Stages:
+        - Name: Source
+          Actions:
+            - Name: Source
+              ActionTypeId:
+                Category: Source
+                Owner: ThirdParty
+                Version: 1
+                Provider: GitHub
+              Configuration:
+                Owner: !Ref GitHubUser
+                Repo: !Ref GitSourceRepo
+                Branch: !Ref GitBranch
+                OAuthToken: !Ref GitHubToken
+              OutputArtifacts:
+                - Name: SourceArtifact
+              RunOrder: 1
+
+        - Name: Build
+          Actions:
+            - Name: Build
+              ActionTypeId:
+                Category: Build
+                Owner: AWS
+                Version: 1
+                Provider: CodeBuild
+              Configuration:
+                ProjectName: !Ref CodeBuildProject
+              InputArtifacts:
+                - Name: SourceArtifact
+              OutputArtifacts:
+                - Name: BuildArtifact
+              RunOrder: 1
+    DependsOn:
+      - CodeBuildProject
+
+  AlarmTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      Subscription:
+        - Endpoint:
+            Ref: OperatorEmail
+          Protocol: email
+
+Outputs:
+  StackName:
+    Description: "Stack name"
+    Value: !Sub "${AWS::StackName}"
