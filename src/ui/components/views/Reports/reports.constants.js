@@ -16,6 +16,7 @@ const constants = {
   editurl: "/settings/preachers",
   report: true,
   actions: false,
+  dropdowndata: [{name: "zones"}, {name: "branches"}],
   days: [
     {
       key: "Sunday",
@@ -55,52 +56,56 @@ const constants = {
   ],
   years: [
     {
-      id: 1,
-      value: 2020,
+      id: 2020,
+      name: 2020,
     },
     {
-      id: 2,
-      value: 2021,
+      id: 2021,
+      name: 2021,
     },
   ],
   tableData: [
     {
-      Header: "Zone Id",
-      accessor: "id",
+      Header: "Month",
+      accessor: "month",
     },
     {
-      Header: "Zone",
-      accessor: "name",
+      Header: "Avg Men",
+      accessor: "avg_men",
+    },
+    {
+      Header: "Avg Women",
+      accessor: "avg_women",
+    },
+    {
+      Header: "Avg Children",
+      accessor: "avg_children",
     },
     {
       Header: "Total",
-      accessor: "zoneattendance",
+      accessor: "total",
     },
   ],
   branchTableData: [
     {
-      Header: "Branch Id",
-      accessor: "id",
+      Header: "Month",
+      accessor: "month",
     },
     {
-      Header: "Branch",
-      accessor: "name",
+      Header: "Avg Men",
+      accessor: "avg_men",
     },
     {
-      Header: "Men",
-      accessor: "men",
+      Header: "Avg Women",
+      accessor: "avg_women",
     },
     {
-      Header: "Women",
-      accessor: "women",
-    },
-    {
-      Header: "Children",
-      accessor: "children",
+      Header: "Avg Children",
+      accessor: "avg_children",
     },
     {
       Header: "Total",
-      accessor: "branchattendance",
+      accessor: "total",
     },
   ],
 };

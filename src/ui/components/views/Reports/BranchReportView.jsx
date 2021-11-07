@@ -1,12 +1,14 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, Fragment } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { createItem } from "@infrastructure/services/thunkService";
-import * as actions from "@domain/redux/attendance/attendance.actions";
+import { createItem, getItems } from "@infrastructure/services/thunkService";
+import * as attendanceActions from "@domain/redux/attendance/attendance.actions";
+import * as eventActions from "@domain/redux/events/events.actions";
+import * as branchActions from "@domain/redux/branches/branches.actions";
 import { AppLoader, ButtonGroup } from "../../molecules";
-import { Button, ErrorMessage } from "../../atoms";
+import { Button, ErrorMessage, Inputfield, Label } from "../../atoms";
 import MembershipCreate from "./MembershipCreate";
 import { isEmpty, fieldSchema } from "../_validations/schema";
 import constants from "./reports.constants";
@@ -20,28 +22,38 @@ const BranchReportView = ({ match, ...rest }) => {
     branchesparams,
     membershipparam,
     branchTableData,
-    days,
-    years,
+    eventsparams,
+    dropdowndata,
   } = constants;
 
   const {
-    attendances: { payload: data },
+    attendances: {
+      attendances: { payload },
+    },
+    branches: { branches },
+    events: { events },
     loading,
-  } = useSelector((state) => state.attendances);
+  } = useSelector((state) => state);
 
   const dispatch = useDispatch();
 
+  React.useEffect(() => {
+    dispatch(getItems(eventActions, eventsparams));
+    dispatch(getItems(branchActions, branchesparams));
+  }, [dispatch, eventsparams, branchesparams]);
+
   const { register, handleSubmit, errors } = useForm();
 
-  const { day, year } = errors;
-
-  const [ d, setData ] = useState({day: 0, year: 2020});
-  const [ dy, setDy ] = useState("Sunday");
+  const { event, branch, from, to } = errors;
 
   const onSubmit = (data) => {
-    setData(data);
-    returnDay(data.day, days);
-    dispatch(createItem(actions, `${parameters}/${attendanceparams}/${branchesparams}`, data));
+    dispatch(
+      createItem(
+        attendanceActions,
+        `${parameters}/${attendanceparams}/${branchesparams}`,
+        data,
+      ),
+    );
   };
 
   const columns = useMemo(() => branchTableData, [branchTableData]);
@@ -59,12 +71,6 @@ const BranchReportView = ({ match, ...rest }) => {
     return <MembershipCreate props={rest} match={match} />;
   }
 
-  const returnDay = (i, jj) => {
-    const dy = jj.find( j => j.value == i).key;
-    setDy(dy);
-    return dy;
-  };
-
   const handleDropDown = (items, title) => {
     return (
       <select
@@ -74,11 +80,10 @@ const BranchReportView = ({ match, ...rest }) => {
         ref={register(fieldSchema({ title }))}
         name={title}
       >
-        <option value="" disabled>{title}</option>
         {items &&
           items.map((val) => (
-            <option value={val.value} key={val.id}>
-              {title === "day" ? val.key : val.value}
+            <option value={val.id} key={val.id}>
+              {val.name}
             </option>
           ))}
       </select>
@@ -89,7 +94,7 @@ const BranchReportView = ({ match, ...rest }) => {
     btnGroupClassName: "btn-outline-primary float-right",
     btnTitle: "REPORT TYPE",
     urlFormat: "",
-    data: [{name: branchesparams}],
+    data: dropdowndata,
   };
 
   return (
@@ -102,7 +107,7 @@ const BranchReportView = ({ match, ...rest }) => {
           <h4 className="c-grey-900 mT-10 mB-30">
             {constants.attendanceparam.toUpperCase()}
           </h4>
-          
+
           <div className="row my-auto">
             <div className="col-md-12">
               <div className="bgc-white bd bdrs-3 p-20 mB-20">
@@ -113,13 +118,46 @@ const BranchReportView = ({ match, ...rest }) => {
                 >
                   <div className="row mx-auto">
                     <div className="form-group mr-2">
-                      {handleDropDown(days, "day")}
+                      <Label labelClassName="text-normal text-dark">
+                        Event:
+                      </Label>
 
-                      <ErrorMessage message={day?.message} />
+                      {handleDropDown(events, "eventid")}
+
+                      <ErrorMessage message={event?.message} />
                     </div>
                     <div className="form-group mr-2">
-                      {handleDropDown(years, "year")}
-                      <ErrorMessage message={year?.message} />
+                      <Label labelClassName="text-normal text-dark">
+                        Branch:
+                      </Label>
+                      {handleDropDown(branches, "branchid")}
+                      <ErrorMessage message={branch?.message} />
+                    </div>
+                    <div className="form-group mr-2">
+                      <Label labelClassName="text-normal text-dark">
+                        From:
+                      </Label>
+                      <Inputfield
+                        inputType="date"
+                        inputClassName={classnames("form-control", {
+                          "is-invalid": from,
+                        })}
+                        inputName="from"
+                        inputRef={register()}
+                      />
+                      <ErrorMessage message={from?.message} />
+                    </div>
+                    <div className="form-group mr-2">
+                      <Label labelClassName="text-normal text-dark">To:</Label>
+                      <Inputfield
+                        inputType="date"
+                        inputClassName={classnames("form-control", {
+                          "is-invalid": to,
+                        })}
+                        inputName="to"
+                        inputRef={register()}
+                      />
+                      <ErrorMessage message={to?.message} />
                     </div>
                     {loading ? (
                       <center>
@@ -127,6 +165,7 @@ const BranchReportView = ({ match, ...rest }) => {
                       </center>
                     ) : (
                       <div className="form-group">
+                        <br />
                         <Button
                           buttonType="submit"
                           buttonClassName="btn btn-primary"
@@ -136,30 +175,33 @@ const BranchReportView = ({ match, ...rest }) => {
                       </div>
                     )}
                     <span className="icon-holder ml-auto">
-                      <i className="ti-printer c-red-500 h3" onClick={() => window.print()} />
+                      <i
+                        className="ti-printer c-red-500 h3"
+                        onClick={() => window.print()}
+                      />
                     </span>
                   </div>
                 </form>
-                
+
                 <div className="print">
-                  <h4 className="c-grey-900 mB-20">SUMMARY OF ATTENDANCE BY BRANCH</h4>
-                  <p>{`Day: ${dy}`}</p>
-                  <p>{`Year: ${d.year}`}</p>
-                  {
-                    data
-                      ?
-                      (
-                        <Table
-                          columns={columns}
-                          data={data}
-                          actions={actions}
-                          // props={props}
-                          constants={constants}
-                          actionItems={actionItems}
-                        />
-                      )
-                      :<p>Please choose day, month or year ...</p>
-                  }
+                  <h4 className="c-grey-900 mB-20">BRANCH SUMMARY</h4>
+                  {payload && Object.keys(payload).length>0 ? (
+                    <Fragment>
+                      <h6>{`Name: ${payload.branch.name}`}</h6>
+                      <h6>{`Event: ${payload.event.name}`}</h6>
+                      <h6>{`Date: ${payload.range}`}</h6>
+                      <Table
+                        columns={columns}
+                        data={payload.attendance}
+                        // actions={actions}
+                        // props={props}
+                        constants={constants}
+                        actionItems={actionItems}
+                      />
+                    </Fragment>
+                  ) : (
+                    <p>Please filter by event, branch and dates...</p>
+                  )}
                 </div>
               </div>
             </div>

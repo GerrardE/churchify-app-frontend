@@ -7,7 +7,7 @@
   "scripts": {
     "start:dev": "webpack-dev-server --config webpack.dev.js",
     "predeploy": "npm run build",
-    "build": "npm run clean && webpack --config webpack.prod.js && cd dist && zip -r projectchurchifyfrontend.zip . && cd ..",
+    "build": "npm run clean && webpack --config webpack.prod.js",
     "clean": "rm -rf dist"
   },
   "repository": {
