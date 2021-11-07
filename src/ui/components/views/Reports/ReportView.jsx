@@ -1,12 +1,14 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, Fragment } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { createItem } from "@infrastructure/services/thunkService";
-import * as actions from "@domain/redux/attendance/attendance.actions";
+import { createItem, getItems } from "@infrastructure/services/thunkService";
+import * as attendanceActions from "@domain/redux/attendance/attendance.actions";
+import * as eventActions from "@domain/redux/events/events.actions";
+import * as zoneActions from "@domain/redux/zones/zones.actions";
 import { AppLoader, ButtonGroup } from "../../molecules";
-import { Button, ErrorMessage } from "../../atoms";
+import { Button, ErrorMessage, Inputfield, Label } from "../../atoms";
 import AttendanceCreate from "./AttendanceCreate";
 import ActivityCreate from "./ActivityCreate";
 import MembershipCreate from "./MembershipCreate";
@@ -31,28 +33,31 @@ const ReportView = ({ match, ...rest }) => {
     freportparam,
     groupparam,
     tableData,
-    days,
-    years,
+    zonesparams,
+    eventsparams,
+    dropdowndata,
   } = constants;
 
   const {
-    attendances: { payload: data },
+    attendances: { attendances: { payload }},
+    zones: { zones },
+    events: { events },
     loading,
-  } = useSelector((state) => state.attendances);
+  } = useSelector((state) => state);
 
   const dispatch = useDispatch();
 
+  React.useEffect(() => {
+    dispatch(getItems(eventActions, eventsparams));
+    dispatch(getItems(zoneActions, zonesparams));
+  }, [dispatch, eventsparams, zonesparams]);
+
   const { register, handleSubmit, errors } = useForm();
 
-  const { day, year } = errors;
-
-  const [ d, setData ] = useState({day: 0, year: 2020});
-  const [ dy, setDy ] = useState("Sunday");
+  const { event, zone, from, to } = errors;
 
   const onSubmit = (data) => {
-    setData(data);
-    returnDay(data.day, days);
-    dispatch(createItem(actions, `${parameters}/${attendanceparams}`, data));
+    dispatch(createItem(attendanceActions, `${parameters}/${attendanceparams}/${zonesparams}`, data));
   };
 
   const columns = useMemo(() => tableData, [tableData]);
@@ -112,12 +117,6 @@ const ReportView = ({ match, ...rest }) => {
     return <BranchReportView props={rest} match={match} />;
   }
 
-  const returnDay = (i, jj) => {
-    const dy = jj.find( j => j.value == i).key;
-    setDy(dy);
-    return dy;
-  };
-
   const handleDropDown = (items, title) => {
     return (
       <select
@@ -127,11 +126,10 @@ const ReportView = ({ match, ...rest }) => {
         ref={register(fieldSchema({ title }))}
         name={title}
       >
-        <option value="" disabled>{title}</option>
         {items &&
           items.map((val) => (
-            <option value={val.value} key={val.id}>
-              {title === "day" ? val.key : val.value}
+            <option value={val.id} key={val.id}>
+              {val.name}
             </option>
           ))}
       </select>
@@ -142,7 +140,7 @@ const ReportView = ({ match, ...rest }) => {
     btnGroupClassName: "btn-outline-primary float-right",
     btnTitle: "REPORT TYPE",
     urlFormat: "",
-    data: [{name: "zone"}],
+    data: dropdowndata,
   };
 
   return (
@@ -166,13 +164,46 @@ const ReportView = ({ match, ...rest }) => {
                 >
                   <div className="row mx-auto">
                     <div className="form-group mr-2">
-                      {handleDropDown(days, "day")}
+                      <Label labelClassName="text-normal text-dark">
+                        Event:
+                      </Label>
 
-                      <ErrorMessage message={day?.message} />
+                      {handleDropDown(events, "eventid")}
+
+                      <ErrorMessage message={event?.message} />
                     </div>
                     <div className="form-group mr-2">
-                      {handleDropDown(years, "year")}
-                      <ErrorMessage message={year?.message} />
+                      <Label labelClassName="text-normal text-dark">
+                        Zone:
+                      </Label>
+                      {handleDropDown(zones, "zoneid")}
+                      <ErrorMessage message={zone?.message} />
+                    </div>
+                    <div className="form-group mr-2">
+                      <Label labelClassName="text-normal text-dark">
+                        From:
+                      </Label>
+                      <Inputfield
+                        inputType="date"
+                        inputClassName={classnames("form-control", {
+                          "is-invalid": from,
+                        })}
+                        inputName="from"
+                        inputRef={register()}
+                      />
+                      <ErrorMessage message={from?.message} />
+                    </div>
+                    <div className="form-group mr-2">
+                      <Label labelClassName="text-normal text-dark">To:</Label>
+                      <Inputfield
+                        inputType="date"
+                        inputClassName={classnames("form-control", {
+                          "is-invalid": to,
+                        })}
+                        inputName="to"
+                        inputRef={register()}
+                      />
+                      <ErrorMessage message={to?.message} />
                     </div>
                     {loading ? (
                       <center>
@@ -180,6 +211,7 @@ const ReportView = ({ match, ...rest }) => {
                       </center>
                     ) : (
                       <div className="form-group">
+                        <br />
                         <Button
                           buttonType="submit"
                           buttonClassName="btn btn-primary"
@@ -195,23 +227,26 @@ const ReportView = ({ match, ...rest }) => {
                 </form>
                 
                 <div className="print">
-                  <h4 className="c-grey-900 mB-20">SUMMARY OF ATTENDANCE BY ZONE</h4>
-                  <p>{`Day: ${dy}`}</p>
-                  <p>{`Year: ${d.year}`}</p>
+                  <h4 className="c-grey-900 mB-20">ZONE SUMMARY</h4>
                   {
-                    data
+                    payload && Object.keys(payload).length>0
                       ?
                       (
-                        <Table
-                          columns={columns}
-                          data={data}
-                          actions={actions}
-                          // props={props}
-                          constants={constants}
-                          actionItems={actionItems}
-                        />
+                        <Fragment>
+                          <h6>{`Name: ${payload.zone.name}`}</h6>
+                          <h6>{`Event: ${payload.event.name}`}</h6>
+                          <h6>{`Date: ${payload.range}`}</h6>
+                          <Table
+                            columns={columns}
+                            data={payload.attendance}
+                            // actions={actions}
+                            // props={props}
+                            constants={constants}
+                            actionItems={actionItems}
+                          />
+                        </Fragment>
                       )
-                      :<p>Please choose day and year...</p>
+                      :<p>Please filter by event, zone and year...</p>
                   }
                 </div>
               </div>

@@ -40,7 +40,7 @@ const getFieldsArray = (
               <option value="">Choose zone...</option>
               {zonesdata &&
                 zonesdata.map((val) => (
-                  <option value={val.id} key={val.id} selected={user && user.zone.id === val.id}>
+                  <option value={val.id} key={val.id} selected={user && user.zoneid === val.id}>
                     {val.name}
                   </option>
                 ))}
@@ -60,7 +60,7 @@ const getFieldsArray = (
             >
               <option value="">Choose branch...</option>
               {branches.map((val) => (
-                <option value={val.id} key={val.id} selected={user && user.branch.id === val.id}>
+                <option value={val.id} key={val.id} selected={user && user.branchid === val.id}>
                   {val.name}
                 </option>
               ))}

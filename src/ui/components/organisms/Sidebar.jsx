@@ -13,7 +13,7 @@ const Sidebar = ({ toggleCollapse }) => {
 
   const [multiRep, setToggleMultiRep] = React.useState(false);
 
-  const [multiRepGen, setToggleMultiRepGen] = React.useState(false);
+  // const [multiRepGen, setToggleMultiRepGen] = React.useState(false);
 
   const [systems, setToggleSystems] = React.useState(false);
 
@@ -24,7 +24,7 @@ const Sidebar = ({ toggleCollapse }) => {
   
   const toggleMultiRep = () => setToggleMultiRep((prevState) => !prevState);
   
-  const toggleMultiRepGen = () => setToggleMultiRepGen((prevState) => !prevState);
+  // const toggleMultiRepGen = () => setToggleMultiRepGen((prevState) => !prevState);
   
   const toggleSystems = () => setToggleSystems((prevState) => !prevState);
 
@@ -122,25 +122,8 @@ const Sidebar = ({ toggleCollapse }) => {
                       </li>
                     </ul>
                   </li>
-                  <li
-                    className={classnames("nav-item dropdown", {
-                      open: multiRepGen,
-                    })}
-                  >
-                    <a className="sidebar-link" onClick={toggleMultiRepGen}>
-                      <span>Generate</span>
-                      <span className="arrow">
-                        <i className="ti-angle-right" />
-                      </span>
-                    </a>
-                    <ul className="dropdown-menu">
-                      <li>
-                        <a href="/reports/generate/zones">Zone</a>
-                      </li>
-                      <li>
-                        <a href="/reports/generate/branches">Branch</a>
-                      </li>
-                    </ul>
+                  <li className="nav-item">
+                    <a href="/reports/generate/zones">Generate</a>
                   </li>
                 </ul>
               </li>
