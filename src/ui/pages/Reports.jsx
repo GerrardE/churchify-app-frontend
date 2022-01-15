@@ -3,7 +3,7 @@ import { ReportView, Dashboard } from "../components";
 
 const Reports = (props) => {
   return (
-    <Dashboard>
+    <Dashboard {...props}>
       <ReportView {...props} />
     </Dashboard>
   );

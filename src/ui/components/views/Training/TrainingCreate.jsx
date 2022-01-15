@@ -9,15 +9,15 @@ import {
 } from "@infrastructure/services/thunkService";
 import * as statesActions from "@domain/redux/states/states.actions";
 import * as citiesActions from "@domain/redux/cities/cities.actions";
-import * as eventActions from "@domain/redux/events/events.actions";
+import * as trainingActions from "@domain/redux/trainings/trainings.actions";
 import * as configsActions from "@domain/redux/configs/configs.actions";
 import * as branchActions from "@domain/redux/branches/branches.actions";
-import constants from "./events.constants";
+import constants from "./training.constants";
 import { Button } from "../../atoms";
 import { AppLoader } from "../../molecules";
 import getFieldsArray from "../_helpers/fieldGenerator";
 
-const EventCreate = ({ props: { history } }) => {
+const TrainingCreate = ({ props: { history } }) => {
   const {
     parameter,
     parameters,
@@ -26,7 +26,6 @@ const EventCreate = ({ props: { history } }) => {
     countryparam,
     citiesparams,
     branchesparams,
-    formDefaults,
   } = constants;
 
   const dispatch = useDispatch();
@@ -37,11 +36,11 @@ const EventCreate = ({ props: { history } }) => {
     dispatch(getItem(configsActions, `configs/${parameters}/config`));
   }, [dispatch, parameters, branchesparams]);
 
-  const { events, configs, countries, states, cities, branches } = useSelector(
+  const { trainings, configs, countries, states, cities, branches } = useSelector(
     (state) => state,
   );
 
-  const { loading } = events;
+  const { loading } = trainings;
 
   const { config: data } = configs;
 
@@ -69,11 +68,7 @@ const EventCreate = ({ props: { history } }) => {
   );
 
   const onSubmit = (data) => {
-    data.branchid ? data.branchid : (data.branchid = formDefaults.branchid);
-    data.date ? data.date : (data.date = formDefaults.date);
-    data.address ? data.address : (data.address = formDefaults.address);
-
-    dispatch(createItem(eventActions, parameters, data));
+    dispatch(createItem(trainingActions, parameters, data));
   };
 
   return (
@@ -130,7 +125,7 @@ const EventCreate = ({ props: { history } }) => {
   );
 };
 
-EventCreate.propTypes = {
+TrainingCreate.propTypes = {
   props: PropTypes.shape({
     history: PropTypes.shape({
       push: PropTypes.oneOfType([PropTypes.func]).isRequired,
@@ -138,4 +133,4 @@ EventCreate.propTypes = {
   }).isRequired,
 };
 
-export default EventCreate;
+export default TrainingCreate;

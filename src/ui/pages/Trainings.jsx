@@ -1,13 +1,13 @@
 import React from "react";
 import Dashboard from "../components/templates/Dashboard";
-import { DashboardView } from "../components";
+import { TrainingView } from "../components";
 
-const Dashbooard = (props) => {
+const Training = (props) => {
   return (
     <Dashboard {...props}>
-      <DashboardView {...props} />
+      <TrainingView {...props} />
     </Dashboard>
   );
 };
 
-export default Dashbooard;
+export default Training;

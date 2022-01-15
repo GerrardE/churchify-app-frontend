@@ -4,7 +4,7 @@ import { FellowshipView } from "../components";
 
 const Fellowship = (props) => {
   return (
-    <Dashboard>
+    <Dashboard {...props}>
       <FellowshipView {...props} />
     </Dashboard>
   );

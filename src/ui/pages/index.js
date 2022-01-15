@@ -16,3 +16,5 @@ export { default as Permissions } from "./Permissions";
 export { default as Dashboard } from "./Dashboard";
 export { default as ApiLogs } from "./ApiLogs";
 export { default as Configs } from "./Configs";
+export { default as Activities } from "./Activities";
+export { default as Trainings } from "./Trainings";

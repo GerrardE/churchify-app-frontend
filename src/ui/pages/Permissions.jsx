@@ -4,7 +4,7 @@ import { PermissionView } from "../components";
 
 const Permission = (props) => {
   return (
-    <Dashboard>
+    <Dashboard {...props}>
       <PermissionView {...props} />
     </Dashboard>
   );

@@ -4,7 +4,7 @@ import { ApiLogView } from "../components";
 
 const ApiLog = (props) => {
   return (
-    <Dashboard>
+    <Dashboard {...props}>
       <ApiLogView {...props} />
     </Dashboard>
   );

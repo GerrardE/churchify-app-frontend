@@ -17,6 +17,8 @@ import {
   Permissions as Permission,
   ApiLogs,
   Configs,
+  Activities,
+  Trainings,
 } from "../pages";
 
 const routes = [
@@ -129,7 +131,7 @@ const routes = [
     component: Branches,
     protected: true,
   },
-  
+
   /* FELLOWSHIPS */
   {
     path: "/settings/fellowships",
@@ -146,7 +148,7 @@ const routes = [
     component: Fellowships,
     protected: true,
   },
-  
+
   /* PREACHERS */
   {
     path: "/settings/preachers",
@@ -163,7 +165,7 @@ const routes = [
     component: Preachers,
     protected: true,
   },
-  
+
   /* DOWNLOADS */
   {
     path: "/downloads",
@@ -185,7 +187,7 @@ const routes = [
     component: Downloads,
     protected: true,
   },
-  
+
   /* EVENTS */
   {
     path: "/settings/events",
@@ -202,7 +204,7 @@ const routes = [
     component: Events,
     protected: true,
   },
-  
+
   /* CATEGORIES */
   {
     path: "/settings/categories",
@@ -219,7 +221,7 @@ const routes = [
     component: Categories,
     protected: true,
   },
-  
+
   /* ROLES */
   {
     path: "/settings/roles",
@@ -241,7 +243,7 @@ const routes = [
     component: Roles,
     protected: true,
   },
-  
+
   /* APILOGS */
   {
     path: "/system/apilogs",
@@ -253,7 +255,7 @@ const routes = [
     component: ApiLogs,
     protected: true,
   },
-  
+
   /* PERMISSIONS */
   {
     path: "/settings/permissions",
@@ -290,6 +292,48 @@ const routes = [
   {
     path: "/system/configs/:id/details",
     component: Configs,
+    protected: true,
+  },
+  /* ACTIVITIES */
+  {
+    path: "/settings/activities",
+    component: Activities,
+    protected: true,
+  },
+  {
+    path: "/settings/activities/:id",
+    component: Activities,
+    protected: true,
+  },
+  {
+    path: "/settings/activities/create/activity",
+    component: Activities,
+    protected: true,
+  },
+  {
+    path: "/settings/activities/:id/details",
+    component: Activities,
+    protected: true,
+  },
+  /* TRAININGS */
+  {
+    path: "/settings/trainings",
+    component: Trainings,
+    protected: true,
+  },
+  {
+    path: "/settings/trainings/:id",
+    component: Trainings,
+    protected: true,
+  },
+  {
+    path: "/settings/trainings/create/training",
+    component: Trainings,
+    protected: true,
+  },
+  {
+    path: "/settings/trainings/:id/details",
+    component: Trainings,
     protected: true,
   },
 

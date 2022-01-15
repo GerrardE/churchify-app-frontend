@@ -2,20 +2,20 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import { getItems } from "@infrastructure/services/thunkService";
-import * as actions from "@domain/redux/events/events.actions";
+import * as actions from "@domain/redux/trainings/trainings.actions";
 import { AppTable } from "../../organisms";
 import { AppLoader } from "../../molecules";
-import EventUpdate from "./EventUpdate";
-import EventCreate from "./EventCreate";
+import TrainingUpdate from "./TrainingUpdate";
+import TrainingCreate from "./TrainingCreate";
 import { isEmpty } from "../_validations/schema";
-import constants from "./events.constants";
+import constants from "./training.constants";
 
-const EventView = ({ match, ...rest }) => {
+const TrainingView = ({ match, ...rest }) => {
   const { parameter, parameters, tableData } = constants;
 
   const dispatch = useDispatch();
   
-  const { events: data, loading } = useSelector((state) => state.events);
+  const { trainings: data, loading } = useSelector((state) => state.trainings);
 
   const actionItems = {
     canview: false,
@@ -36,13 +36,13 @@ const EventView = ({ match, ...rest }) => {
     const { params } = match;
     const { id } = params;
 
-    return <EventUpdate id={id} props={rest} />;
+    return <TrainingUpdate id={id} props={rest} />;
   }
 
   if (isEmpty(match.params) &&
     match.path === `/settings/${parameters}/create/${parameter}`
   ) {
-    return <EventCreate props={rest} match={match} />;
+    return <TrainingCreate props={rest} match={match} />;
   }
 
   return (
@@ -71,15 +71,15 @@ const EventView = ({ match, ...rest }) => {
   );
 };
 
-EventView.propTypes = {
+TrainingView.propTypes = {
   match: PropTypes.oneOfType([PropTypes.object]),
   history: PropTypes.shape({
     push: PropTypes.oneOfType([PropTypes.func]).isRequired,
   }).isRequired,
 };
 
-EventView.defaultProps = {
+TrainingView.defaultProps = {
   match: {},
 };
 
-export default EventView;
+export default TrainingView;

@@ -2,20 +2,20 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import { getItems } from "@infrastructure/services/thunkService";
-import * as actions from "@domain/redux/events/events.actions";
+import * as actions from "@domain/redux/activities/activities.actions";
 import { AppTable } from "../../organisms";
 import { AppLoader } from "../../molecules";
-import EventUpdate from "./EventUpdate";
-import EventCreate from "./EventCreate";
+import ActivityUpdate from "./ActivityUpdate";
+import ActivityCreate from "./ActivityCreate";
 import { isEmpty } from "../_validations/schema";
-import constants from "./events.constants";
+import constants from "./activity.constants";
 
-const EventView = ({ match, ...rest }) => {
+const ActivityView = ({ match, ...rest }) => {
   const { parameter, parameters, tableData } = constants;
 
   const dispatch = useDispatch();
   
-  const { events: data, loading } = useSelector((state) => state.events);
+  const { activities: data, loading } = useSelector((state) => state.activities);
 
   const actionItems = {
     canview: false,
@@ -36,13 +36,13 @@ const EventView = ({ match, ...rest }) => {
     const { params } = match;
     const { id } = params;
 
-    return <EventUpdate id={id} props={rest} />;
+    return <ActivityUpdate id={id} props={rest} />;
   }
 
   if (isEmpty(match.params) &&
     match.path === `/settings/${parameters}/create/${parameter}`
   ) {
-    return <EventCreate props={rest} match={match} />;
+    return <ActivityCreate props={rest} match={match} />;
   }
 
   return (
@@ -71,15 +71,15 @@ const EventView = ({ match, ...rest }) => {
   );
 };
 
-EventView.propTypes = {
+ActivityView.propTypes = {
   match: PropTypes.oneOfType([PropTypes.object]),
   history: PropTypes.shape({
     push: PropTypes.oneOfType([PropTypes.func]).isRequired,
   }).isRequired,
 };
 
-EventView.defaultProps = {
+ActivityView.defaultProps = {
   match: {},
 };
 
-export default EventView;
+export default ActivityView;

@@ -4,7 +4,7 @@ import { ConfigView } from "../components";
 
 const Config = (props) => {
   return (
-    <Dashboard>
+    <Dashboard {...props}>
       <ConfigView {...props} />
     </Dashboard>
   );

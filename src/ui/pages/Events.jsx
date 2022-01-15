@@ -4,7 +4,7 @@ import { EventView } from "../components";
 
 const Event = (props) => {
   return (
-    <Dashboard>
+    <Dashboard {...props}>
       <EventView {...props} />
     </Dashboard>
   );

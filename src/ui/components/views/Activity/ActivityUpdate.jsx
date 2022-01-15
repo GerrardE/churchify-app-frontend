@@ -1,53 +1,34 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import PropTypes from "prop-types";
-import {
-  getItem,
-  getItems,
-  createItem,
-} from "@infrastructure/services/thunkService";
+import { getItem, getItems, updateItem } from "@infrastructure/services/thunkService";
 import * as statesActions from "@domain/redux/states/states.actions";
 import * as citiesActions from "@domain/redux/cities/cities.actions";
-import * as eventActions from "@domain/redux/events/events.actions";
-import * as configsActions from "@domain/redux/configs/configs.actions";
 import * as branchActions from "@domain/redux/branches/branches.actions";
-import constants from "./events.constants";
+import * as activityActions from "@domain/redux/activities/activities.actions";
+import * as configsActions from "@domain/redux/configs/configs.actions";
+import constants from "./activity.constants";
 import { Button } from "../../atoms";
 import { AppLoader } from "../../molecules";
 import getFieldsArray from "../_helpers/fieldGenerator";
 
-const EventCreate = ({ props: { history } }) => {
-  const {
-    parameter,
-    parameters,
-    statesparams,
-    stateparam,
-    countryparam,
-    citiesparams,
-    branchesparams,
-    formDefaults,
-  } = constants;
+const ActivityUpdate = ({ id, ...rest }) => {
+  const { parameter, parameters, statesparams, citiesparams, countryparam, stateparam, branchesparams } = constants;
 
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(getItems(branchActions, `${branchesparams}`));
-
     dispatch(getItem(configsActions, `configs/${parameters}/config`));
-  }, [dispatch, parameters, branchesparams]);
+    
+    dispatch(getItems(branchActions, branchesparams));
 
-  const { events, configs, countries, states, cities, branches } = useSelector(
-    (state) => state,
-  );
-
-  const { loading } = events;
-
-  const { config: data } = configs;
-
-  data.countries = countries.countries;
+    dispatch(getItem(activityActions, `${parameters}/${id}`));
+  }, [dispatch, parameters, id, branchesparams]);
 
   const { register, handleSubmit, errors } = useForm();
+
+  const { branches, activities, configs, countries, states, cities } = useSelector((state) => state);
 
   const getStates = (id) => {
     dispatch(getItems(statesActions, `${statesparams}/${id}/${countryparam}`));
@@ -57,31 +38,29 @@ const EventCreate = ({ props: { history } }) => {
     dispatch(getItems(citiesActions, `${citiesparams}/${id}/${stateparam}`));
   };
 
-  const fields = getFieldsArray(
-    data,
-    errors,
-    register,
-    states.states_,
-    getStates,
-    cities.cities,
-    getCities,
-    branches.branches,
-  );
+  const { config: data } = configs;
+
+  const { activity: defaults, loading } = activities;
+  
+  data.defaults = defaults;
+  
+  data.countries = countries.countries;
+
+  const fields = getFieldsArray(data, errors, register, states.states_, getStates, cities.cities, getCities, branches.branches);
 
   const onSubmit = (data) => {
-    data.branchid ? data.branchid : (data.branchid = formDefaults.branchid);
-    data.date ? data.date : (data.date = formDefaults.date);
-    data.address ? data.address : (data.address = formDefaults.address);
-
-    dispatch(createItem(eventActions, parameters, data));
+    dispatch(updateItem(activityActions, `${parameters}/${id}`, data));
   };
 
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-md-12 mb-2 mt-2">
+        <div className="col-md-6">
+          <h4 className="c-grey-900 mT-10 mB-30">{parameters.toUpperCase()}</h4>
+        </div>
+        <div className="col-md-6">
           <a
-            onClick={() => history.push(`/settings/${parameters}`)}
+            onClick={() => rest.history.push(`/settings/${parameters}`)}
             className="btn btn-outline-primary float-right"
             role="button"
             aria-pressed="true"
@@ -95,7 +74,7 @@ const EventCreate = ({ props: { history } }) => {
         <div className="col-md-2" />
         <div className="col-md-8">
           <div className="bgc-white bd bdrs-3 p-20 mB-20">
-            <h4 className="c-grey-900 mB-20">{`CREATE ${parameter.toUpperCase()}`}</h4>
+            <h4 className="c-grey-900 mB-20">{`UPDATE ${parameter.toUpperCase()}`}</h4>
             <form
               onSubmit={handleSubmit(onSubmit)}
               className="needs-validation"
@@ -104,11 +83,9 @@ const EventCreate = ({ props: { history } }) => {
               <div className="form-row">{fields}</div>
 
               {loading ? (
-                <center>
-                  <AppLoader loaderWidth="15%" loaderClassName="app-loader" />
-                </center>
+                <AppLoader loaderWidth="15%" loaderClassName="app-loader" />
               ) : (
-                <div className="form-group d-flex flex-row-reverse mt-2">
+                <div className="form-group d-flex flex-row-reverse">
                   <div className="peers ai-c jc-sb fxw-nw">
                     <div className="peer">
                       <Button
@@ -130,12 +107,8 @@ const EventCreate = ({ props: { history } }) => {
   );
 };
 
-EventCreate.propTypes = {
-  props: PropTypes.shape({
-    history: PropTypes.shape({
-      push: PropTypes.oneOfType([PropTypes.func]).isRequired,
-    }).isRequired,
-  }).isRequired,
+ActivityUpdate.propTypes = {
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 
-export default EventCreate;
+export default ActivityUpdate;

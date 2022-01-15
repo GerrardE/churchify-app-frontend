@@ -6,6 +6,7 @@ const constants = {
   trainingparam: "training",
   groupparam: "group",
   freportparam: "freport",
+  cellparam: "cell",
   membershipparam: "membership",
   submitparam: "submit",
   branchesparams: "branches",

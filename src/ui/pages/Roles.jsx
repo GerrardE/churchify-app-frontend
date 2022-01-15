@@ -4,7 +4,7 @@ import { RoleView } from "../components";
 
 const Role = (props) => {
   return (
-    <Dashboard>
+    <Dashboard {...props}>
       <RoleView {...props} />
     </Dashboard>
   );

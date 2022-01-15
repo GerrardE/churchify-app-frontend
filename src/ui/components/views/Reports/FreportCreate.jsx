@@ -13,7 +13,7 @@ import { AppLoader } from "../../molecules";
 import getFieldsArray from "../_helpers/fieldGenerator";
 
 const FreportCreate = () => {
-  const { freportparam, fellowshipsparams, parameters, branchesparams, zonesparams } = constants;
+  const { freportparam, fellowshipsparams, parameters, branchesparams, zonesparams, cellparam } = constants;
 
   const dispatch = useDispatch();
 
@@ -24,8 +24,8 @@ const FreportCreate = () => {
 
     dispatch(getItems(fellowshipActions, `${fellowshipsparams}`));
 
-    dispatch(getItem(configsActions, `configs/${freportparam}/config`));
-  }, [dispatch, freportparam, fellowshipsparams, branchesparams, zonesparams]);
+    dispatch(getItem(configsActions, `configs/${cellparam}/config`));
+  }, [dispatch, cellparam, fellowshipsparams, branchesparams, zonesparams]);
   
   const { freports, configs, fellowships, zones, branches, signin: { user } } = useSelector((state) => state);
   
@@ -50,7 +50,7 @@ const FreportCreate = () => {
         <div className="col-md-2" />
         <div className="col-md-8">
           <div className="bgc-white bd bdrs-3 p-20 mB-20">
-            <h4 className="c-grey-900 mB-20">{`SUBMIT ${freportparam.toUpperCase()}`}</h4>
+            <h4 className="c-grey-900 mB-20">{`SUBMIT ${cellparam.toUpperCase()}`}</h4>
             <form
               onSubmit={handleSubmit(onSubmit)}
               className="needs-validation"
