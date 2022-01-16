@@ -68,6 +68,11 @@ const routes = [
     protected: true,
   },
   {
+    path: "/reports/generate/global",
+    component: Reports,
+    protected: true,
+  },
+  {
     path: "/reports/submit/attendance",
     component: Reports,
     protected: true,
@@ -296,43 +301,43 @@ const routes = [
   },
   /* ACTIVITIES */
   {
-    path: "/settings/activities",
+    path: "/settings/activitytypes",
     component: Activities,
     protected: true,
   },
   {
-    path: "/settings/activities/:id",
+    path: "/settings/activitytypes/:id",
     component: Activities,
     protected: true,
   },
   {
-    path: "/settings/activities/create/activity",
+    path: "/settings/activitytypes/create/activitytype",
     component: Activities,
     protected: true,
   },
   {
-    path: "/settings/activities/:id/details",
+    path: "/settings/activitytypes/:id/details",
     component: Activities,
     protected: true,
   },
   /* TRAININGS */
   {
-    path: "/settings/trainings",
+    path: "/settings/trainingtypes",
     component: Trainings,
     protected: true,
   },
   {
-    path: "/settings/trainings/:id",
+    path: "/settings/trainingtypes/:id",
     component: Trainings,
     protected: true,
   },
   {
-    path: "/settings/trainings/create/training",
+    path: "/settings/trainingtypes/create/trainingtype",
     component: Trainings,
     protected: true,
   },
   {
-    path: "/settings/trainings/:id/details",
+    path: "/settings/trainingtypes/:id/details",
     component: Trainings,
     protected: true,
   },

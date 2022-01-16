@@ -4,14 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import {
   getItem,
-  getItems,
   createItem,
 } from "@infrastructure/services/thunkService";
-import * as statesActions from "@domain/redux/states/states.actions";
-import * as citiesActions from "@domain/redux/cities/cities.actions";
 import * as trainingActions from "@domain/redux/trainings/trainings.actions";
 import * as configsActions from "@domain/redux/configs/configs.actions";
-import * as branchActions from "@domain/redux/branches/branches.actions";
 import constants from "./training.constants";
 import { Button } from "../../atoms";
 import { AppLoader } from "../../molecules";
@@ -21,22 +17,16 @@ const TrainingCreate = ({ props: { history } }) => {
   const {
     parameter,
     parameters,
-    statesparams,
-    stateparam,
-    countryparam,
-    citiesparams,
-    branchesparams,
+    formDefaults,
   } = constants;
 
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(getItems(branchActions, `${branchesparams}`));
-
     dispatch(getItem(configsActions, `configs/${parameters}/config`));
-  }, [dispatch, parameters, branchesparams]);
+  }, [dispatch, parameters]);
 
-  const { trainings, configs, countries, states, cities, branches } = useSelector(
+  const { trainings, configs } = useSelector(
     (state) => state,
   );
 
@@ -44,30 +34,16 @@ const TrainingCreate = ({ props: { history } }) => {
 
   const { config: data } = configs;
 
-  data.countries = countries.countries;
-
   const { register, handleSubmit, errors } = useForm();
-
-  const getStates = (id) => {
-    dispatch(getItems(statesActions, `${statesparams}/${id}/${countryparam}`));
-  };
-
-  const getCities = (id) => {
-    dispatch(getItems(citiesActions, `${citiesparams}/${id}/${stateparam}`));
-  };
 
   const fields = getFieldsArray(
     data,
     errors,
     register,
-    states.states_,
-    getStates,
-    cities.cities,
-    getCities,
-    branches.branches,
   );
 
   const onSubmit = (data) => {
+    data.branchid ? data.branchid : (data.branchid = formDefaults.branchid);
     dispatch(createItem(trainingActions, parameters, data));
   };
 

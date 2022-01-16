@@ -212,12 +212,12 @@ const Sidebar = ({ toggleCollapse, history }) => {
                     </a>
                   </li>
                   <li>
-                    <a className="sidebar-link" onClick={() => history.push("/settings/trainings")}>
+                    <a className="sidebar-link" onClick={() => history.push("/settings/trainingtypes")}>
                       Training Types
                     </a>
                   </li>
                   <li>
-                    <a className="sidebar-link" onClick={() => history.push("/settings/activities")}>
+                    <a className="sidebar-link" onClick={() => history.push("/settings/activitytypes")}>
                       Activity Types
                     </a>
                   </li>

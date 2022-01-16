@@ -6,7 +6,7 @@ import { Sidebar, Topbar, Footer } from "../organisms";
 const Dashboard = (props) => {
   const { children } = props;
 
-  let [collapse, setCollapse] = React.useState(false);
+  let [collapse, setCollapse] = React.useState(true);
 
   const toggle = () => setCollapse(prevState => !prevState);
 

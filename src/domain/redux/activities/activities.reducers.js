@@ -32,7 +32,7 @@ const activitiesReducer = (state = initialState, action) => {
   case activitiesConstants.GET_ACTIVITY_SUCCESS:
     return {
       ...state,
-      event: action.payload,
+      activity: action.payload,
     };
 
   case activitiesConstants.GET_ACTIVITY_FAIL:

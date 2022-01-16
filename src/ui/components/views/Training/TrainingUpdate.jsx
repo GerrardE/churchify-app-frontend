@@ -2,10 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { getItem, getItems, updateItem } from "@infrastructure/services/thunkService";
-import * as statesActions from "@domain/redux/states/states.actions";
-import * as citiesActions from "@domain/redux/cities/cities.actions";
-import * as branchActions from "@domain/redux/branches/branches.actions";
+import { getItem, updateItem } from "@infrastructure/services/thunkService";
 import * as trainingActions from "@domain/redux/trainings/trainings.actions";
 import * as configsActions from "@domain/redux/configs/configs.actions";
 import constants from "./training.constants";
@@ -14,29 +11,19 @@ import { AppLoader } from "../../molecules";
 import getFieldsArray from "../_helpers/fieldGenerator";
 
 const TrainingUpdate = ({ id, ...rest }) => {
-  const { parameter, parameters, statesparams, citiesparams, countryparam, stateparam, branchesparams } = constants;
+  const { parameter, parameters, formDefaults } = constants;
 
   const dispatch = useDispatch();
 
   React.useEffect(() => {
     dispatch(getItem(configsActions, `configs/${parameters}/config`));
     
-    dispatch(getItems(branchActions, branchesparams));
-
     dispatch(getItem(trainingActions, `${parameters}/${id}`));
-  }, [dispatch, parameters, id, branchesparams]);
+  }, [dispatch, parameters, id]);
 
   const { register, handleSubmit, errors } = useForm();
 
-  const { branches, trainings, configs, countries, states, cities } = useSelector((state) => state);
-
-  const getStates = (id) => {
-    dispatch(getItems(statesActions, `${statesparams}/${id}/${countryparam}`));
-  };
-
-  const getCities = (id) => {
-    dispatch(getItems(citiesActions, `${citiesparams}/${id}/${stateparam}`));
-  };
+  const { trainings, configs } = useSelector((state) => state);
 
   const { config: data } = configs;
 
@@ -44,11 +31,10 @@ const TrainingUpdate = ({ id, ...rest }) => {
   
   data.defaults = defaults;
   
-  data.countries = countries.countries;
-
-  const fields = getFieldsArray(data, errors, register, states.states_, getStates, cities.cities, getCities, branches.branches);
+  const fields = getFieldsArray(data, errors, register);
 
   const onSubmit = (data) => {
+    data.branchid ? data.branchid : (data.branchid = formDefaults.branchid);
     dispatch(updateItem(trainingActions, `${parameters}/${id}`, data));
   };
 

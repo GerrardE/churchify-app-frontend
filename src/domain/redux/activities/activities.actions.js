@@ -7,12 +7,12 @@ const loading = (data) => ({
 
 /* GET ITEMS */
 const getItemsSuccess = (data) => ({
-  type: activitiesConstants.GET_EVENTS_SUCCESS,
+  type: activitiesConstants.GET_ACTIVITIES_SUCCESS,
   payload: data,
 });
 
 const getItemsFail = (data) => ({
-  type: activitiesConstants.GET_EVENTS_FAIL,
+  type: activitiesConstants.GET_ACTIVITIES_FAIL,
   payload: data,
 });
 

@@ -1,14 +1,17 @@
 const constants = {
-  parameters: "activities",
-  parameter: "activity",
+  parameters: "activitytypes",
+  parameter: "activitytype",
   countryparams: "countries",
   countryparam: "country",
   statesparams: "states",
   stateparam: "state",
   citiesparams: "cities",
   branchesparams: "branches",
-  editurl: "/settings/activities",
+  editurl: "/settings/activitytypes",
   actions: true,
+  formDefaults: {
+    branchid: 1,
+  },
   tableData: [
     {
       Header: "Id",

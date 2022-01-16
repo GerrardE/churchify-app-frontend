@@ -1,7 +1,9 @@
 import React from "react";
 import classnames from "classnames";
 import { Inputfield, ErrorMessage, Label } from "@ui/components/atoms";
+import dateHelper from "./date.helper";
 
+// DEPRECATED: start decentralizing the generator
 const getFieldsArray = (
   data,
   errors,
@@ -15,6 +17,8 @@ const getFieldsArray = (
   events = [{}],
   preachers = [{}],
   fellowships = [{}],
+  activities = [{}],
+  trainings = [{}],
 ) => {
   const fieldsArray = [];
 
@@ -147,6 +151,46 @@ const getFieldsArray = (
             </select>
             <ErrorMessage message={errors[conf.field]?.message} />
           </div>
+        ) : conf.field == "activitytypeid" ? (
+          <div className="form-group col-md-6" key={`${conf.field}-19`}>
+            <Label labelClassName="text-normal text-dark">ACTIVITY TYPE</Label>
+            <select
+              id={`${conf.field}-20`}
+              className={classnames("form-control custom-select mr-sm-2", {
+                "is-invalid": errors[conf.field],
+              })}
+              ref={register(conf.validation)}
+              name={conf.field}
+            >
+              <option value="">Choose activity type...</option>
+              {activities.map((val) => (
+                <option value={val.id} key={val.id}>
+                  {val.name}
+                </option>
+              ))}
+            </select>
+            <ErrorMessage message={errors[conf.field]?.message} />
+          </div>
+        ) : conf.field == "trainingtypeid" ? (
+          <div className="form-group col-md-6" key={`${conf.field}-21`}>
+            <Label labelClassName="text-normal text-dark">TRAINING TYPE</Label>
+            <select
+              id={`${conf.field}-22`}
+              className={classnames("form-control custom-select mr-sm-2", {
+                "is-invalid": errors[conf.field],
+              })}
+              ref={register(conf.validation)}
+              name={conf.field}
+            >
+              <option value="">Choose training type...</option>
+              {trainings.map((val) => (
+                <option value={val.id} key={val.id}>
+                  {val.name}
+                </option>
+              ))}
+            </select>
+            <ErrorMessage message={errors[conf.field]?.message} />
+          </div>
         ) : conf.field == "country" ? (
           <div className="form-group col-md-6" key={`${conf.field}-3`}>
             <Label labelClassName="text-normal text-dark">
@@ -221,13 +265,13 @@ const getFieldsArray = (
             className={classnames("form-group col-md-6", {
               "is-invisible": conf.field.includes("id"),
             })}
-            key={conf.field}
+            key={`${conf.field}-${dateHelper.randString()}`}
           >
             <Label labelClassName="text-normal text-dark">
               {conf.field.toUpperCase()}
             </Label>
             <Inputfield
-              key={conf.field}
+              key={`${conf.field}-${dateHelper.randString()}`}
               inputRows={conf.field == "config" ? 16 : 6}
               fieldType={conf.field == "notes" ? "textarea" : (conf.field == "config" ? "textarea" : "")}
               inputType={conf.datatype == "integer" ? "number" : (conf.field.includes("password") ? "password" : (conf.field.includes("date") ? "date" : "text"))}

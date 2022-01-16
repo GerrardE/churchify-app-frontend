@@ -5,19 +5,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { createItem, getItems } from "@infrastructure/services/thunkService";
 import * as attendanceActions from "@domain/redux/attendance/attendance.actions";
 import * as eventActions from "@domain/redux/events/events.actions";
-import * as branchActions from "@domain/redux/branches/branches.actions";
 import { AppLoader, ButtonGroup } from "../../molecules";
 import { Button, ErrorMessage, Inputfield, Label } from "../../atoms";
 import { fieldSchema } from "../_validations/schema";
 import constants from "./reports.constants";
 import Table from "../../molecules/Table";
 
-const BranchReportView = () => {
+const GlobalReportView = () => {
   const {
     parameters,
     attendanceparams,
-    branchesparams,
-    branchTableData,
+    globalTableData,
+    globalparam,
     eventsparams,
     dropdowndata,
   } = constants;
@@ -26,7 +25,6 @@ const BranchReportView = () => {
     attendances: {
       attendances: { payload },
     },
-    branches: { branches },
     events: { events },
     loading,
   } = useSelector((state) => state);
@@ -35,24 +33,23 @@ const BranchReportView = () => {
 
   React.useEffect(() => {
     dispatch(getItems(eventActions, eventsparams));
-    dispatch(getItems(branchActions, branchesparams));
-  }, [dispatch, eventsparams, branchesparams]);
+  }, [dispatch, eventsparams]);
 
   const { register, handleSubmit, errors } = useForm();
 
-  const { event, branch, from, to } = errors;
+  const { event, from, to } = errors;
 
   const onSubmit = (data) => {
     dispatch(
       createItem(
         attendanceActions,
-        `${parameters}/${attendanceparams}/${branchesparams}`,
+        `${parameters}/${attendanceparams}/${globalparam}`,
         data,
       ),
     );
   };
 
-  const columns = useMemo(() => branchTableData, [branchTableData]);
+  const columns = useMemo(() => globalTableData, [globalTableData]);
 
   const actionItems = {
     canview: false,
@@ -117,13 +114,6 @@ const BranchReportView = () => {
                     </div>
                     <div className="form-group mr-2">
                       <Label labelClassName="text-normal text-dark">
-                        Branch:
-                      </Label>
-                      {handleDropDown(branches, "branchid")}
-                      <ErrorMessage message={branch?.message} />
-                    </div>
-                    <div className="form-group mr-2">
-                      <Label labelClassName="text-normal text-dark">
                         From:
                       </Label>
                       <Inputfield
@@ -173,23 +163,20 @@ const BranchReportView = () => {
                 </form>
 
                 <div className="print">
-                  <h4 className="c-grey-900 mB-20">BRANCH SUMMARY</h4>
+                  <h4 className="c-grey-900 mB-20">GLOBAL SUMMARY</h4>
                   {payload && Object.keys(payload).length>0 ? (
                     <Fragment>
-                      <h6>{`Name: ${payload.branch.name}`}</h6>
                       <h6>{`Event: ${payload.event.name}`}</h6>
                       <h6>{`Date: ${payload.range}`}</h6>
                       <Table
                         columns={columns}
                         data={payload.attendance}
-                        // actions={actions}
-                        // props={props}
                         constants={constants}
                         actionItems={actionItems}
                       />
                     </Fragment>
                   ) : (
-                    <p>Please filter by event, branch and dates...</p>
+                    <p>Please filter by event and dates...</p>
                   )}
                 </div>
               </div>
@@ -201,12 +188,4 @@ const BranchReportView = () => {
   );
 };
 
-// BranchReportView.propTypes = {
-//   match: PropTypes.oneOfType([PropTypes.object]),
-// };
-
-// BranchReportView.defaultProps = {
-//   match: {},
-// };
-
-export default BranchReportView;
+export default GlobalReportView;
