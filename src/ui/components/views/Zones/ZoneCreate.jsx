@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { getItem, createItem } from "@infrastructure/services/thunkService";
@@ -9,7 +10,7 @@ import { Button } from "../../atoms";
 import { AppLoader } from "../../molecules";
 import getFieldsArray from "../_helpers/fieldGenerator";
 
-const ZoneCreate = () => {
+const ZoneCreate = ({ props: { history }}) => {
   const { parameter, parameters } = constants;
 
   const dispatch = useDispatch();
@@ -42,10 +43,11 @@ const ZoneCreate = () => {
         </div>
         <div className="col-md-6">
           <a
-            href={`/settings/${parameters}`}
+            onClick={() => history.push(`/settings/${parameters}`)}
             className="btn btn-outline-primary float-right"
             role="button"
             aria-pressed="true"
+            tabIndex={0}
           >
             BACK
           </a>
@@ -90,6 +92,14 @@ const ZoneCreate = () => {
       </div>
     </div>
   );
+};
+
+ZoneCreate.propTypes = {
+  props: PropTypes.shape({
+    history: PropTypes.shape({
+      push: PropTypes.oneOfType([PropTypes.func]).isRequired,
+    }).isRequired,
+  }).isRequired,
 };
 
 export default ZoneCreate;

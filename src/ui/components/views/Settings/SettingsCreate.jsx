@@ -7,9 +7,7 @@ import { addSetting, getSetting } from "@domain/redux/settings/settings.thunks";
 import { Label, Inputfield, Button, ErrorMessage } from "../../atoms";
 import { AppLoader } from "../../molecules";
 
-const SettingCreate = ({ match, ...rest }) => {
-  const { props } = rest;
-  const { history } = props;
+const SettingCreate = ({ match, props: { history } }) => {
   const parameter = match.params.setting;
   const dispatch = useDispatch();
   const { token } = useSelector((state) => state.signin.user);
@@ -87,7 +85,7 @@ const SettingCreate = ({ match, ...rest }) => {
                       </Button>
                       <a
                         className="btn btn-outline-danger"
-                        href="/settings"
+                        onClick={() => history.push("/settings")}
                         role="button"
                       >
                         Cancel
@@ -106,14 +104,15 @@ const SettingCreate = ({ match, ...rest }) => {
 };
 
 SettingCreate.propTypes = {
-  history: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  props: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  props: PropTypes.shape({
+    history: PropTypes.shape({
+      push: PropTypes.oneOfType([PropTypes.func]).isRequired,
+    }).isRequired,
+  }).isRequired,
   match: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 };
 
 SettingCreate.defaultProps = {
-  history: {},
-  props: {},
   match: {},
 };
 

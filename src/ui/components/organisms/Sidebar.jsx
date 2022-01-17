@@ -193,7 +193,7 @@ const Sidebar = ({ toggleCollapse, history }) => {
                   </li>
                   <li>
                     <a className="sidebar-link" onClick={() => history.push("/settings/fellowships")}>
-                      Fellowships
+                      Cells
                     </a>
                   </li>
                   <li>

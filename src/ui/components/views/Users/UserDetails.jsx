@@ -11,16 +11,12 @@ import { Button } from "@ui/components/atoms";
 import { AppLoader } from "../../molecules";
 import constants from "./users.constants";
 
-const UserDetails = ({ id, ...rest }) => {
+const UserDetails = ({ id, props: { history } }) => {
   let [ roleData, setRole ] = React.useState("");
 
   const { parameters, rolesparams } = constants;
 
-  const { props } = rest;
-
   const dispatch = useDispatch();
-
-  const { history } = props;
 
   if (!id) history.push(`/settings/${parameters}`);
 
@@ -169,8 +165,9 @@ const UserDetails = ({ id, ...rest }) => {
                           <span className="text-muted float-right">
                             <a
                               className="btn btn-outline-danger"
-                              href={`/settings/${parameters}`}
+                              onClick={() => history.push(`/settings/${parameters}`)}
                               role="button"
+                              tabIndex={0}
                             >
                               Back
                             </a>
@@ -191,14 +188,15 @@ const UserDetails = ({ id, ...rest }) => {
 };
 
 UserDetails.propTypes = {
-  history: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  props: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  props: PropTypes.shape({
+    history: PropTypes.shape({
+      push: PropTypes.oneOfType([PropTypes.func]).isRequired,
+    }).isRequired,
+  }).isRequired,
 };
 
 UserDetails.defaultProps = {
-  history: {},
-  props: {},
   id: 1,
 };
 

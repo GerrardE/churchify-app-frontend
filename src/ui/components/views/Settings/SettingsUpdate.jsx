@@ -10,9 +10,7 @@ import {
 } from "../_validations/schema";
 import { AppLoader } from "../../molecules";
 
-const SettingsUpdate = ({ id, ...rest }) => {
-  const { props } = rest;
-  const { history } = props;
+const SettingsUpdate = ({ id, props: { history } }) => {
   const dispatch = useDispatch();
 
   const { register, handleSubmit, errors } = useForm();
@@ -117,8 +115,9 @@ const SettingsUpdate = ({ id, ...rest }) => {
                       </Button>
                       <a
                         className="btn btn-outline-danger"
-                        href="/settings"
+                        onClick={history.push("/settings")}
                         role="button"
+                        tabIndex={0}
                       >
                         Cancel
                       </a>
@@ -137,13 +136,11 @@ const SettingsUpdate = ({ id, ...rest }) => {
 
 SettingsUpdate.propTypes = {
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  history: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  props: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-};
-
-SettingsUpdate.defaultProps = {
-  history: {},
-  props: {},
+  props: PropTypes.shape({
+    history: PropTypes.shape({
+      push: PropTypes.oneOfType([PropTypes.func]).isRequired,
+    }).isRequired,
+  }).isRequired,
 };
 
 export default SettingsUpdate;

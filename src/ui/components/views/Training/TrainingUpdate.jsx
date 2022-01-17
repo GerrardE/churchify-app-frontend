@@ -10,7 +10,7 @@ import { Button } from "../../atoms";
 import { AppLoader } from "../../molecules";
 import getFieldsArray from "../_helpers/fieldGenerator";
 
-const TrainingUpdate = ({ id, ...rest }) => {
+const TrainingUpdate = ({ id, props: { history } }) => {
   const { parameter, parameters, formDefaults } = constants;
 
   const dispatch = useDispatch();
@@ -46,7 +46,7 @@ const TrainingUpdate = ({ id, ...rest }) => {
         </div>
         <div className="col-md-6">
           <a
-            onClick={() => rest.history.push(`/settings/${parameters}`)}
+            onClick={() => history.push(`/settings/${parameters}`)}
             className="btn btn-outline-primary float-right"
             role="button"
             aria-pressed="true"
@@ -95,6 +95,11 @@ const TrainingUpdate = ({ id, ...rest }) => {
 
 TrainingUpdate.propTypes = {
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  props: PropTypes.shape({
+    history: PropTypes.shape({
+      push: PropTypes.oneOfType([PropTypes.func]).isRequired,
+    }).isRequired,
+  }).isRequired,
 };
 
 export default TrainingUpdate;

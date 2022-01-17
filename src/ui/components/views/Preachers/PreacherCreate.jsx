@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { getItem, getItems, createItem } from "@infrastructure/services/thunkService";
@@ -12,7 +13,7 @@ import { Button } from "../../atoms";
 import { AppLoader } from "../../molecules";
 import getFieldsArray from "../_helpers/fieldGenerator";
 
-const PreacherCreate = () => {
+const PreacherCreate = ({ props: { history }}) => {
   const { parameter, parameters, statesparams, stateparam, countryparam, citiesparams, branchesparams } = constants;
 
   const dispatch = useDispatch();
@@ -51,10 +52,11 @@ const PreacherCreate = () => {
       <div className="row">
         <div className="col-md-12 mb-2 mt-2">
           <a
-            href={`/settings/${parameters}`}
+            onClick={() => history.push(`/settings/${parameters}`)}
             className="btn btn-outline-primary float-right"
             role="button"
             aria-pressed="true"
+            tabIndex={0}
           >
             BACK
           </a>
@@ -99,6 +101,14 @@ const PreacherCreate = () => {
       </div>
     </div>
   );
+};
+
+PreacherCreate.propTypes = {
+  props: PropTypes.shape({
+    history: PropTypes.shape({
+      push: PropTypes.oneOfType([PropTypes.func]).isRequired,
+    }).isRequired,
+  }).isRequired,
 };
 
 export default PreacherCreate;

@@ -60,9 +60,10 @@ const DownloadView = ({ match, ...rest }) => {
   return (
     <React.Fragment>
       <a
-        href={`/settings/${parameters}/create/${parameter}`}
+        onClick={() => rest.history.push(`/settings/${parameters}/create/${parameter}`)}
         className="btn btn-outline-primary float-right"
         role="button"
+        tabIndex={0}
         aria-pressed="true"
       >
         {`CREATE ${parameter.toUpperCase()}`}

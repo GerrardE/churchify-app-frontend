@@ -73,9 +73,6 @@ const EventView = ({ match, ...rest }) => {
 
 EventView.propTypes = {
   match: PropTypes.oneOfType([PropTypes.object]),
-  history: PropTypes.shape({
-    push: PropTypes.oneOfType([PropTypes.func]).isRequired,
-  }).isRequired,
 };
 
 EventView.defaultProps = {

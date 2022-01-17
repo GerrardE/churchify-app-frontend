@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -17,7 +18,7 @@ import { Button } from "../../atoms";
 import { AppLoader } from "../../molecules";
 import getFieldsArray from "../_helpers/fieldGenerator";
 
-const UserCreate = () => {
+const UserCreate = ({ props: { history }}) => {
   const {
     branchesparams,
     zonesparams,
@@ -75,7 +76,7 @@ const UserCreate = () => {
   
   const onSubmit = (data) => {
     dispatch(
-      createItem(usersActions, "auth/signup", data),
+      createItem(usersActions, "users/auth/signup", data),
     );
   };
 
@@ -87,10 +88,11 @@ const UserCreate = () => {
         </div>
         <div className="col-md-6">
           <a
-            href={`/settings/${parameters}`}
+            onClick={() => history.push(`/settings/${parameters}`)}
             className="btn btn-outline-primary float-right"
             role="button"
             aria-pressed="true"
+            tabIndex={0}
           >
             BACK
           </a>
@@ -135,6 +137,14 @@ const UserCreate = () => {
       </div>
     </div>
   );
+};
+
+UserCreate.propTypes = {
+  props: PropTypes.shape({
+    history: PropTypes.shape({
+      push: PropTypes.oneOfType([PropTypes.func]).isRequired,
+    }).isRequired,
+  }).isRequired,
 };
 
 export default UserCreate;

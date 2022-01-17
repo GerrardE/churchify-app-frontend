@@ -16,18 +16,14 @@ import { AppLoader } from "../../molecules";
 import constants from "./roles.constants";
 import Label from "../../atoms/Label";
 
-const RoleDetail = ({ id, ...rest }) => {
+const RoleDetail = ({ id, props: { history} }) => {
   let selectedPermissions = [];
 
   let deselectedPermissions = [];
 
   const { parameters, permissionparams } = constants;
 
-  const { props } = rest;
-
   const dispatch = useDispatch();
-
-  const { history } = props;
 
   if (!id) history.push(`/settings/${parameters}`);
 
@@ -257,8 +253,9 @@ const RoleDetail = ({ id, ...rest }) => {
                           <span className="text-muted float-right">
                             <a
                               className="btn btn-outline-danger"
-                              href={`/settings/${parameters}`}
+                              onClick={() => history.push(`/settings/${parameters}`)}
                               role="button"
+                              tabIndex={0}
                             >
                               Back
                             </a>
@@ -279,14 +276,15 @@ const RoleDetail = ({ id, ...rest }) => {
 };
 
 RoleDetail.propTypes = {
-  history: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  props: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  props: PropTypes.shape({
+    history: PropTypes.shape({
+      push: PropTypes.oneOfType([PropTypes.func]).isRequired,
+    }).isRequired,
+  }).isRequired,
 };
 
 RoleDetail.defaultProps = {
-  history: {},
-  props: {},
   id: 1,
 };
 

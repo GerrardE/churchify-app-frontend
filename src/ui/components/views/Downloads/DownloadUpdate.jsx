@@ -11,7 +11,7 @@ import { Button } from "../../atoms";
 import { AppLoader } from "../../molecules";
 import getFieldsArray from "../_helpers/fieldGenerator";
 
-const DownloadUpdate = ({ id }) => {
+const DownloadUpdate = ({ id, props: { history } }) => {
   const { parameter, parameters, categoryparams } = constants;
 
   const dispatch = useDispatch();
@@ -48,10 +48,11 @@ const DownloadUpdate = ({ id }) => {
         </div>
         <div className="col-md-6">
           <a
-            href={`/settings/${parameters}`}
+            onClick={() => history.push(`/settings/${parameters}`)}
             className="btn btn-outline-primary float-right"
             role="button"
             aria-pressed="true"
+            tabIndex={0}
           >
             BACK
           </a>
@@ -96,6 +97,11 @@ const DownloadUpdate = ({ id }) => {
 
 DownloadUpdate.propTypes = {
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  props: PropTypes.shape({
+    history: PropTypes.shape({
+      push: PropTypes.oneOfType([PropTypes.func]).isRequired,
+    }).isRequired,
+  }).isRequired,
 };
 
 export default DownloadUpdate;
