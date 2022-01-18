@@ -5,7 +5,7 @@ import { SigninView } from "../components";
 const Signin = (props) => {
   
   return (
-    <Auth title="Signin">
+    <Auth title="Signin" {...props}>
       <SigninView {...props} />
     </Auth>
   );

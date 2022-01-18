@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -18,7 +19,7 @@ import AppLoader from "../../molecules/AppLoader";
 import constants from "./auth.constants";
 import getFieldsArray from "../_helpers/fieldGenerator";
 
-const SignupView = () => {
+const SignupView = ({ match }) => {
   const {
     branchesparams,
     zonesparams,
@@ -33,14 +34,16 @@ const SignupView = () => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(getItems(countriesActions, `${countryparams}`));
-
-    dispatch(getItems(branchActions, `${branchesparams}`));
-
-    dispatch(getItems(zonesActions, `${zonesparams}`));
-
-    dispatch(getItem(configsActions, `configs/${parameters}/config`));
-  }, [dispatch, parameters, branchesparams, zonesparams, countryparams]);
+    if(match.path == "/signup"){
+      dispatch(getItems(countriesActions, `${countryparams}`));
+  
+      dispatch(getItems(branchActions, `${branchesparams}`));
+  
+      dispatch(getItems(zonesActions, `${zonesparams}`));
+  
+      dispatch(getItem(configsActions, `configs/${parameters}/config`));
+    }
+  }, [dispatch, parameters, branchesparams, zonesparams, countryparams, match.path]);
 
   const { users, configs, branches, countries, states, cities, zones } = useSelector(
     (state) => state,
@@ -111,12 +114,12 @@ const SignupView = () => {
   );
 };
 
-// SignupView.propTypes = {
-//   history: PropTypes.oneOfType([PropTypes.object]),
-// };
+SignupView.propTypes = {
+  match: PropTypes.oneOfType([PropTypes.object]),
+};
 
-// SignupView.defaultProps = {
-//   history: {},
-// };
+SignupView.defaultProps = {
+  match: {},
+};
 
 export default SignupView;
