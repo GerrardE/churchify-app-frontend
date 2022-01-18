@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Logo from "@ui/assets/static/images/logo.png";
 import BackgroundImage from "@ui/assets/static/images/bg.jpg";
 
-const Auth = ({ children, title }) => {
+const Auth = ({ children, title, history }) => {
   return (
     <div className="peers ai-s fxw-nw h-100vh">
       <div
@@ -48,6 +48,9 @@ const Auth = ({ children, title }) => {
 Auth.propTypes = {
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.node]).isRequired,
   title: PropTypes.string.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.oneOfType([PropTypes.func]).isRequired,
+  }).isRequired,
 };
 
 export default Auth;
