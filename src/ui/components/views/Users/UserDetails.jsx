@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import moment from "moment";
-import { getItem, getItems, createItem } from "@infrastructure/services/thunkService";
+import { getItem, getItems, createItem, updateItem } from "@infrastructure/services/thunkService";
 import * as actions from "@domain/redux/users/users.actions";
 import * as roleActions from "@domain/redux/roles/roles.actions";
 import Logo from "@ui/assets/static/images/logo.png";
@@ -14,7 +14,7 @@ import constants from "./users.constants";
 const UserDetails = ({ id, props: { history } }) => {
   let [ roleData, setRole ] = React.useState("");
 
-  const { parameters, rolesparams } = constants;
+  const { parameters, rolesparams, rolesparam } = constants;
 
   const dispatch = useDispatch();
 
@@ -33,9 +33,20 @@ const UserDetails = ({ id, props: { history } }) => {
     dispatch(getItems(roleActions, `/${rolesparams}`));
   }, [dispatch, id, rolesparams]);
 
-  const onSubmit = (role, id) => {
-    const data = { role, id };
-    dispatch(createItem(roleActions, `${parameters}/${rolesparams}`, data));
+  const assignRole = (role, id) => {
+    if(role && id) {
+      const data = { role, id };
+      dispatch(createItem(roleActions, `${parameters}/${rolesparams}`, data));
+    }
+  };
+
+  const reassignRole = (role, id) => {
+    if(role && id) {
+      const roleid = roles.find(role => role.name === user["role"]).id;
+      const initialData = { role: roleid, id, newrole: role };
+
+      dispatch(updateItem(roleActions, `${parameters}/${rolesparam}/reassign`, initialData));
+    }
   };
 
   return (
@@ -146,9 +157,13 @@ const UserDetails = ({ id, props: { history } }) => {
                                         <Button
                                           buttonType="submit"
                                           buttonClassName="btn btn-primary"
-                                          buttonOnClick={() =>
-                                            onSubmit(roleData, user["id"])
-                                          }
+                                          buttonOnClick={() => {
+                                            if(user["role"] == "Role not assigned yet"){
+                                              assignRole(roleData, user["id"]);
+                                            } else {
+                                              reassignRole(roleData, user["id"]);
+                                            }
+                                          }}
                                         >
                                           Save
                                         </Button>

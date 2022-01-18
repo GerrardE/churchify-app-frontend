@@ -11,6 +11,7 @@ const constants = {
   stateparam: "state",
   zonesparams: "zones",
   rolesparams: "roles",
+  rolesparam: "role",
   citiesparams: "cities",
   actions: true,
   tableData: [
