@@ -3,14 +3,16 @@ import PropTypes from "prop-types";
 import classnames from "classnames";
 import { Sidebar, Topbar, Footer } from "../organisms";
 
-const Dashboard = ({ children }) => {
-  let [collapse, setCollapse] = React.useState(false);
+const Dashboard = (props) => {
+  const { children } = props;
+
+  let [collapse, setCollapse] = React.useState(true);
 
   const toggle = () => setCollapse(prevState => !prevState);
 
   return (
     <div className={classnames("app", { "is-collapsed": collapse })}>
-      <Sidebar toggleCollapse={toggle} />
+      <Sidebar toggleCollapse={toggle} {...props} />
       <div className="page-container">
         <Topbar toggleCollapse={toggle} />
         <main className="main-content bgc-grey-100">

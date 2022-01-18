@@ -16,6 +16,7 @@ import TrainingCreate from "./TrainingCreate";
 import GroupCreate from "./GroupCreate";
 import FreportCreate from "./FreportCreate";
 import BranchReportView from "./BranchReportView";
+import GlobalReportView from "./GlobalReportView";
 import { isEmpty, fieldSchema } from "../_validations/schema";
 import constants from "./reports.constants";
 import Table from "../../molecules/Table";
@@ -35,6 +36,7 @@ const ReportView = ({ match, ...rest }) => {
     tableData,
     zonesparams,
     eventsparams,
+    globalparam,
     dropdowndata,
   } = constants;
 
@@ -115,6 +117,13 @@ const ReportView = ({ match, ...rest }) => {
     match.path === `/${parameters}/generate/${branchesparams}`
   ) {
     return <BranchReportView props={rest} match={match} />;
+  }
+
+  if (
+    isEmpty(match.params) &&
+    match.path === `/${parameters}/generate/${globalparam}`
+  ) {
+    return <GlobalReportView props={rest} match={match} />;
   }
 
   const handleDropDown = (items, title) => {

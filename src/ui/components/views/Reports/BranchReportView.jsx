@@ -1,5 +1,4 @@
 import React, { useMemo, Fragment } from "react";
-import PropTypes from "prop-types";
 import classnames from "classnames";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,18 +8,15 @@ import * as eventActions from "@domain/redux/events/events.actions";
 import * as branchActions from "@domain/redux/branches/branches.actions";
 import { AppLoader, ButtonGroup } from "../../molecules";
 import { Button, ErrorMessage, Inputfield, Label } from "../../atoms";
-import MembershipCreate from "./MembershipCreate";
-import { isEmpty, fieldSchema } from "../_validations/schema";
+import { fieldSchema } from "../_validations/schema";
 import constants from "./reports.constants";
 import Table from "../../molecules/Table";
 
-const BranchReportView = ({ match, ...rest }) => {
+const BranchReportView = () => {
   const {
-    submitparam,
     parameters,
     attendanceparams,
     branchesparams,
-    membershipparam,
     branchTableData,
     eventsparams,
     dropdowndata,
@@ -63,13 +59,6 @@ const BranchReportView = ({ match, ...rest }) => {
     canedit: false,
     candelete: false,
   };
-
-  if (
-    isEmpty(match.params) &&
-    match.path === `/${parameters}/${submitparam}/${membershipparam}`
-  ) {
-    return <MembershipCreate props={rest} match={match} />;
-  }
 
   const handleDropDown = (items, title) => {
     return (
@@ -212,12 +201,12 @@ const BranchReportView = ({ match, ...rest }) => {
   );
 };
 
-BranchReportView.propTypes = {
-  match: PropTypes.oneOfType([PropTypes.object]),
-};
+// BranchReportView.propTypes = {
+//   match: PropTypes.oneOfType([PropTypes.object]),
+// };
 
-BranchReportView.defaultProps = {
-  match: {},
-};
+// BranchReportView.defaultProps = {
+//   match: {},
+// };
 
 export default BranchReportView;

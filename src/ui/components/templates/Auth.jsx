@@ -31,12 +31,12 @@ const Auth = ({ children, title }) => {
         {title === "Signin" ? (
           <p className="mB-40">
             Don&apos;t have an account?
-            <a href="/signup"> Signup</a>
+            <a onClick={() => history.push("/signup")}> Signup</a>
           </p>
         ) : (
           <p className="mb-10">
             Already have an account?
-            <a href="/"> Signin</a>
+            <a onClick={() => history.push("/")}> Signin</a>
           </p>
         )}
         {children}

@@ -1,3 +1,7 @@
+import { dateHelper } from "../_helpers";
+
+const date = dateHelper.dateToday();
+
 const constants = {
   parameters: "events",
   parameter: "event",
@@ -9,6 +13,11 @@ const constants = {
   branchesparams: "branches",
   editurl: "/settings/events",
   actions: true,
+  formDefaults: {
+    branchid: 1,
+    address: "Trem Headquarters",
+    date,
+  },
   tableData: [
     {
       Header: "Id",

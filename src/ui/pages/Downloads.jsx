@@ -4,7 +4,7 @@ import { DownloadView } from "../components";
 
 const Download = (props) => {
   return (
-    <Dashboard>
+    <Dashboard {...props}>
       <DownloadView {...props} />
     </Dashboard>
   );

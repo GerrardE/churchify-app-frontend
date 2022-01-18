@@ -11,14 +11,10 @@ import Logo from "@ui/assets/static/images/logo.png";
 import { AppLoader } from "../../molecules";
 import constants from "./apilogs.constants";
 
-const ApiLogDetail = ({ id, ...rest }) => {
+const ApiLogDetail = ({ id, props: { history } }) => {
   const { parameters } = constants;
 
-  const { props } = rest;
-
   const dispatch = useDispatch();
-
-  const { history } = props;
 
   if (!id) history.push(`/system/${parameters}`);
 
@@ -115,8 +111,9 @@ const ApiLogDetail = ({ id, ...rest }) => {
                           <span className="text-muted float-right mr-2 mb-2">
                             <a
                               className="btn btn-outline-danger"
-                              href={`/system/${parameters}`}
+                              onClick={() => history.push(`/system/${parameters}`)}
                               role="button"
+                              tabIndex={0}
                             >
                               Back
                             </a>
@@ -137,14 +134,15 @@ const ApiLogDetail = ({ id, ...rest }) => {
 };
 
 ApiLogDetail.propTypes = {
-  history: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  props: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  props: PropTypes.shape({
+    history: PropTypes.shape({
+      push: PropTypes.oneOfType([PropTypes.func]).isRequired,
+    }).isRequired,
+  }).isRequired,
 };
 
 ApiLogDetail.defaultProps = {
-  history: {},
-  props: {},
   id: 1,
 };
 

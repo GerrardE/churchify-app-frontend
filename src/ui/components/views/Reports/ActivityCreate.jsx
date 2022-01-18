@@ -12,7 +12,7 @@ import { AppLoader } from "../../molecules";
 import getFieldsArray from "../_helpers/fieldGenerator";
 
 const ActivityCreate = () => {
-  const { activityparam, branchesparams, zonesparams, parameters } = constants;
+  const { activityparam, branchesparams, zonesparams, parameters, activitytypeparams } = constants;
 
   const dispatch = useDispatch();
 
@@ -20,9 +20,10 @@ const ActivityCreate = () => {
     dispatch(getItems(branchActions, `${branchesparams}`));
 
     dispatch(getItems(zonesActions, `${zonesparams}`));
+    dispatch(getItems(activityActions, `${activitytypeparams}`));
 
     dispatch(getItem(configsActions, `configs/${activityparam}/config`));
-  }, [dispatch, activityparam, branchesparams, zonesparams]);
+  }, [dispatch, activityparam, branchesparams, zonesparams, activitytypeparams]);
   
   const { activities, configs, branches, zones, signin: { user } } = useSelector((state) => state);
   
@@ -34,8 +35,8 @@ const ActivityCreate = () => {
   data.zonesdata = zones.zones;
   
   const { register, handleSubmit, errors } = useForm();
-
-  const fields = getFieldsArray(data, errors, register, [{}], ()=>{}, [{}], ()=>{}, branches.branches);
+  
+  const fields = getFieldsArray(data, errors, register, [{}], ()=>{}, [{}], ()=>{}, branches.branches, [{}], [{}], [{}], [{}], activities.activities);
 
   const onSubmit = (data) => {
     dispatch(createItem(activityActions, `${parameters}/${activityparam}`, data));

@@ -12,7 +12,7 @@ import { AppLoader } from "../../molecules";
 import getFieldsArray from "../_helpers/fieldGenerator";
 
 const TrainingCreate = () => {
-  const { trainingparam, branchesparams, parameters, zonesparams } = constants;
+  const { trainingparam, branchesparams, parameters, zonesparams, trainingtypeparams } = constants;
 
   const dispatch = useDispatch();
 
@@ -20,9 +20,10 @@ const TrainingCreate = () => {
     dispatch(getItems(branchActions, `${branchesparams}`));
 
     dispatch(getItems(zonesActions, `${zonesparams}`));
+    dispatch(getItems(trainingActions, `${trainingtypeparams}`));
 
     dispatch(getItem(configsActions, `configs/${trainingparam}/config`));
-  }, [dispatch, trainingparam, branchesparams, zonesparams]);
+  }, [dispatch, trainingparam, branchesparams, zonesparams, trainingtypeparams]);
   
   const { trainings, configs, branches, zones, signin: { user } } = useSelector((state) => state);
   
@@ -35,7 +36,7 @@ const TrainingCreate = () => {
   
   const { register, handleSubmit, errors } = useForm();
 
-  const fields = getFieldsArray(data, errors, register, [{}], ()=>{}, [{}], ()=>{}, branches.branches);
+  const fields = getFieldsArray(data, errors, register, [{}], ()=>{}, [{}], ()=>{}, branches.branches, [{}], [{}], [{}], [{}], [{}], trainings.trainings);
 
   const onSubmit = (data) => {
     dispatch(createItem(trainingActions, `${parameters}/${trainingparam}`, data));

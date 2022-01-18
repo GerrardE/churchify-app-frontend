@@ -9,7 +9,7 @@ import { Button } from "../../atoms";
 import { AppLoader } from "../../molecules";
 import getFieldsArray from "../_helpers/fieldGenerator";
 
-const ConfigUpdate = ({ id }) => {
+const ConfigUpdate = ({ id, props: { history } }) => {
   const { parameter, parameters } = constants;
 
   const dispatch = useDispatch();
@@ -39,10 +39,11 @@ const ConfigUpdate = ({ id }) => {
         </div>
         <div className="col-md-6">
           <a
-            href={`/system/${parameters}`}
+            onClick={() => history.push(`/system/${parameters}`)}
             className="btn btn-outline-primary float-right"
             role="button"
             aria-pressed="true"
+            tabIndex={0}
           >
             BACK
           </a>
@@ -87,6 +88,11 @@ const ConfigUpdate = ({ id }) => {
 
 ConfigUpdate.propTypes = {
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  props: PropTypes.shape({
+    history: PropTypes.shape({
+      push: PropTypes.oneOfType([PropTypes.func]).isRequired,
+    }).isRequired,
+  }).isRequired,
 };
 
 export default ConfigUpdate;

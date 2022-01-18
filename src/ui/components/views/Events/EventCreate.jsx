@@ -1,7 +1,12 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { getItem, getItems, createItem } from "@infrastructure/services/thunkService";
+import PropTypes from "prop-types";
+import {
+  getItem,
+  getItems,
+  createItem,
+} from "@infrastructure/services/thunkService";
 import * as statesActions from "@domain/redux/states/states.actions";
 import * as citiesActions from "@domain/redux/cities/cities.actions";
 import * as eventActions from "@domain/redux/events/events.actions";
@@ -12,25 +17,36 @@ import { Button } from "../../atoms";
 import { AppLoader } from "../../molecules";
 import getFieldsArray from "../_helpers/fieldGenerator";
 
-const EventCreate = () => {
-  const { parameter, parameters, statesparams, stateparam, countryparam, citiesparams, branchesparams } = constants;
+const EventCreate = ({ props: { history } }) => {
+  const {
+    parameter,
+    parameters,
+    statesparams,
+    stateparam,
+    countryparam,
+    citiesparams,
+    branchesparams,
+    formDefaults,
+  } = constants;
 
   const dispatch = useDispatch();
 
   React.useEffect(() => {
     dispatch(getItems(branchActions, `${branchesparams}`));
-    
+
     dispatch(getItem(configsActions, `configs/${parameters}/config`));
   }, [dispatch, parameters, branchesparams]);
-  
-  const { events, configs, countries, states, cities, branches } = useSelector((state) => state);
-  
+
+  const { events, configs, countries, states, cities, branches } = useSelector(
+    (state) => state,
+  );
+
   const { loading } = events;
-  
+
   const { config: data } = configs;
 
   data.countries = countries.countries;
-  
+
   const { register, handleSubmit, errors } = useForm();
 
   const getStates = (id) => {
@@ -41,9 +57,22 @@ const EventCreate = () => {
     dispatch(getItems(citiesActions, `${citiesparams}/${id}/${stateparam}`));
   };
 
-  const fields = getFieldsArray(data, errors, register, states.states_, getStates, cities.cities, getCities, branches.branches);
+  const fields = getFieldsArray(
+    data,
+    errors,
+    register,
+    states.states_,
+    getStates,
+    cities.cities,
+    getCities,
+    branches.branches,
+  );
 
   const onSubmit = (data) => {
+    data.branchid ? data.branchid : (data.branchid = formDefaults.branchid);
+    data.date ? data.date : (data.date = formDefaults.date);
+    data.address ? data.address : (data.address = formDefaults.address);
+
     dispatch(createItem(eventActions, parameters, data));
   };
 
@@ -52,10 +81,11 @@ const EventCreate = () => {
       <div className="row">
         <div className="col-md-12 mb-2 mt-2">
           <a
-            href={`/settings/${parameters}`}
+            onClick={() => history.push(`/settings/${parameters}`)}
             className="btn btn-outline-primary float-right"
             role="button"
             aria-pressed="true"
+            tabIndex={0}
           >
             BACK
           </a>
@@ -71,9 +101,7 @@ const EventCreate = () => {
               className="needs-validation"
               noValidate
             >
-              <div className="form-row">
-                {fields}
-              </div>
+              <div className="form-row">{fields}</div>
 
               {loading ? (
                 <center>
@@ -100,6 +128,14 @@ const EventCreate = () => {
       </div>
     </div>
   );
+};
+
+EventCreate.propTypes = {
+  props: PropTypes.shape({
+    history: PropTypes.shape({
+      push: PropTypes.oneOfType([PropTypes.func]).isRequired,
+    }).isRequired,
+  }).isRequired,
 };
 
 export default EventCreate;

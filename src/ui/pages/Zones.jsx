@@ -4,7 +4,7 @@ import { ZoneView } from "../components";
 
 const Zone = (props) => {
   return (
-    <Dashboard>
+    <Dashboard {...props}>
       <ZoneView {...props} />
     </Dashboard>
   );

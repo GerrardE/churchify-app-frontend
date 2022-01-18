@@ -15,3 +15,5 @@ export { default as PermissionView } from "./Permissions/PermissionView";
 export { default as DashboardView } from "./Dashboard/DashboardView";
 export { default as SignupView } from "./Auth/SignupView";
 export { default as ConfigView } from "./Configs/ConfigView";
+export { default as ActivityView } from "./Activity/ActivityView";
+export { default as TrainingView } from "./Training/TrainingView";

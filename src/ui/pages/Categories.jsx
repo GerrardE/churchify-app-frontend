@@ -4,7 +4,7 @@ import { CategoryView } from "../components";
 
 const Category = (props) => {
   return (
-    <Dashboard>
+    <Dashboard {...props}>
       <CategoryView {...props} />
     </Dashboard>
   );

@@ -7,12 +7,8 @@ import Logo from "@ui/assets/static/images/logo.png";
 import { AppLoader } from "../../molecules";
 import constants from "./configs.constants";
 
-const ConfigDetail = ({ id, ...rest }) => {
+const ConfigDetail = ({ id, props: { history } }) => {
   const { parameters } = constants;
-
-  const { props } = rest;
-
-  const { history } = props;
 
   if (!id) history.push(`/system/${parameters}`);
 
@@ -109,8 +105,9 @@ const ConfigDetail = ({ id, ...rest }) => {
                           <span className="text-muted float-right mr-2 mb-2">
                             <a
                               className="btn btn-outline-danger"
-                              href={`/system/${parameters}`}
+                              onClick={() => history.push(`/system/${parameters}`)}
                               role="button"
+                              tabIndex={0}
                             >
                               Back
                             </a>
@@ -131,14 +128,15 @@ const ConfigDetail = ({ id, ...rest }) => {
 };
 
 ConfigDetail.propTypes = {
-  history: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  props: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  props: PropTypes.shape({
+    history: PropTypes.shape({
+      push: PropTypes.oneOfType([PropTypes.func]).isRequired,
+    }).isRequired,
+  }).isRequired,
 };
 
 ConfigDetail.defaultProps = {
-  history: {},
-  props: {},
   id: 1,
 };
 

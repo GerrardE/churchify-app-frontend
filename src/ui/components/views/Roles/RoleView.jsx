@@ -56,10 +56,11 @@ const RoleView = ({ match, ...rest }) => {
   return (
     <React.Fragment>
       <a
-        href={`/settings/${parameters}/create/${parameter}`}
+        onClick={() => rest.history.push(`/settings/${parameters}/create/${parameter}`)}
         className="btn btn-outline-primary float-right"
         role="button"
         aria-pressed="true"
+        tabIndex={0}
       >
         {`CREATE ${parameter.toUpperCase()}`}
       </a>

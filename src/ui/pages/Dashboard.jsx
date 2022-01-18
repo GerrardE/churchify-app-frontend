@@ -4,7 +4,7 @@ import { DashboardView } from "../components";
 
 const Dashbooard = (props) => {
   return (
-    <Dashboard>
+    <Dashboard {...props}>
       <DashboardView {...props} />
     </Dashboard>
   );

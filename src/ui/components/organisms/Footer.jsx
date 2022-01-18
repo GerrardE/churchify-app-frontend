@@ -6,8 +6,8 @@ const Footer = () => {
       <span>
         Copyright © 2020
         {" "}
-        <a href="https://www.codequilibrium.com" title="codequilibrium">
-          codequilibrium
+        <a href="https://www.ezeugwagerrard.com" rel="noreferrer" target="_blank" title="ezeugwagerrard">
+          ezeugwagerrard
         </a>
         . All rights reserved.
       </span>

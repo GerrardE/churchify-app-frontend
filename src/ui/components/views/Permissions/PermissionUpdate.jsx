@@ -10,7 +10,7 @@ import { Button } from "../../atoms";
 import { AppLoader } from "../../molecules";
 import getFieldsArray from "../_helpers/fieldGenerator";
 
-const PermissionUpdate = ({ id }) => {
+const PermissionUpdate = ({ id, props: { history } }) => {
   const { parameter, parameters } = constants;
 
   const dispatch = useDispatch();
@@ -43,10 +43,11 @@ const PermissionUpdate = ({ id }) => {
         </div>
         <div className="col-md-6">
           <a
-            href={`/settings/${parameters}`}
+            onClick={() => history.push(`/settings/${parameters}`)}
             className="btn btn-outline-primary float-right"
             role="button"
             aria-pressed="true"
+            tabIndex={0}
           >
             BACK
           </a>
@@ -91,6 +92,11 @@ const PermissionUpdate = ({ id }) => {
 
 PermissionUpdate.propTypes = {
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  props: PropTypes.shape({
+    history: PropTypes.shape({
+      push: PropTypes.oneOfType([PropTypes.func]).isRequired,
+    }).isRequired,
+  }).isRequired,
 };
 
 export default PermissionUpdate;

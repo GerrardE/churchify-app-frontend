@@ -4,7 +4,7 @@ import { UserView } from "../components";
 
 const User = (props) => {
   return (
-    <Dashboard>
+    <Dashboard {...props}>
       <UserView {...props} />
     </Dashboard>
   );

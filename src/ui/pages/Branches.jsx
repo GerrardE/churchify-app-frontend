@@ -4,7 +4,7 @@ import { BranchView } from "../components";
 
 const Zone = (props) => {
   return (
-    <Dashboard>
+    <Dashboard {...props}>
       <BranchView {...props} />
     </Dashboard>
   );

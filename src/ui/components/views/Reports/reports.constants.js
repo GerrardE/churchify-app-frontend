@@ -3,9 +3,12 @@ const constants = {
   attendanceparam: "attendance",
   attendanceparams: "attendances",
   activityparam: "activity",
+  activitytypeparams: "activitytypes",
+  trainingtypeparams: "trainingtypes",
   trainingparam: "training",
   groupparam: "group",
   freportparam: "freport",
+  cellparam: "cell",
   membershipparam: "membership",
   submitparam: "submit",
   branchesparams: "branches",
@@ -16,7 +19,7 @@ const constants = {
   editurl: "/settings/preachers",
   report: true,
   actions: false,
-  dropdowndata: [{name: "zones"}, {name: "branches"}],
+  dropdowndata: [{name: "zones"}, {name: "branches"}, {name: "global"}],
   days: [
     {
       key: "Sunday",
@@ -87,6 +90,29 @@ const constants = {
     },
   ],
   branchTableData: [
+    {
+      Header: "Month",
+      accessor: "month",
+    },
+    {
+      Header: "Avg Men",
+      accessor: "avg_men",
+    },
+    {
+      Header: "Avg Women",
+      accessor: "avg_women",
+    },
+    {
+      Header: "Avg Children",
+      accessor: "avg_children",
+    },
+    {
+      Header: "Total",
+      accessor: "total",
+    },
+  ],
+  globalparam: "global",
+  globalTableData: [
     {
       Header: "Month",
       accessor: "month",

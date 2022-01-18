@@ -4,7 +4,7 @@ import { PreacherView } from "../components";
 
 const Preacher = (props) => {
   return (
-    <Dashboard>
+    <Dashboard {...props}>
       <PreacherView {...props} />
     </Dashboard>
   );

@@ -1,62 +1,70 @@
+/* LINKS */
+a:hover {
+  cursor: pointer;
+}
+
 /* DASHBOARD */
 #loader {
-    transition: all 0.3s ease-in-out;
-    opacity: 1;
-    visibility: visible;
-    position: fixed;
-    height: 100vh;
-    width: 100%;
-    background: #fff;
-    z-index: 90000;
-  }
+  transition: all 0.3s ease-in-out;
+  opacity: 1;
+  visibility: visible;
+  position: fixed;
+  height: 100vh;
+  width: 100%;
+  background: #fff;
+  z-index: 90000;
+}
 
-  #loader.fadeOut {
+#loader.fadeOut {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: calc(50% - 20px);
+  left: calc(50% - 20px);
+  background-color: #333;
+  border-radius: 100%;
+  -webkit-animation: sk-scaleout 1s infinite ease-in-out;
+  animation: sk-scaleout 1s infinite ease-in-out;
+}
+
+@-webkit-keyframes sk-scaleout {
+  0% {
+    -webkit-transform: scale(0);
+  }
+  100% {
+    -webkit-transform: scale(1);
     opacity: 0;
-    visibility: hidden;
   }
+}
 
-  .spinner {
-    width: 40px;
-    height: 40px;
-    position: absolute;
-    top: calc(50% - 20px);
-    left: calc(50% - 20px);
-    background-color: #333;
-    border-radius: 100%;
-    -webkit-animation: sk-scaleout 1.0s infinite ease-in-out;
-    animation: sk-scaleout 1.0s infinite ease-in-out;
+@keyframes sk-scaleout {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
   }
-
-  @-webkit-keyframes sk-scaleout {
-    0% { -webkit-transform: scale(0) }
-    100% {
-      -webkit-transform: scale(1.0);
-      opacity: 0;
-    }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 0;
   }
-
-  @keyframes sk-scaleout {
-    0% {
-      -webkit-transform: scale(0);
-      transform: scale(0);
-    } 100% {
-      -webkit-transform: scale(1.0);
-      transform: scale(1.0);
-      opacity: 0;
-    }
-  }
+}
 
 .logo {
-  margin: 20% 0 0 20%
+  margin: 20% 0 0 20%;
 }
 
-.app-loader{
-  opacity: .3;
+.app-loader {
+  opacity: 0.3;
 }
 
-.app-loader-central{
+.app-loader-central {
   margin-top: 10rem;
-  opacity: .3;
+  opacity: 0.3;
 }
 
 .mt-15 {
@@ -87,7 +95,7 @@ div.row.mx-auto {
   width: 80%;
   padding: 1rem;
   margin: auto;
-  border: 1px #D3D3D3 solid;
+  border: 1px #d3d3d3 solid;
   border-radius: 5px;
   background: white;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
@@ -106,7 +114,9 @@ div.row.mx-auto {
     visibility: visible;
   }
 
-  .dataTables_length, .dataTables_paginate, .dataTables_filter {
+  .dataTables_length,
+  .dataTables_paginate,
+  .dataTables_filter {
     display: none;
   }
 
@@ -115,22 +125,22 @@ div.row.mx-auto {
   }
 
   .print {
-      background-color: white;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      margin: 0;
-      font-size: 14px;
-      line-height: 18px;
-      margin: 0;
-      border: initial;
-      border-radius: initial;
-      width: initial;
-      min-height: initial;
-      box-shadow: initial;
-      background: initial;
-      page-break-after: always;
+    background-color: white;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    font-size: 14px;
+    line-height: 18px;
+    margin: 0;
+    border: initial;
+    border-radius: initial;
+    width: initial;
+    min-height: initial;
+    box-shadow: initial;
+    background: initial;
+    page-break-after: always;
   }
 }

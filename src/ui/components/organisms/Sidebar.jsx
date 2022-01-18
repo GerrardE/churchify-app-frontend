@@ -5,7 +5,7 @@ import classnames from "classnames";
 import PropTypes from "prop-types";
 import Logo from "@ui/assets/static/images/logo.png";
 
-const Sidebar = ({ toggleCollapse }) => {
+const Sidebar = ({ toggleCollapse, history }) => {
   // TODO: needs refactoring
   const [toggle, setToggle] = React.useState(false);
 
@@ -37,7 +37,7 @@ const Sidebar = ({ toggleCollapse }) => {
           <div className="sidebar-logo">
             <div className="peers ai-c fxw-nw">
               <div className="peer peer-greed">
-                <a className="sidebar-link td-n" href="/dashboard">
+                <a className="sidebar-link td-n" onClick={() => history.push("/dashboard")}>
                   <div className="peers ai-c fxw-nw">
                     <div className="peer">
                       <div className="logo">
@@ -67,7 +67,7 @@ const Sidebar = ({ toggleCollapse }) => {
 
           <ul className="sidebar-menu scrollable pos-r">
             <li className="nav-item mT-30 actived">
-              <a className="sidebar-link" href="/dashboard">
+              <a className="sidebar-link" onClick={() => history.push("/dashboard")}>
                 <span className="icon-holder">
                   <i className="c-black-500 ti-home" />
                 </span>
@@ -103,33 +103,33 @@ const Sidebar = ({ toggleCollapse }) => {
                     </a>
                     <ul className="dropdown-menu">
                       <li>
-                        <a href="/reports/submit/attendance">Attendance</a>
+                        <a onClick={() => history.push("/reports/submit/attendance")}>Attendance</a>
                       </li>
                       <li>
-                        <a href="/reports/submit/activity">Activity</a>
+                        <a onClick={() => history.push("/reports/submit/activity")}>Activity</a>
                       </li>
                       <li>
-                        <a href="/reports/submit/membership">Membership</a>
+                        <a onClick={() => history.push("/reports/submit/membership")}>Membership</a>
                       </li>
                       <li>
-                        <a href="/reports/submit/training">Training</a>
+                        <a onClick={() => history.push("/reports/submit/training")}>Training</a>
                       </li>
                       <li>
-                        <a href="/reports/submit/group">Group</a>
+                        <a onClick={() => history.push("/reports/submit/group")}>Group</a>
                       </li>
                       <li>
-                        <a href="/reports/submit/freport">Fellowship</a>
+                        <a onClick={() => history.push("/reports/submit/freport")}>Cell</a>
                       </li>
                     </ul>
                   </li>
                   <li className="nav-item">
-                    <a href="/reports/generate/zones">Generate</a>
+                    <a onClick={() => history.push("/reports/generate/zones")}>Generate</a>
                   </li>
                 </ul>
               </li>
             ) : ""}
             <li className="nav-item mT-30 actived">
-              <a className="sidebar-link" href="/downloads">
+              <a className="sidebar-link" onClick={() => history.push("/downloads")}>
                 <span className="icon-holder">
                   <i className="c-purple-500 ti-download" />
                 </span>
@@ -155,19 +155,19 @@ const Sidebar = ({ toggleCollapse }) => {
                   {user.role === "super:admin" ? (
                     <Fragment>
                       <li>
-                        <a className="sidebar-link" href="/settings/users">
+                        <a className="sidebar-link" onClick={() => history.push("/settings/users")}>
                           Users
                         </a>
                       </li>
                       <li>
-                        <a className="sidebar-link" href="/settings/roles">
+                        <a className="sidebar-link" onClick={() => history.push("/settings/roles")}>
                           Roles
                         </a>
                       </li>
                       <li>
                         <a
                           className="sidebar-link"
-                          href="/settings/permissions"
+                          onClick={() => history.push("/settings/permissions")}
                         >
                           Permissions
                         </a>
@@ -177,38 +177,48 @@ const Sidebar = ({ toggleCollapse }) => {
                     ""
                   )}
                   <li>
-                    <a className="sidebar-link" href="/settings/zones">
+                    <a className="sidebar-link" onClick={() => history.push("/settings/zones")}>
                       Zones
                     </a>
                   </li>
                   <li>
-                    <a className="sidebar-link" href="/settings/branches">
+                    <a className="sidebar-link" onClick={() => history.push("/settings/branches")}>
                       Branches
                     </a>
                   </li>
                   <li>
-                    <a className="sidebar-link" href="/settings/preachers">
+                    <a className="sidebar-link" onClick={() => history.push("/settings/preachers")}>
                       Preachers
                     </a>
                   </li>
                   <li>
-                    <a className="sidebar-link" href="/settings/fellowships">
-                      Fellowships
+                    <a className="sidebar-link" onClick={() => history.push("/settings/fellowships")}>
+                      Cells
                     </a>
                   </li>
                   <li>
-                    <a className="sidebar-link" href="/settings/events">
+                    <a className="sidebar-link" onClick={() => history.push("/settings/events")}>
                       Events
                     </a>
                   </li>
                   <li>
-                    <a className="sidebar-link" href="/settings/categories">
+                    <a className="sidebar-link" onClick={() => history.push("/settings/categories")}>
                       Categories
                     </a>
                   </li>
                   <li>
-                    <a className="sidebar-link" href="/settings/downloads">
+                    <a className="sidebar-link" onClick={() => history.push("/settings/downloads")}>
                       Downloads
+                    </a>
+                  </li>
+                  <li>
+                    <a className="sidebar-link" onClick={() => history.push("/settings/trainingtypes")}>
+                      Training Types
+                    </a>
+                  </li>
+                  <li>
+                    <a className="sidebar-link" onClick={() => history.push("/settings/activitytypes")}>
+                      Activity Types
                     </a>
                   </li>
                 </ul>
@@ -234,13 +244,13 @@ const Sidebar = ({ toggleCollapse }) => {
                 <ul className="dropdown-menu">
                   {user.role === "super:admin" ? (
                     <li>
-                      <a className="sidebar-link" href="/system/configs">
+                      <a className="sidebar-link" onClick={() => history.push("/system/configs")}>
                         Configs
                       </a>
                     </li>
                   ) : ("")}
                   <li>
-                    <a className="sidebar-link" href="/system/apilogs">
+                    <a className="sidebar-link" onClick={() => history.push("/system/apilogs")}>
                       ApiLogs
                     </a>
                   </li>
@@ -258,6 +268,9 @@ const Sidebar = ({ toggleCollapse }) => {
 
 Sidebar.propTypes = {
   toggleCollapse: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.oneOfType([PropTypes.func]).isRequired,
+  }).isRequired,
 };
 
 export default Sidebar;
