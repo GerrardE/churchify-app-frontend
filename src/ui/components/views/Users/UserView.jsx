@@ -81,11 +81,6 @@ const UserView = ({ match, ...rest }) => {
 
 UserView.propTypes = {
   match: PropTypes.oneOfType([PropTypes.object]),
-  props: PropTypes.shape({
-    history: PropTypes.shape({
-      push: PropTypes.oneOfType([PropTypes.func]).isRequired,
-    }).isRequired,
-  }).isRequired,
 };
 
 UserView.defaultProps = {

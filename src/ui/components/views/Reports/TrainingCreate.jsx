@@ -32,11 +32,13 @@ const TrainingCreate = () => {
   const { config: data } = configs;
 
   data.user = user;
-  data.zonesdata = zones.zones;
+  data.zonelist = zones.zones;
+  data.branchlist = branches.branches;
+  data.trainingtypelist = trainings.trainings;
   
   const { register, handleSubmit, errors } = useForm();
 
-  const fields = getFieldsArray(data, errors, register, [{}], ()=>{}, [{}], ()=>{}, branches.branches, [{}], [{}], [{}], [{}], [{}], trainings.trainings);
+  const fields = getFieldsArray(data, errors, register);
 
   const onSubmit = (data) => {
     dispatch(createItem(trainingActions, `${parameters}/${trainingparam}`, data));

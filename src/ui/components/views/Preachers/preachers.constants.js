@@ -27,22 +27,6 @@ const constants = {
       accessor: "address",
     },
     {
-      Header: "Branch",
-      accessor: "branchid",
-    },
-    {
-      Header: "City",
-      accessor: "city",
-    },
-    {
-      Header: "State",
-      accessor: "state",
-    },
-    {
-      Header: "Country",
-      accessor: "country",
-    },
-    {
       Header: "Notes",
       accessor: "notes",
     },

@@ -31,11 +31,12 @@ const GroupCreate = () => {
   const { config: data } = configs;
   
   data.user = user;
-  data.zonesdata = zones.zones;
+  data.zonelist = zones.zones;
+  data.branchlist = branches.branches;
   
   const { register, handleSubmit, errors } = useForm();
 
-  const fields = getFieldsArray(data, errors, register, [{}], ()=>{}, [{}], ()=>{}, branches.branches);
+  const fields = getFieldsArray(data, errors, register);
 
   const onSubmit = (data) => {
     dispatch(createItem(groupActions, `${parameters}/${groupparam}`, data));

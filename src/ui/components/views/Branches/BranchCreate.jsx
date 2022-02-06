@@ -29,7 +29,7 @@ const BranchCreate = ({ props: { history }}) => {
   
   const { config: data } = configs;
   
-  data.zonesdata = zones.zones;
+  data.zonelist = zones.zones;
 
   data.countries = countries.countries;
   

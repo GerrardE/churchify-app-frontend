@@ -14,7 +14,7 @@ import { AppLoader } from "../../molecules";
 import getFieldsArray from "../_helpers/fieldGenerator";
 
 const EventUpdate = ({ id, props: { history } }) => {
-  const { parameter, parameters, statesparams, citiesparams, countryparam, stateparam, branchesparams } = constants;
+  const { parameter, parameters, statesparams, citiesparams, countryparam, stateparam, branchesparams, formDefaults } = constants;
 
   const dispatch = useDispatch();
 
@@ -49,6 +49,10 @@ const EventUpdate = ({ id, props: { history } }) => {
   const fields = getFieldsArray(data, errors, register, states.states_, getStates, cities.cities, getCities, branches.branches);
 
   const onSubmit = (data) => {
+    data.branchid ? data.branchid : (data.branchid = formDefaults.branchid);
+    data.date ? data.date : (data.date = formDefaults.date);
+    data.address ? data.address : (data.address = formDefaults.address);
+
     dispatch(updateItem(eventActions, `${parameters}/${id}`, data));
   };
 

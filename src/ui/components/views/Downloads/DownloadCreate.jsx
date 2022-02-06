@@ -29,8 +29,9 @@ const DownloadCreate = ({ props: { history }}) => {
   const { config: data } = configs;
   
   const { register, handleSubmit, errors } = useForm();
-
-  const fields = getFieldsArray(data, errors, register, [{}], ()=>{}, [{}], ()=>{}, [{}], categories.categories);
+  
+  data.categorylist = categories.categories;
+  const fields = getFieldsArray(data, errors, register);
 
   const onSubmit = (data) => {
     dispatch(createItem(downloadActions, parameters, data));
