@@ -53,8 +53,8 @@ const SignupView = ({ match }) => {
 
   const { config: data } = configs;
 
-  data.zonesdata = zones.zones;
-
+  data.zonelist = zones.zones;
+  data.branchlist = branches.branches;
   data.countries = countries.countries;
 
   const { register, handleSubmit, errors } = useForm();
@@ -75,7 +75,6 @@ const SignupView = ({ match }) => {
     getStates,
     cities.cities,
     getCities,
-    branches.branches,
   );
 
   const onSubmit = (data) => {

@@ -41,7 +41,9 @@ const FellowshipCreate = ({ props: { history }}) => {
     dispatch(getItems(citiesActions, `${citiesparams}/${id}/${stateparam}`));
   };
 
-  const fields = getFieldsArray(data, errors, register, states.states_, getStates, cities.cities, getCities, branches.branches);
+  data.branchlist = branches.branches;
+
+  const fields = getFieldsArray(data, errors, register, states.states_, getStates, cities.cities, getCities);
 
   const onSubmit = (data) => {
     dispatch(createItem(fellowshipActions, parameters, data));

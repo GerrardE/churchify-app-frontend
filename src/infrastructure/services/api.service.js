@@ -12,10 +12,10 @@ const getResource = async (path, token="token") => {
         Authorization: token,
       },
     });
-    // toast.success(response.data.message);
+    // toast.success(JSON.stringify(response.data.message).replace(/["'{}]+/g, " "));
     return response.data.payload;
   } catch (error) {
-    toast.error(error.response.data.message);
+    toast.error(JSON.stringify(error.response.data.message).replace(/["'{}]+/g, " "));
     throw error.response.data;
   }
 };
@@ -27,10 +27,10 @@ const postResource = async (path, body, token="token") => {
         Authorization: token,
       },
     });
-    toast.success(response.data.message);
+    toast.success(JSON.stringify(response.data.message).replace(/["'{}]+/g, " "));
     return response.data;
   } catch (error) {
-    toast.error(error.response.data.message);
+    toast.error(JSON.stringify(error.response.data.message).replace(/["'{}]+/g, " "));
     throw error.response.data;
   }
 };
@@ -42,10 +42,10 @@ const putResource = async (path, body, token="token") => {
         Authorization: token,
       },
     });
-    toast.success(response.data.message);
+    toast.success(JSON.stringify(response.data.message).replace(/["'{}]+/g, " "));
     return response.data;
   } catch (error) {
-    toast.error(error.response.data.message);
+    toast.error(JSON.stringify(error.response.data.message).replace(/["'{}]+/g, " "));
     throw error.response.data;
   }
 };
@@ -57,10 +57,10 @@ const deleteResource = async (path, token="token") => {
         Authorization: token,
       },
     });
-    toast.success(response.data.message);
+    toast.success(JSON.stringify(response.data.message).replace(/["'{}]+/g, " "));
     return response.data;
   } catch (error) {
-    toast.error(error.response.data.message);
+    toast.error(JSON.stringify(error.response.data.message).replace(/["'{}]+/g, " "));
     throw error.response.data;
   }
 };

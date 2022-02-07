@@ -32,11 +32,13 @@ const ActivityCreate = () => {
   const { config: data } = configs;
 
   data.user = user;
-  data.zonesdata = zones.zones;
+  data.zonelist = zones.zones;
+  data.branchlist = branches.branches;
+  data.activitytypelist = activities.activities;
   
   const { register, handleSubmit, errors } = useForm();
   
-  const fields = getFieldsArray(data, errors, register, [{}], ()=>{}, [{}], ()=>{}, branches.branches, [{}], [{}], [{}], [{}], activities.activities);
+  const fields = getFieldsArray(data, errors, register);
 
   const onSubmit = (data) => {
     dispatch(createItem(activityActions, `${parameters}/${activityparam}`, data));

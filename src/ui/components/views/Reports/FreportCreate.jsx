@@ -34,11 +34,13 @@ const FreportCreate = () => {
   const { config: data } = configs;
 
   data.user = user;
-  data.zonesdata = zones.zones;
+  data.zonelist = zones.zones;
+  data.branchlist = branches.branches;
+  data.fellowshiplist = fellowships.fellowships;
   
   const { register, handleSubmit, errors } = useForm();
 
-  const fields = getFieldsArray(data, errors, register, [{}], ()=>{}, [{}], ()=>{}, branches.branches, [{}], [{}], [{}], fellowships.fellowships);
+  const fields = getFieldsArray(data, errors, register);
 
   const onSubmit = (data) => {
     dispatch(createItem(freportActions, `${parameters}/${freportparam}`, data));
