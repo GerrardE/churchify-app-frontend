@@ -43,10 +43,10 @@ const BranchUpdate = ({ id, props: { history } }) => {
   const { preacher: defaults, loading } = preachers;
   
   data.defaults = defaults;
-  
+  data.branchlist = branches.branches;
   data.countries = countries.countries;
 
-  const fields = getFieldsArray(data, errors, register, states.states_, getStates, cities.cities, getCities, branches.branches);
+  const fields = getFieldsArray(data, errors, register, states.states_, getStates, cities.cities, getCities);
 
   const onSubmit = (data) => {
     dispatch(updateItem(preacherActions, `${parameters}/${id}`, data));
