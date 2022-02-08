@@ -39,17 +39,14 @@ const BranchUpdate = ({ id, props: { history } }) => {
   };
 
   const { config: data } = configs;
-
-  const fields = getFieldsArray(data, errors, register, states.states_, getStates, cities.cities, getCities);
-
-
+  
   const { branch: defaults, loading } = branches;
   
   data.defaults = defaults;
-
-  data.zonesdata = zones.zones;
-
+  data.zonelist = zones.zones;
   data.countries = countries.countries;
+
+  const fields = getFieldsArray(data, errors, register, states.states_, getStates, cities.cities, getCities);
 
   const onSubmit = (data) => {
     dispatch(updateItem(branchActions, `${parameters}/${id}`, data));
