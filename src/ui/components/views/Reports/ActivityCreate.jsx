@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getItem, getItems, createItem } from "@infrastructure/services/thunkService";
 import * as activityActions from "@domain/redux/activities/activities.actions";
 import * as configsActions from "@domain/redux/configs/configs.actions";
-import * as branchActions from "@domain/redux/branches/branches.actions";
 import * as zonesActions from "@domain/redux/zones/zones.actions";
 import constants from "./reports.constants";
 import { Button } from "../../atoms";
@@ -12,18 +11,16 @@ import { AppLoader } from "../../molecules";
 import getFieldsArray from "../_helpers/fieldGenerator";
 
 const ActivityCreate = () => {
-  const { activityparam, branchesparams, zonesparams, parameters, activitytypeparams } = constants;
+  const { activityparam, zonesparams, parameters, activitytypeparams } = constants;
 
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(getItems(branchActions, `${branchesparams}`));
-
     dispatch(getItems(zonesActions, `${zonesparams}`));
     dispatch(getItems(activityActions, `${activitytypeparams}`));
 
     dispatch(getItem(configsActions, `configs/${activityparam}/config`));
-  }, [dispatch, activityparam, branchesparams, zonesparams, activitytypeparams]);
+  }, [dispatch, activityparam, zonesparams, activitytypeparams]);
   
   const { activities, configs, branches, zones, signin: { user } } = useSelector((state) => state);
   
@@ -41,7 +38,7 @@ const ActivityCreate = () => {
   const fields = getFieldsArray(data, errors, register);
 
   const onSubmit = (data) => {
-    dispatch(createItem(activityActions, `${parameters}/${activityparam}`, data));
+    dispatch(createItem(activityActions, `${parameters}/${activityparam}`, data, true));
   };
 
   return (
@@ -50,7 +47,7 @@ const ActivityCreate = () => {
         <div className="col-md-2" />
         <div className="col-md-8">
           <div className="bgc-white bd bdrs-3 p-20 mB-20">
-            <h4 className="c-grey-900 mB-20">{`SUBMIT ${activityparam.toUpperCase()}`}</h4>
+            <h4 className="c-grey-900 mB-20">{`SUBMIT ${activityparam.toUpperCase()} REPORT`}</h4>
             <form
               onSubmit={handleSubmit(onSubmit)}
               className="needs-validation"

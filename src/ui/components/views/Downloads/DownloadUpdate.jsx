@@ -33,8 +33,9 @@ const DownloadUpdate = ({ id, props: { history } }) => {
   const { download: defaults, loading } = downloads;
   
   data.defaults = defaults;
+  data.categorylist = categories.categories;
 
-  const fields = getFieldsArray(data, errors, register, [{}], ()=>{}, [{}], ()=>{}, [{}], categories.categories);
+  const fields = getFieldsArray(data, errors, register);
 
   const onSubmit = (data) => {
     dispatch(updateItem(downloadActions, `${parameters}/${id}`, data));
