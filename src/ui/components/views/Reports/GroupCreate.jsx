@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getItem, getItems, createItem } from "@infrastructure/services/thunkService";
 import * as groupActions from "@domain/redux/groups/groups.actions";
 import * as configsActions from "@domain/redux/configs/configs.actions";
-import * as branchActions from "@domain/redux/branches/branches.actions";
 import * as zonesActions from "@domain/redux/zones/zones.actions";
 import constants from "./reports.constants";
 import { Button } from "../../atoms";
@@ -12,17 +11,15 @@ import { AppLoader } from "../../molecules";
 import getFieldsArray from "../_helpers/fieldGenerator";
 
 const GroupCreate = () => {
-  const { groupparam, branchesparams, parameters, zonesparams } = constants;
+  const { groupparam, parameters, zonesparams } = constants;
 
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(getItems(branchActions, `${branchesparams}`));
-
     dispatch(getItems(zonesActions, `${zonesparams}`));
 
     dispatch(getItem(configsActions, `configs/${groupparam}/config`));
-  }, [dispatch, groupparam, branchesparams, zonesparams]);
+  }, [dispatch, groupparam, zonesparams]);
   
   const { groups, configs, branches, zones, signin: { user } } = useSelector((state) => state);
   
@@ -39,7 +36,7 @@ const GroupCreate = () => {
   const fields = getFieldsArray(data, errors, register);
 
   const onSubmit = (data) => {
-    dispatch(createItem(groupActions, `${parameters}/${groupparam}`, data));
+    dispatch(createItem(groupActions, `${parameters}/${groupparam}`, data, true));
   };
 
   return (
@@ -48,7 +45,7 @@ const GroupCreate = () => {
         <div className="col-md-2" />
         <div className="col-md-8">
           <div className="bgc-white bd bdrs-3 p-20 mB-20">
-            <h4 className="c-grey-900 mB-20">{`SUBMIT ${groupparam.toUpperCase()}`}</h4>
+            <h4 className="c-grey-900 mB-20">{`SUBMIT ${groupparam.toUpperCase()} REPORT`}</h4>
             <form
               onSubmit={handleSubmit(onSubmit)}
               className="needs-validation"

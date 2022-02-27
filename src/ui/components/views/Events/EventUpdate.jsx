@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { getItem, getItems, updateItem } from "@infrastructure/services/thunkService";
-import * as statesActions from "@domain/redux/states/states.actions";
-import * as citiesActions from "@domain/redux/cities/cities.actions";
 import * as branchActions from "@domain/redux/branches/branches.actions";
 import * as eventActions from "@domain/redux/events/events.actions";
 import * as configsActions from "@domain/redux/configs/configs.actions";
@@ -14,7 +12,7 @@ import { AppLoader } from "../../molecules";
 import getFieldsArray from "../_helpers/fieldGenerator";
 
 const EventUpdate = ({ id, props: { history } }) => {
-  const { parameter, parameters, statesparams, citiesparams, countryparam, stateparam, branchesparams, formDefaults } = constants;
+  const { parameter, parameters, branchesparams, formDefaults } = constants;
 
   const dispatch = useDispatch();
 
@@ -30,14 +28,6 @@ const EventUpdate = ({ id, props: { history } }) => {
 
   const { branches, events, configs, countries, states, cities } = useSelector((state) => state);
 
-  const getStates = (id) => {
-    dispatch(getItems(statesActions, `${statesparams}/${id}/${countryparam}`));
-  };
-
-  const getCities = (id) => {
-    dispatch(getItems(citiesActions, `${citiesparams}/${id}/${stateparam}`));
-  };
-
   const { config: data } = configs;
 
   const { event: defaults, loading } = events;
@@ -45,8 +35,9 @@ const EventUpdate = ({ id, props: { history } }) => {
   data.defaults = defaults;
   
   data.countries = countries.countries;
+  data.branchlist = branches.branches;
 
-  const fields = getFieldsArray(data, errors, register, states.states_, getStates, cities.cities, getCities, branches.branches);
+  const fields = getFieldsArray(data, errors, register, states.states_, cities.cities);
 
   const onSubmit = (data) => {
     data.branchid ? data.branchid : (data.branchid = formDefaults.branchid);

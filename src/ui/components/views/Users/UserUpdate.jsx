@@ -9,7 +9,6 @@ import {
 } from "@infrastructure/services/thunkService";
 import * as usersActions from "@domain/redux/users/users.actions";
 import * as configsActions from "@domain/redux/configs/configs.actions";
-import * as branchActions from "@domain/redux/branches/branches.actions";
 import * as zonesActions from "@domain/redux/zones/zones.actions";
 import constants from "./users.constants";
 import { Button } from "../../atoms";
@@ -18,7 +17,6 @@ import getFieldsArray from "../_helpers/fieldGenerator";
 
 const UserUpdate = ({ id, props: { history } }) => {
   const {
-    branchesparams,
     zonesparams,
     parameter,
     parameters,
@@ -29,14 +27,12 @@ const UserUpdate = ({ id, props: { history } }) => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(getItems(branchActions, `${branchesparams}`));
-
     dispatch(getItems(zonesActions, `${zonesparams}`));
 
     dispatch(getItem(usersActions, `${parameters}/${id}`));
 
     dispatch(getItem(configsActions, `configs/${parametersupdate}/config`));
-  }, [dispatch, parameters, parametersupdate, branchesparams, zonesparams, countryparams, id]);
+  }, [dispatch, parameters, parametersupdate, zonesparams, countryparams, id]);
   
   const { register, handleSubmit, errors } = useForm();
   

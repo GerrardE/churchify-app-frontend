@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getItem, getItems, createItem } from "@infrastructure/services/thunkService";
 import * as attendanceActions from "@domain/redux/attendance/attendance.actions";
 import * as configsActions from "@domain/redux/configs/configs.actions";
-import * as branchActions from "@domain/redux/branches/branches.actions";
 import * as zonesActions from "@domain/redux/zones/zones.actions";
 import * as eventActions from "@domain/redux/events/events.actions";
 import * as preacherActions from "@domain/redux/preachers/preachers.actions";
@@ -14,13 +13,11 @@ import { AppLoader } from "../../molecules";
 import getFieldsArray from "../_helpers/fieldGenerator";
 
 const AttendanceCreate = () => {
-  const { attendanceparam, branchesparams, zonesparams, eventsparams, preachersparams, parameters } = constants;
+  const { attendanceparam, zonesparams, eventsparams, preachersparams, parameters } = constants;
 
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(getItems(branchActions, `${branchesparams}`));
-
     dispatch(getItems(zonesActions, `${zonesparams}`));
 
     dispatch(getItems(eventActions, `${eventsparams}`));
@@ -28,7 +25,7 @@ const AttendanceCreate = () => {
     dispatch(getItems(preacherActions, `${preachersparams}`));
 
     dispatch(getItem(configsActions, `configs/${attendanceparam}/config`));
-  }, [dispatch, attendanceparam, branchesparams, eventsparams, preachersparams, zonesparams]);
+  }, [dispatch, attendanceparam, eventsparams, preachersparams, zonesparams]);
   
   const { attendances, configs, branches, events, preachers, zones, signin: { user } } = useSelector((state) => state);
   
@@ -47,7 +44,7 @@ const AttendanceCreate = () => {
   const fields = getFieldsArray(data, errors, register);
 
   const onSubmit = (data) => {
-    dispatch(createItem(attendanceActions, `${parameters}/${attendanceparam}`, data));
+    dispatch(createItem(attendanceActions, `${parameters}/${attendanceparam}`, data, true));
   };
 
   return (
@@ -56,7 +53,7 @@ const AttendanceCreate = () => {
         <div className="col-md-2" />
         <div className="col-md-8">
           <div className="bgc-white bd bdrs-3 p-20 mB-20">
-            <h4 className="c-grey-900 mB-20">{`SUBMIT ${attendanceparam.toUpperCase()}`}</h4>
+            <h4 className="c-grey-900 mB-20">{`SUBMIT ${attendanceparam.toUpperCase()} REPORT`}</h4>
             <form
               onSubmit={handleSubmit(onSubmit)}
               className="needs-validation"

@@ -7,8 +7,6 @@ import {
   getItems,
   createItem,
 } from "@infrastructure/services/thunkService";
-import * as statesActions from "@domain/redux/states/states.actions";
-import * as citiesActions from "@domain/redux/cities/cities.actions";
 import * as eventActions from "@domain/redux/events/events.actions";
 import * as configsActions from "@domain/redux/configs/configs.actions";
 import * as branchActions from "@domain/redux/branches/branches.actions";
@@ -21,10 +19,6 @@ const EventCreate = ({ props: { history } }) => {
   const {
     parameter,
     parameters,
-    statesparams,
-    stateparam,
-    countryparam,
-    citiesparams,
     branchesparams,
     formDefaults,
   } = constants;
@@ -46,26 +40,16 @@ const EventCreate = ({ props: { history } }) => {
   const { config: data } = configs;
 
   data.countries = countries.countries;
+  data.branchlist = branches.branches;
 
   const { register, handleSubmit, errors } = useForm();
-
-  const getStates = (id) => {
-    dispatch(getItems(statesActions, `${statesparams}/${id}/${countryparam}`));
-  };
-
-  const getCities = (id) => {
-    dispatch(getItems(citiesActions, `${citiesparams}/${id}/${stateparam}`));
-  };
 
   const fields = getFieldsArray(
     data,
     errors,
     register,
     states.states_,
-    getStates,
     cities.cities,
-    getCities,
-    branches.branches,
   );
 
   const onSubmit = (data) => {

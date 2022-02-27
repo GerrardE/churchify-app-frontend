@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { getItem, getItems, createItem } from "@infrastructure/services/thunkService";
-import * as statesActions from "@domain/redux/states/states.actions";
-import * as citiesActions from "@domain/redux/cities/cities.actions";
 import * as fellowshipActions from "@domain/redux/fellowships/fellowships.actions";
 import * as configsActions from "@domain/redux/configs/configs.actions";
 import * as branchActions from "@domain/redux/branches/branches.actions";
@@ -14,7 +12,7 @@ import { AppLoader } from "../../molecules";
 import getFieldsArray from "../_helpers/fieldGenerator";
 
 const FellowshipCreate = ({ props: { history }}) => {
-  const { parameter, parameters, statesparams, stateparam, countryparam, citiesparams, branchesparams } = constants;
+  const { parameter, parameters, branchesparams } = constants;
 
   const dispatch = useDispatch();
 
@@ -33,17 +31,9 @@ const FellowshipCreate = ({ props: { history }}) => {
   
   const { register, handleSubmit, errors } = useForm();
 
-  const getStates = (id) => {
-    dispatch(getItems(statesActions, `${statesparams}/${id}/${countryparam}`));
-  };
-
-  const getCities = (id) => {
-    dispatch(getItems(citiesActions, `${citiesparams}/${id}/${stateparam}`));
-  };
-
   data.branchlist = branches.branches;
 
-  const fields = getFieldsArray(data, errors, register, states.states_, getStates, cities.cities, getCities);
+  const fields = getFieldsArray(data, errors, register, states.states_, cities.cities);
 
   const onSubmit = (data) => {
     dispatch(createItem(fellowshipActions, parameters, data));

@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { getItem, getItems, createItem } from "@infrastructure/services/thunkService";
-import * as statesActions from "@domain/redux/states/states.actions";
-import * as citiesActions from "@domain/redux/cities/cities.actions";
 import * as zonesActions from "@domain/redux/zones/zones.actions";
 import * as branchActions from "@domain/redux/branches/branches.actions";
 import * as configsActions from "@domain/redux/configs/configs.actions";
@@ -14,7 +12,7 @@ import { AppLoader } from "../../molecules";
 import getFieldsArray from "../_helpers/fieldGenerator";
 
 const BranchCreate = ({ props: { history }}) => {
-  const { parameter, parameters, zoneparams, statesparams, citiesparams, countryparam, stateparam } = constants;
+  const { parameter, parameters, zoneparams } = constants;
 
   const dispatch = useDispatch();
 
@@ -35,15 +33,7 @@ const BranchCreate = ({ props: { history }}) => {
   
   const { register, handleSubmit, errors } = useForm();
 
-  const getStates = (id) => {
-    dispatch(getItems(statesActions, `${statesparams}/${id}/${countryparam}`));
-  };
-
-  const getCities = (id) => {
-    dispatch(getItems(citiesActions, `${citiesparams}/${id}/${stateparam}`));
-  };
-
-  const fields = getFieldsArray(data, errors, register, states.states_, getStates, cities.cities, getCities);
+  const fields = getFieldsArray(data, errors, register, states.states_, cities.cities);
 
   const onSubmit = (data) => {
     dispatch(createItem(branchActions, parameters, data));

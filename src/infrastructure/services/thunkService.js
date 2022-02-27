@@ -1,6 +1,6 @@
 import * as apiService from "./api.service";
 
-const getItems = (actions, path) => async (dispatch, getState) => {
+const getItems = (actions, path, isReload=false) => async (dispatch, getState) => {
   const state = getState();
 
   const { signin } = state;
@@ -12,13 +12,16 @@ const getItems = (actions, path) => async (dispatch, getState) => {
     const response = await apiService.getResource(path, token);
     dispatch(actions.loading(false));
     dispatch(actions.getItemsSuccess(response));
+    if(isReload) {
+      window.location.reload();
+    }
   } catch (errors) {
     dispatch(actions.loading(false));
     dispatch(actions.getItemsFail(errors));
   }
 };
 
-const getItem = (actions, path) => async (dispatch, getState) => {
+const getItem = (actions, path, isReload=false) => async (dispatch, getState) => {
   const state = getState();
 
   const { signin } = state;
@@ -30,13 +33,16 @@ const getItem = (actions, path) => async (dispatch, getState) => {
     const response = await apiService.getResource(path, token);
     dispatch(actions.loading(false));
     dispatch(actions.getItemSuccess(response));
+    if(isReload) {
+      window.location.reload();
+    }
   } catch (errors) {
     dispatch(actions.loading(false));
     dispatch(actions.getItemFail(errors));
   }
 };
 
-const createItem = (actions, path, data) => async (dispatch, getState) => {
+const createItem = (actions, path, data, isReload=false) => async (dispatch, getState) => {
   const state = getState();
 
   const { signin } = state;
@@ -48,13 +54,16 @@ const createItem = (actions, path, data) => async (dispatch, getState) => {
     const response = await apiService.postResource(path, data, token);
     dispatch(actions.loading(false));
     dispatch(actions.createItemSuccess(response));
+    if(isReload) {
+      window.location.reload();
+    }
   } catch (errors) {
     dispatch(actions.loading(false));
     dispatch(actions.createItemFail(errors));
   }
 };
 
-const updateItem = (actions, path, data) => async (dispatch, getState) => {
+const updateItem = (actions, path, data, isReload=false) => async (dispatch, getState) => {
   const state = getState();
 
   const { signin } = state;
@@ -66,13 +75,16 @@ const updateItem = (actions, path, data) => async (dispatch, getState) => {
     const response = await apiService.putResource(path, data, token);
     dispatch(actions.loading(false));
     dispatch(actions.updateItemSuccess(response));
+    if(isReload) {
+      window.location.reload();
+    }
   } catch (errors) {
     dispatch(actions.loading(false));
     dispatch(actions.updateItemFail(errors));
   }
 };
 
-const deleteItem = (actions, path) => async (dispatch, getState) => {
+const deleteItem = (actions, path, isReload=false) => async (dispatch, getState) => {
   const state = getState();
 
   const { signin } = state;
@@ -84,6 +96,9 @@ const deleteItem = (actions, path) => async (dispatch, getState) => {
     const response = await apiService.deleteResource(path, token);
     dispatch(actions.loading(false));
     dispatch(actions.deleteItemSuccess(response));
+    if(isReload) {
+      window.location.reload();
+    }
   } catch (errors) {
     dispatch(actions.loading(false));
     dispatch(actions.deleteItemFail(errors));
