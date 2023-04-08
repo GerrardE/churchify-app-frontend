@@ -3,18 +3,20 @@ import PropTypes from "prop-types";
 import classnames from "classnames";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { createItem, getItems } from "@infrastructure/services/thunkService";
-import * as attendanceActions from "@domain/redux/attendance/attendance.actions";
+import {
+  createItem,
+  getItems } from "@infrastructure/services/thunkService";
+import * as attendanceActions from "@domain/redux/reports/attendances/attendances.actions";
 import * as eventActions from "@domain/redux/events/events.actions";
 import * as zoneActions from "@domain/redux/zones/zones.actions";
 import { AppLoader, ButtonGroup } from "../../molecules";
 import { Button, ErrorMessage, Inputfield, Label } from "../../atoms";
-import AttendanceCreate from "./AttendanceCreate";
-import ActivityCreate from "./ActivityCreate";
-import MembershipCreate from "./MembershipCreate";
-import TrainingCreate from "./TrainingCreate";
-import GroupCreate from "./GroupCreate";
-import FreportCreate from "./FreportCreate";
+// import AttendanceCreate from "./AttendanceCreatejsx";
+// import ActivityCreate from "./ActivityCreatejsx";
+// import MembershipCreate from "./MembershipCreate";
+// import TrainingCreate from "./TrainingCreate";
+// import GroupCreate from "./GroupCreatejsx";
+// import FreportCreate from "./FreportCreatejsx";
 import BranchReportView from "./BranchReportView";
 import GlobalReportView from "./GlobalReportView";
 import { isEmpty, fieldSchema } from "../_validations/schema";
@@ -23,16 +25,16 @@ import Table from "../../molecules/Table";
 
 const ReportView = ({ match, ...rest }) => {
   const {
-    attendanceparam,
-    submitparam,
+    // attendanceparam,
+    // submitparam,
     parameters,
-    activityparam,
+    // activityparam,
     attendanceparams,
     branchesparams,
-    membershipparam,
-    trainingparam,
-    freportparam,
-    groupparam,
+    // membershipparam,
+    // trainingparam,
+    // freportparam,
+    // groupparam,
     tableData,
     zonesparams,
     eventsparams,
@@ -70,47 +72,47 @@ const ReportView = ({ match, ...rest }) => {
     candelete: false,
   };
 
-  if (
-    isEmpty(match.params) &&
-    match.path === `/${parameters}/${submitparam}/${attendanceparam}`
-  ) {
-    return <AttendanceCreate props={rest} match={match} />;
-  }
+  // if (
+  //   isEmpty(match.params) &&
+  //   match.path === `/${parameters}/${submitparam}/${attendanceparam}`
+  // ) {
+  //   return <AttendanceCreate props={rest} match={match} />;
+  // }
 
-  if (
-    isEmpty(match.params) &&
-    match.path === `/${parameters}/${submitparam}/${activityparam}`
-  ) {
-    return <ActivityCreate props={rest} match={match} />;
-  }
+  // if (
+  //   isEmpty(match.params) &&
+  //   match.path === `/${parameters}/${submitparam}/${activityparam}`
+  // ) {
+  //   return <ActivityCreate props={rest} match={match} />;
+  // }
 
-  if (
-    isEmpty(match.params) &&
-    match.path === `/${parameters}/${submitparam}/${membershipparam}`
-  ) {
-    return <MembershipCreate props={rest} match={match} />;
-  }
+  // if (
+  //   isEmpty(match.params) &&
+  //   match.path === `/${parameters}/${submitparam}/${membershipparam}`
+  // ) {
+  //   return <MembershipCreate props={rest} match={match} />;
+  // }
 
-  if (
-    isEmpty(match.params) &&
-    match.path === `/${parameters}/${submitparam}/${trainingparam}`
-  ) {
-    return <TrainingCreate props={rest} match={match} />;
-  }
+  // if (
+  //   isEmpty(match.params) &&
+  //   match.path === `/${parameters}/${submitparam}/${trainingparam}`
+  // ) {
+  //   return <TrainingCreate props={rest} match={match} />;
+  // }
 
-  if (
-    isEmpty(match.params) &&
-    match.path === `/${parameters}/${submitparam}/${groupparam}`
-  ) {
-    return <GroupCreate props={rest} match={match} />;
-  }
+  // if (
+  //   isEmpty(match.params) &&
+  //   match.path === `/${parameters}/${submitparam}/${groupparam}`
+  // ) {
+  //   return <GroupCreate props={rest} match={match} />;
+  // }
 
-  if (
-    isEmpty(match.params) &&
-    match.path === `/${parameters}/${submitparam}/${freportparam}`
-  ) {
-    return <FreportCreate props={rest} match={match} />;
-  }
+  // if (
+  //   isEmpty(match.params) &&
+  //   match.path === `/${parameters}/${submitparam}/${freportparam}`
+  // ) {
+  //   return <FreportCreate props={rest} match={match} />;
+  // }
 
   if (
     isEmpty(match.params) &&

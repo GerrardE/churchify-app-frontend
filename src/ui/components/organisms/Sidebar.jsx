@@ -11,6 +11,8 @@ const Sidebar = ({ toggleCollapse, history }) => {
 
   const [toggleRep, setToggleRep] = React.useState(false);
 
+  const [toggleFin, setToggleFin] = React.useState(false);
+
   const [multiRep, setToggleMultiRep] = React.useState(false);
 
   // const [multiRepGen, setToggleMultiRepGen] = React.useState(false);
@@ -21,6 +23,8 @@ const Sidebar = ({ toggleCollapse, history }) => {
   const toggleSettings = () => setToggle((prevState) => !prevState);
   
   const toggleReports = () => setToggleRep((prevState) => !prevState);
+
+  const toggleFinances = () => setToggleFin((prevState) => !prevState);
   
   const toggleMultiRep = () => setToggleMultiRep((prevState) => !prevState);
   
@@ -103,27 +107,61 @@ const Sidebar = ({ toggleCollapse, history }) => {
                     </a>
                     <ul className="dropdown-menu">
                       <li>
-                        <a onClick={() => history.push("/reports/submit/attendance")}>Attendance</a>
+                        <a onClick={() => history.push("/reports/attendances/create/attendance")}>Attendance</a>
                       </li>
                       <li>
-                        <a onClick={() => history.push("/reports/submit/activity")}>Activity</a>
+                        <a onClick={() => history.push("/reports/activityreports/create/activityreport")}>Activity</a>
                       </li>
                       <li>
-                        <a onClick={() => history.push("/reports/submit/membership")}>Membership</a>
+                        <a onClick={() => history.push("/reports/memberships/create/membership")}>Membership</a>
                       </li>
                       <li>
-                        <a onClick={() => history.push("/reports/submit/training")}>Training</a>
+                        <a onClick={() => history.push("/reports/trainingreports/create/trainingreport")}>Training</a>
                       </li>
                       <li>
-                        <a onClick={() => history.push("/reports/submit/group")}>Group</a>
+                        <a onClick={() => history.push("/reports/groups/create/group")}>Group</a>
                       </li>
                       <li>
-                        <a onClick={() => history.push("/reports/submit/freport")}>Cell</a>
+                        <a onClick={() => history.push("/reports/cells/create/cell")}>Cell</a>
                       </li>
                     </ul>
                   </li>
                   <li className="nav-item">
                     <a onClick={() => history.push("/reports/generate/zones")}>Generate</a>
+                  </li>
+                </ul>
+              </li>
+            ) : ""}
+            {user.role.includes("admin") ? (
+              <li
+                className={classnames("nav-item mT-30 dropdown actived", {
+                  open: toggleFin,
+                })}
+              >
+                <a className="dropdown-toggle" onClick={toggleFinances}>
+                  <span className="icon-holder">
+                    <i className="c-pink-500 ti-credit-card" />
+                  </span>
+                  <span className="title">Finances</span>
+                  <span className="arrow">
+                    <i className="ti-angle-right" />
+                  </span>
+                </a>
+                <ul className="dropdown-menu">
+                  <li className="nav-item">
+                    <a onClick={() => history.push("/finances/finances")}>Finance</a>
+                  </li>
+                  <li className="nav-item">
+                    <a onClick={() => history.push("/finances/assets")}>Assets</a>
+                  </li>
+                  <li className="nav-item">
+                    <a onClick={() => history.push("/finances/payments")}>Payments</a>
+                  </li>
+                  <li className="nav-item">
+                    <a onClick={() => history.push("/finances/receipts")}>Receipts</a>
+                  </li>
+                  <li className="nav-item">
+                    <a onClick={() => history.push("/finances/remunerations")}>Remunerations</a>
                   </li>
                 </ul>
               </li>

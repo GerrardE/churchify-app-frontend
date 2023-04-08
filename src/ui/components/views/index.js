@@ -1,4 +1,3 @@
-export { default as ReportsView } from "./Reports/AttendanceCreate";
 export { default as SigninView } from "./Auth/SigninView";
 export { default as ZoneView } from "./Zones/ZoneView";
 export { default as UserView } from "./Users/UserView";
@@ -17,3 +16,12 @@ export { default as SignupView } from "./Auth/SignupView";
 export { default as ConfigView } from "./Configs/ConfigView";
 export { default as ActivityView } from "./Activity/ActivityView";
 export { default as TrainingView } from "./Training/TrainingView";
+export {
+  MembershipCreate,
+  ActivityReportsCreate,
+  GroupCreate,
+  TrainingReportsCreate,
+  FreportCreate,
+  AttendanceCreate,
+} from "./Reports";
+export * from "./Finances";

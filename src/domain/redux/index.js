@@ -13,17 +13,27 @@ import categories from "./categories/categories.reducers";
 import branches from "./branches/branches.reducers";
 import preachers from "./preachers/preachers.reducers";
 import activities from "./activities/activities.reducers";
-import attendances from "./attendance/attendance.reducers";
-import memberships from "./membership/membership.reducers";
-import groups from "./groups/groups.reducers";
+
 import permissions from "./permissions/permissions.reducers";
 import roles from "./roles/roles.reducers";
 import fellowships from "./fellowships/fellowships.reducers";
-import freports from "./freports/freports.reducers";
 import trainings from "./trainings/trainings.reducers";
 import dashboard from "./dashboard/dashboard.reducers";
 import signoutConstants from "./signout/signout.constants";
 import apilogs from "./apilogs/apilogs.reducers";
+
+import { attendancesReducer as attendances } from "./reports/attendances";
+import { activityreportsReducer as activityreports } from "./reports/activityreports";
+import { membershipsReducer as memberships } from "./reports/memberships";
+import { freportsReducer as freports } from "./reports/freports";
+import { groupsReducer as groups } from "./reports/groups";
+import { trainingreportsReducer as trainingreports } from "./reports/trainingreports";
+
+import { assetsReducer as assets } from "./finances/assets";
+import { financesReducer as finances } from "./finances/finances";
+import { paymentsReducer as payments } from "./finances/payments";
+import { remunerationsReducer as remunerations } from "./finances/remunerations";
+import { receiptsReducer as receipts } from "./finances/receipts";
 
 const appReducer = combineReducers({
   signin,
@@ -41,10 +51,17 @@ const appReducer = combineReducers({
   attendances,
   memberships,
   groups,
+  activityreports,
+  trainingreports,
   roles,
   permissions,
   freports,
   trainings,
+  receipts,
+  payments,
+  remunerations,
+  assets,
+  finances,
   countries,
   states,
   cities,
