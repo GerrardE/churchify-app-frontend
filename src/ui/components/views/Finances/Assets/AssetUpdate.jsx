@@ -3,30 +3,28 @@ import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { getItem, getItems, updateItem } from "@infrastructure/services/thunkService";
-import * as branchActions from "@domain/redux/branches/branches.actions";
 import * as assetActions from "@domain/redux/finances/assets/assets.actions";
 import * as configsActions from "@domain/redux/configs/configs.actions";
-import * as zoneActions from "@domain/redux/zones/zones.actions";
+import * as financeActions from "@domain/redux/finances/finances/finances.actions";
 import constants from "./assets.constants";
 import { Button } from "../../../atoms";
 import { AppLoader } from "../../../molecules";
 import getFieldsArray from "../../_helpers/fieldGenerator";
 
 const AssetUpdate = ({ id, props: { history } }) => {
-  const { parameter, parameters, branchesparams, zonesparams } = constants;
+  const { parameter, parameters, branchesparams, zonesparams, financesparams } = constants;
 
   const dispatch = useDispatch();
 
   React.useEffect(() => {
     dispatch(getItem(configsActions, `configs/${parameters}/config`));
-    dispatch(getItems(branchActions, branchesparams));
-    dispatch(getItems(zoneActions, `${zonesparams}`));
+    dispatch(getItems(financeActions, `${financesparams}`));
     dispatch(getItem(assetActions, `/finance/${parameters}/${id}`));
-  }, [dispatch, parameters, id, branchesparams, zonesparams]);
+  }, [dispatch, parameters, id, branchesparams, zonesparams, financesparams]);
 
   const { register, handleSubmit, errors } = useForm();
 
-  const { branches, assets, configs, zones } = useSelector((state) => state);
+  const { branches, assets, configs, zones, finances } = useSelector((state) => state);
 
   const { config: data } = configs;
 
@@ -35,6 +33,7 @@ const AssetUpdate = ({ id, props: { history } }) => {
   data.defaults = defaults;
   data.branchlist = branches.branches;
   data.zonelist = zones.zones;
+  data.financelist = finances.finances;
 
   const fields = getFieldsArray(data, errors, register);
 

@@ -2,6 +2,7 @@ const constants = {
   parameters: "assets",
   parameter: "asset",
   branchesparams: "branches",
+  financesparams: "finances",
   zonesparams: "zones",
   editurl: "/finances/assets",
   actions: true,

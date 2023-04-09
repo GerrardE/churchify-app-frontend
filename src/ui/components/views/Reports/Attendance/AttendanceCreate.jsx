@@ -6,6 +6,7 @@ import { getItem, getItems, createItem } from "@infrastructure/services/thunkSer
 import * as attendancesActions from "@domain/redux/reports/attendances/attendances.actions";
 import * as configsActions from "@domain/redux/configs/configs.actions";
 import * as branchActions from "@domain/redux/branches/branches.actions";
+import * as preacherActions from "@domain/redux/preachers/preachers.actions";
 import * as zonesActions from "@domain/redux/zones/zones.actions";
 import constants from "./attendance.constants";
 import { Button } from "../../../atoms";
@@ -23,6 +24,7 @@ const AttendanceCreate = ({ match, ...rest }) => {
   React.useEffect(() => {
     dispatch(getItems(zonesActions, `${zonesparams}`));
     dispatch(getItems(branchActions, `${branchesparams}`));
+    dispatch(getItems(preacherActions, `${preachersparams}`));
     dispatch(getItem(configsActions, `configs/${parameters}/config`));
   }, [dispatch, parameters, branchesparams, zonesparams, eventsparams, preachersparams]);
   

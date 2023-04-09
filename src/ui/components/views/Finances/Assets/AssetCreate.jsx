@@ -4,26 +4,24 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { getItem, getItems, createItem } from "@infrastructure/services/thunkService";
 import * as assetActions from "@domain/redux/finances/assets/assets.actions";
+import * as financeActions from "@domain/redux/finances/finances/finances.actions";
 import * as configsActions from "@domain/redux/configs/configs.actions";
-import * as branchActions from "@domain/redux/branches/branches.actions";
-import * as zoneActions from "@domain/redux/zones/zones.actions";
 import constants from "./assets.constants";
 import { Button } from "../../../atoms";
 import { AppLoader } from "../../../molecules";
 import getFieldsArray from "../../_helpers/fieldGenerator";
 
 const AssetCreate = ({ props: { history }}) => {
-  const { parameter, parameters, branchesparams, zonesparams } = constants;
+  const { parameter, parameters, branchesparams, zonesparams, financesparams } = constants;
 
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(getItems(zoneActions, `${zonesparams}`));
-    dispatch(getItems(branchActions, `${branchesparams}`));
+    dispatch(getItems(financeActions, `${financesparams}`));
     dispatch(getItem(configsActions, `configs/${parameters}/config`));
-  }, [dispatch, parameters, branchesparams, zonesparams]);
+  }, [dispatch, parameters, branchesparams, zonesparams, financesparams]);
   
-  const { assets, configs, zones, branches } = useSelector((state) => state);
+  const { assets, configs, zones, branches, finances } = useSelector((state) => state);
   
   const { loading } = assets;
   
@@ -31,6 +29,7 @@ const AssetCreate = ({ props: { history }}) => {
 
   data.branchlist = branches.branches;
   data.zonelist = zones.zones;
+  data.financelist = finances.finances;
   
   const { register, handleSubmit, errors } = useForm();
 

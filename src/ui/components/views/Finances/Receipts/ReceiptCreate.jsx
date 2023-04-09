@@ -5,25 +5,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { getItem, getItems, createItem } from "@infrastructure/services/thunkService";
 import * as receiptActions from "@domain/redux/finances/receipts/receipts.actions";
 import * as configsActions from "@domain/redux/configs/configs.actions";
-import * as branchActions from "@domain/redux/branches/branches.actions";
-import * as zoneActions from "@domain/redux/zones/zones.actions";
+import * as financeActions from "@domain/redux/finances/finances/finances.actions";
 import constants from "./receipts.constants";
 import { Button } from "../../../atoms";
 import { AppLoader } from "../../../molecules";
 import getFieldsArray from "../../_helpers/fieldGenerator";
 
 const ReceiptCreate = ({ props: { history }}) => {
-  const { parameter, parameters, branchesparams, zonesparams } = constants;
+  const { parameter, parameters, branchesparams, zonesparams, financesparams } = constants;
 
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(getItems(zoneActions, `${zonesparams}`));
-    dispatch(getItems(branchActions, `${branchesparams}`));
     dispatch(getItem(configsActions, `configs/${parameters}/config`));
-  }, [dispatch, parameters, branchesparams, zonesparams]);
+    dispatch(getItems(financeActions, `${financesparams}`));
+  }, [dispatch, parameters, branchesparams, zonesparams, financesparams]);
   
-  const { receipts, configs, zones, branches } = useSelector((state) => state);
+  const { receipts, configs, zones, branches, finances } = useSelector((state) => state);
   
   const { loading } = receipts;
   
@@ -31,6 +29,7 @@ const ReceiptCreate = ({ props: { history }}) => {
 
   data.branchlist = branches.branches;
   data.zonelist = zones.zones;
+  data.financelist = finances.finances;
   
   const { register, handleSubmit, errors } = useForm();
 

@@ -1,8 +1,7 @@
 const constants = {
   parameters: "remunerations",
   parameter: "remuneration",
-  branchesparams: "branches",
-  zonesparams: "zones",
+  financesparams: "finances",
   editurl: "/finances/remunerations",
   actions: true,
   tableData: [

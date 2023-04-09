@@ -7,23 +7,25 @@ import * as financeActions from "@domain/redux/finances/finances/finances.action
 import * as configsActions from "@domain/redux/configs/configs.actions";
 import * as branchActions from "@domain/redux/branches/branches.actions";
 import * as zoneActions from "@domain/redux/zones/zones.actions";
+import * as preacherActions from "@domain/redux/preachers/preachers.actions";
 import constants from "./finances.constants";
 import { Button } from "../../../atoms";
 import { AppLoader } from "../../../molecules";
 import getFieldsArray from "../../_helpers/fieldGenerator";
 
 const FinanceCreate = ({ props: { history }}) => {
-  const { parameter, parameters, branchesparams, zonesparams } = constants;
+  const { parameter, parameters, branchesparams, zonesparams, preachersparams } = constants;
 
   const dispatch = useDispatch();
 
   React.useEffect(() => {
     dispatch(getItems(zoneActions, `${zonesparams}`));
     dispatch(getItems(branchActions, `${branchesparams}`));
+    dispatch(getItems(preacherActions, `${preachersparams}`));
     dispatch(getItem(configsActions, `configs/${parameters}/config`));
-  }, [dispatch, parameters, branchesparams, zonesparams]);
+  }, [dispatch, parameters, branchesparams, zonesparams, preachersparams]);
   
-  const { finances, configs, zones, branches } = useSelector((state) => state);
+  const { finances, configs, zones, branches, preachers } = useSelector((state) => state);
   
   const { loading } = finances;
   
@@ -31,6 +33,7 @@ const FinanceCreate = ({ props: { history }}) => {
 
   data.branchlist = branches.branches;
   data.zonelist = zones.zones;
+  data.preacherlist = preachers.preachers;
   
   const { register, handleSubmit, errors } = useForm();
 

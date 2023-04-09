@@ -3,30 +3,28 @@ import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { getItem, getItems, updateItem } from "@infrastructure/services/thunkService";
-import * as branchActions from "@domain/redux/branches/branches.actions";
 import * as paymentActions from "@domain/redux/finances/payments/payments.actions";
 import * as configsActions from "@domain/redux/configs/configs.actions";
-import * as zoneActions from "@domain/redux/zones/zones.actions";
+import * as financeActions from "@domain/redux/finances/finances/finances.actions";
 import constants from "./payments.constants";
 import { Button } from "../../../atoms";
 import { AppLoader } from "../../../molecules";
 import getFieldsArray from "../../_helpers/fieldGenerator";
 
 const PaymentUpdate = ({ id, props: { history } }) => {
-  const { parameter, parameters, branchesparams, zonesparams } = constants;
+  const { parameter, parameters, branchesparams, zonesparams, financesparams } = constants;
 
   const dispatch = useDispatch();
 
   React.useEffect(() => {
     dispatch(getItem(configsActions, `configs/${parameters}/config`));
-    dispatch(getItems(branchActions, branchesparams));
-    dispatch(getItems(zoneActions, `${zonesparams}`));
     dispatch(getItem(paymentActions, `/finance/${parameters}/${id}`));
-  }, [dispatch, parameters, id, branchesparams, zonesparams]);
+    dispatch(getItems(financeActions, `${financesparams}`));
+  }, [dispatch, parameters, id, branchesparams, zonesparams, financesparams]);
 
   const { register, handleSubmit, errors } = useForm();
 
-  const { branches, payments, configs, zones } = useSelector((state) => state);
+  const { branches, payments, configs, zones, finances } = useSelector((state) => state);
 
   const { config: data } = configs;
 
@@ -35,6 +33,7 @@ const PaymentUpdate = ({ id, props: { history } }) => {
   data.defaults = defaults;
   data.branchlist = branches.branches;
   data.zonelist = zones.zones;
+  data.financelist = finances.finances;
 
   const fields = getFieldsArray(data, errors, register);
 
