@@ -19,6 +19,17 @@ import {
   Configs,
   Activities,
   Trainings,
+  Membership,
+  Group,
+  ActivityReports,
+  TrainingReports,
+  Attendance,
+  Freports,
+  Remunerations,
+  Receipts,
+  Payments,
+  Finances,
+  Assets,
 } from "../pages";
 
 const routes = [
@@ -57,6 +68,98 @@ const routes = [
     protected: true,
   },
   /* REPORTS */
+  /**
+   * ACTIVITY REPORTS
+   */
+  {
+    path: "/reports/activityreports",
+    component: ActivityReports,
+    protected: true,
+  },
+  {
+    path: "/reports/activityreports/:id",
+    component: ActivityReports,
+    protected: true,
+  },
+  {
+    path: "/reports/activityreports/create/activityreport",
+    component: ActivityReports,
+    protected: true,
+  },
+  {
+    path: "/reports/activityreports/:id/details",
+    component: ActivityReports,
+    protected: true,
+  },
+  /**
+   * MEMBERSHIP REPORTS
+   */
+  {
+    path: "/reports/memberships",
+    component: Membership,
+    protected: true,
+  },
+  {
+    path: "/reports/memberships/:id",
+    component: Membership,
+    protected: true,
+  },
+  {
+    path: "/reports/memberships/create/membership",
+    component: Membership,
+    protected: true,
+  },
+  {
+    path: "/reports/memberships/:id/details",
+    component: Membership,
+    protected: true,
+  },
+  /**
+   * GROUP REPORTS
+   */
+  {
+    path: "/reports/groups",
+    component: Group,
+    protected: true,
+  },
+  {
+    path: "/reports/groups/:id",
+    component: Group,
+    protected: true,
+  },
+  {
+    path: "/reports/groups/create/group",
+    component: Group,
+    protected: true,
+  },
+  {
+    path: "/reports/groups/:id/details",
+    component: Group,
+    protected: true,
+  },
+  /**
+   * ATTENDANCE REPORTS
+   */
+  {
+    path: "/reports/attendances",
+    component: Attendance,
+    protected: true,
+  },
+  {
+    path: "/reports/attendances/:id",
+    component: Attendance,
+    protected: true,
+  },
+  {
+    path: "/reports/attendances/create/attendance",
+    component: Attendance,
+    protected: true,
+  },
+  {
+    path: "/reports/attendances/:id/details",
+    component: Attendance,
+    protected: true,
+  },
   {
     path: "/reports/generate/zones",
     component: Reports,
@@ -72,36 +175,112 @@ const routes = [
     component: Reports,
     protected: true,
   },
+  /**
+   * FREPORT REPORTS
+   */
   {
-    path: "/reports/submit/attendance",
-    component: Reports,
+    path: "/reports/cells",
+    component: Freports,
     protected: true,
   },
   {
-    path: "/reports/submit/activity",
-    component: Reports,
+    path: "/reports/cells/:id",
+    component: Freports,
     protected: true,
   },
   {
-    path: "/reports/submit/membership",
-    component: Reports,
+    path: "/reports/cells/create/cell",
+    component: Freports,
     protected: true,
   },
   {
-    path: "/reports/submit/training",
-    component: Reports,
+    path: "/reports/cells/:id/details",
+    component: Freports,
+    protected: true,
+  },
+  /**
+   * TRAINING REPORTS
+   */
+  {
+    path: "/reports/trainingreports",
+    component: TrainingReports,
     protected: true,
   },
   {
-    path: "/reports/submit/group",
-    component: Reports,
+    path: "/reports/trainingreports/:id",
+    component: TrainingReports,
     protected: true,
   },
   {
-    path: "/reports/submit/freport",
-    component: Reports,
+    path: "/reports/trainingreports/create/trainingreport",
+    component: TrainingReports,
     protected: true,
   },
+  {
+    path: "/reports/trainingreports/:id/details",
+    component: TrainingReports,
+    protected: true,
+  },
+  // /**
+  //  * ACTIVITY REPORTS
+  //  */
+  // {
+  //   path: "/reports/activitys",
+  //   component: Group,
+  //   protected: true,
+  // },
+  // {
+  //   path: "/reports/activitys/:id",
+  //   component: Group,
+  //   protected: true,
+  // },
+  // {
+  //   path: "/reports/activitys/create/activity",
+  //   component: Group,
+  //   protected: true,
+  // },
+  // {
+  //   path: "/reports/activitys/:id/details",
+  //   component: Group,
+  //   protected: true,
+  // },
+  /*
+  {
+    path: "/reports/membership",
+    component: Membership,
+    protected: true,
+  },
+  
+  // {
+  //   path: "/reports/submit/attendance",
+  //   component: Reports,
+  //   protected: true,
+  // },
+  // {
+  //   path: "/reports/submit/activity",
+  //   component: Reports,
+  //   protected: true,
+  // },
+  // {
+  //   path: "/reports/submit/membership",
+  //   component: Reports,
+  //   protected: true,
+  // },
+  // {
+  //   path: "/reports/submit/training",
+  //   component: Reports,
+  //   protected: true,
+  // },
+  // {
+  //   path: "/reports/submit/group",
+  //   component: Reports,
+  //   protected: true,
+  // },
+  // {
+  //   path: "/reports/submit/cell",
+  //   component: Reports,
+  //   protected: true,
+  // },
 
   /* ZONES */
   {
@@ -339,6 +518,121 @@ const routes = [
   {
     path: "/settings/trainingtypes/:id/details",
     component: Trainings,
+    protected: true,
+  },
+  /**
+   * FINANCE
+   */
+  {
+    path: "/finances/finances",
+    component: Finances,
+    protected: true,
+  },
+  {
+    path: "/finances/finances/:id",
+    component: Finances,
+    protected: true,
+  },
+  {
+    path: "/finances/finances/create/finance",
+    component: Finances,
+    protected: true,
+  },
+  {
+    path: "/finances/finances/:id/details",
+    component: Finances,
+    protected: true,
+  },
+  /**
+   * PAYMENTS
+   */
+  {
+    path: "/finances/payments",
+    component: Payments,
+    protected: true,
+  },
+  {
+    path: "/finances/payments/:id",
+    component: Payments,
+    protected: true,
+  },
+  {
+    path: "/finances/payments/create/payment",
+    component: Payments,
+    protected: true,
+  },
+  {
+    path: "/finances/payments/:id/details",
+    component: Payments,
+    protected: true,
+  },
+  /**
+   * ASSETS
+   */
+  {
+    path: "/finances/assets",
+    component: Assets,
+    protected: true,
+  },
+  {
+    path: "/finances/assets/:id",
+    component: Assets,
+    protected: true,
+  },
+  {
+    path: "/finances/assets/create/asset",
+    component: Assets,
+    protected: true,
+  },
+  {
+    path: "/finances/assets/:id/details",
+    component: Assets,
+    protected: true,
+  },
+  /**
+   * REMUNERATIONS
+   */
+  {
+    path: "/finances/remunerations",
+    component: Remunerations,
+    protected: true,
+  },
+  {
+    path: "/finances/remunerations/:id",
+    component: Remunerations,
+    protected: true,
+  },
+  {
+    path: "/finances/remunerations/create/remuneration",
+    component: Remunerations,
+    protected: true,
+  },
+  {
+    path: "/finances/remunerations/:id/details",
+    component: Remunerations,
+    protected: true,
+  },
+  /**
+   * RECEIPTS
+   */
+  {
+    path: "/finances/receipts",
+    component: Receipts,
+    protected: true,
+  },
+  {
+    path: "/finances/receipts/:id",
+    component: Receipts,
+    protected: true,
+  },
+  {
+    path: "/finances/receipts/create/receipt",
+    component: Receipts,
+    protected: true,
+  },
+  {
+    path: "/finances/receipts/:id/details",
+    component: Receipts,
     protected: true,
   },
 

@@ -3,7 +3,7 @@ import classnames from "classnames";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { createItem, getItems } from "@infrastructure/services/thunkService";
-import * as attendanceActions from "@domain/redux/attendance/attendance.actions";
+import * as attendancesActions from "@domain/redux/reports/attendances/attendances.actions";
 import * as eventActions from "@domain/redux/events/events.actions";
 import * as branchActions from "@domain/redux/branches/branches.actions";
 import { AppLoader, ButtonGroup } from "../../molecules";
@@ -45,7 +45,7 @@ const BranchReportView = () => {
   const onSubmit = (data) => {
     dispatch(
       createItem(
-        attendanceActions,
+        attendancesActions,
         `${parameters}/${attendanceparams}/${branchesparams}`,
         data,
       ),

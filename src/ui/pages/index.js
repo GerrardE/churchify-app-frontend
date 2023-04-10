@@ -18,3 +18,5 @@ export { default as ApiLogs } from "./ApiLogs";
 export { default as Configs } from "./Configs";
 export { default as Activities } from "./Activities";
 export { default as Trainings } from "./Trainings";
+export * from "./Reports/";
+export * from "./Finances";
