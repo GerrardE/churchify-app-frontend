@@ -8,6 +8,7 @@ import * as configsActions from "@domain/redux/configs/configs.actions";
 import * as branchActions from "@domain/redux/branches/branches.actions";
 import * as preacherActions from "@domain/redux/preachers/preachers.actions";
 import * as zonesActions from "@domain/redux/zones/zones.actions";
+import * as eventActions from "@domain/redux/events/events.actions";
 import constants from "./attendance.constants";
 import { Button } from "../../../atoms";
 import { AppLoader } from "../../../molecules";
@@ -24,6 +25,7 @@ const AttendanceCreate = ({ match, ...rest }) => {
   React.useEffect(() => {
     dispatch(getItems(zonesActions, `${zonesparams}`));
     dispatch(getItems(branchActions, `${branchesparams}`));
+    dispatch(getItems(eventActions, `${eventsparams}`));
     dispatch(getItems(preacherActions, `${preachersparams}`));
     dispatch(getItem(configsActions, `configs/${parameters}/config`));
   }, [dispatch, parameters, branchesparams, zonesparams, eventsparams, preachersparams]);
