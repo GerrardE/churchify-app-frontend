@@ -12,16 +12,12 @@ const constants = {
       accessor: "id",
     },
     {
+      Header: "Submittedby",
+      accessor: "usertraining.firstname",
+    },
+    {
       Header: "Branch",
-      accessor: "branchid",
-    },
-    {
-      Header: "Zone",
-      accessor: "zoneid",
-    },
-    {
-      Header: "Date",
-      accessor: "date",
+      accessor: "branchtraining.name",
     },
     {
       Header: "Converts",
@@ -32,16 +28,16 @@ const constants = {
       accessor: "trainees",
     },
     {
+      Header: "Training Date",
+      accessor: "date",
+    },
+    {
       Header: "CreatedAt",
       accessor: "createdAt",
     },
     {
       Header: "UpdatedAt",
       accessor: "updatedAt",
-    },
-    {
-      Header: "Notes",
-      accessor: "notes",
     },
   ],
 };

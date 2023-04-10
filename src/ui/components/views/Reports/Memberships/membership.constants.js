@@ -11,12 +11,12 @@ const constants = {
       accessor: "id",
     },
     {
-      Header: "Branch",
-      accessor: "branchid",
+      Header: "Submittedby",
+      accessor: "usermembership.firstname",
     },
     {
-      Header: "Zone",
-      accessor: "zoneid",
+      Header: "Branch",
+      accessor: "branchmembership.name",
     },
     {
       Header: "Adults",
@@ -35,8 +35,8 @@ const constants = {
       accessor: "newmembers",
     },
     {
-      Header: "Notes",
-      accessor: "notes",
+      Header: "Membership Date",
+      accessor: "date",
     },
     {
       Header: "CreatedAt",

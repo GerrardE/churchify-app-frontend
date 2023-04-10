@@ -11,12 +11,12 @@ const constants = {
       accessor: "id",
     },
     {
-      Header: "Branch",
-      accessor: "branchid",
+      Header: "Submittedby",
+      accessor: "usergroup.firstname",
     },
     {
-      Header: "Zone",
-      accessor: "zoneid",
+      Header: "Branch",
+      accessor: "branchgroup.name",
     },
     {
       Header: "Cmf",
@@ -47,12 +47,8 @@ const constants = {
       accessor: "rcf",
     },
     {
-      Header: "Date",
+      Header: "Group Date",
       accessor: "date",
-    },
-    {
-      Header: "Notes",
-      accessor: "notes",
     },
     {
       Header: "CreatedAt",
