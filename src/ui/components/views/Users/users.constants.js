@@ -16,10 +16,6 @@ const constants = {
   actions: true,
   tableData: [
     {
-      Header: "Id",
-      accessor: "id",
-    },
-    {
       Header: "First Name",
       accessor: "firstname",
     },
@@ -32,12 +28,20 @@ const constants = {
       accessor: "email",
     },
     {
+      Header: "Role",
+      accessor: "roles[0].name",
+    },
+    {
       Header: "Phone",
       accessor: "phone",
     },
     {
       Header: "Joined",
       accessor: "createdAt",
+    },
+    {
+      Header: "Updated",
+      accessor: "updatedAt",
     },
   ],
 };

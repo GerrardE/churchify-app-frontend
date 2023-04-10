@@ -3,6 +3,8 @@ const constants = {
   parameter: "attendance",
   zonesparams: "zones",
   branchesparams: "branches",
+  eventsparams: "events",
+  preachersparams: "preachers",
   editurl: "/reports/attendances",
   actions: true,
   tableData: [
@@ -11,20 +13,12 @@ const constants = {
       accessor: "id",
     },
     {
-      Header: "Preacher",
-      accessor: "preacherid",
+      Header: "Submittedby",
+      accessor: "attendance.firstname",
     },
     {
       Header: "Branch",
-      accessor: "branchid",
-    },
-    {
-      Header: "Zone",
-      accessor: "zoneid",
-    },
-    {
-      Header: "Event",
-      accessor: "eventid",
+      accessor: "branchattendance.name",
     },
     {
       Header: "Women",
@@ -39,12 +33,8 @@ const constants = {
       accessor: "children",
     },
     {
-      Header: "Date",
+      Header: "Attendance Date",
       accessor: "date",
-    },
-    {
-      Header: "Notes",
-      accessor: "notes",
     },
     {
       Header: "CreatedAt",

@@ -12,16 +12,12 @@ const constants = {
       accessor: "id",
     },
     {
+      Header: "Submittedby",
+      accessor: "userfreport.firstname",
+    },
+    {
       Header: "Branch",
-      accessor: "branchid",
-    },
-    {
-      Header: "Zone",
-      accessor: "zoneid",
-    },
-    {
-      Header: "Fellowship",
-      accessor: "fellowshipid",
+      accessor: "branchfreport.name",
     },
     {
       Header: "Newcells",
@@ -36,12 +32,8 @@ const constants = {
       accessor: "attendance",
     },
     {
-      Header: "Date",
+      Header: "Fellowship Date",
       accessor: "date",
-    },
-    {
-      Header: "Notes",
-      accessor: "notes",
     },
     {
       Header: "CreatedAt",
