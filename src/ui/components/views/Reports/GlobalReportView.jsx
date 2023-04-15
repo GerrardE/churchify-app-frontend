@@ -13,7 +13,6 @@ import Table from "../../molecules/Table";
 
 const GlobalReportView = () => {
   const {
-    parameters,
     attendanceparams,
     globalTableData,
     globalparam,
@@ -43,7 +42,7 @@ const GlobalReportView = () => {
     dispatch(
       createItem(
         attendancesActions,
-        `${parameters}/${attendanceparams}/${globalparam}`,
+        `${attendanceparams}/${globalparam}`,
         data,
       ),
     );
