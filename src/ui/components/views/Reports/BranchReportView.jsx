@@ -14,7 +14,6 @@ import Table from "../../molecules/Table";
 
 const BranchReportView = () => {
   const {
-    parameters,
     attendanceparams,
     branchesparams,
     branchTableData,
@@ -46,7 +45,7 @@ const BranchReportView = () => {
     dispatch(
       createItem(
         attendancesActions,
-        `${parameters}/${attendanceparams}/${branchesparams}`,
+        `${attendanceparams}/${branchesparams}`,
         data,
       ),
     );
