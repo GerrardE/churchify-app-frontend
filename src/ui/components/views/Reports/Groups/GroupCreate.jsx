@@ -35,7 +35,7 @@ const GroupCreate = ({ match, ...rest }) => {
   data.zonelist = zones.zones;
   data.branchlist = branches.branches;
   
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors, reset } = useForm();
 
   if (!isEmpty(match.params) && match.path === `/reports/${parameters}/:id`) {
     const { params } = match;
@@ -54,6 +54,7 @@ const GroupCreate = ({ match, ...rest }) => {
 
   const onSubmit = (data) => {
     dispatch(createItem(groupsActions, parameters, data));
+    reset();
   };
 
   return (

@@ -38,7 +38,7 @@ const TrainingReportsCreate = ({ match, ...rest }) => {
   data.branchlist = branches.branches;
   data.trainingtypelist = trainings.trainings;
   
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors, reset } = useForm();
 
   if (!isEmpty(match.params) && match.path === `/reports/${parameters}/:id`) {
     const { params } = match;
@@ -57,6 +57,7 @@ const TrainingReportsCreate = ({ match, ...rest }) => {
 
   const onSubmit = (data) => {
     dispatch(createItem(trainingreportsActions, parameters, data));
+    reset();
   };
 
   return (
