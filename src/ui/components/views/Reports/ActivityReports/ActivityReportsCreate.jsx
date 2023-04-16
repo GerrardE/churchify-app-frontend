@@ -38,7 +38,7 @@ const ActivityReportsCreate = ({ match, ...rest }) => {
   data.branchlist = branches.branches;
   data.activitytypelist = activities.activities;
   
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors, reset } = useForm();
 
   if (!isEmpty(match.params) && match.path === `/reports/${parameters}/:id`) {
     const { params } = match;
@@ -57,6 +57,7 @@ const ActivityReportsCreate = ({ match, ...rest }) => {
 
   const onSubmit = (data) => {
     dispatch(createItem(activityreportsActions, parameters, data));
+    reset();
   };
 
   return (

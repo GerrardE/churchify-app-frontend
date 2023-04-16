@@ -39,7 +39,7 @@ const FreportCreate = ({ match, ...rest }) => {
   data.branchlist = branches.branches;
   data.fellowshiplist = fellowships.fellowships;
   
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors, reset } = useForm();
 
   if (!isEmpty(match.params) && match.path === `/reports/${parameters}/:id`) {
     const { params } = match;
@@ -58,6 +58,7 @@ const FreportCreate = ({ match, ...rest }) => {
 
   const onSubmit = (data) => {
     dispatch(createItem(freportsActions, "freports", data));
+    reset();
   };
 
   return (

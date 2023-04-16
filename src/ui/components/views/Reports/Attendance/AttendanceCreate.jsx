@@ -42,7 +42,7 @@ const AttendanceCreate = ({ match, ...rest }) => {
   data.eventlist = events.events;
   data.preacherlist = preachers.preachers;
   
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors, reset } = useForm();
 
   if (!isEmpty(match.params) && match.path === `/reports/${parameters}/:id`) {
     const { params } = match;
@@ -59,8 +59,9 @@ const AttendanceCreate = ({ match, ...rest }) => {
 
   const fields = getFieldsArray(data, errors, register);
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     dispatch(createItem(attendancesActions, parameters, data));
+    reset();
   };
 
   return (
