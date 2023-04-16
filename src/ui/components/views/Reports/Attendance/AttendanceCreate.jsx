@@ -59,7 +59,7 @@ const AttendanceCreate = ({ match, ...rest }) => {
 
   const fields = getFieldsArray(data, errors, register);
 
-  const onSubmit = async (data) => {
+  const onSubmit = (data) => {
     dispatch(createItem(attendancesActions, parameters, data));
     reset();
   };
