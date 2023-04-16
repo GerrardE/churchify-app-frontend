@@ -3,7 +3,7 @@ import classnames from "classnames";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { createItem, getItems } from "@infrastructure/services/thunkService";
-import * as attendancesActions from "@domain/redux/reports/attendances/attendances.actions";
+import * as gactions from "@domain/redux/reports/attendances/globalattendancereports.actions";
 import * as eventActions from "@domain/redux/events/events.actions";
 import { AppLoader, ButtonGroup } from "../../molecules";
 import { Button, ErrorMessage, Inputfield, Label } from "../../atoms";
@@ -22,7 +22,7 @@ const GlobalReportView = () => {
 
   const {
     attendances: {
-      attendances: { payload },
+      globalattendancereports: { payload },
     },
     events: { events },
     loading,
@@ -41,7 +41,7 @@ const GlobalReportView = () => {
   const onSubmit = (data) => {
     dispatch(
       createItem(
-        attendancesActions,
+        gactions,
         `${attendanceparams}/${globalparam}`,
         data,
       ),
