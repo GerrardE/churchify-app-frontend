@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   createItem,
   getItems } from "@infrastructure/services/thunkService";
-import * as attendanceActions from "@domain/redux/reports/attendances/attendances.actions";
+import * as zactions from "@domain/redux/reports/attendances/zoneattendancereports.actions";
 import * as eventActions from "@domain/redux/events/events.actions";
 import * as zoneActions from "@domain/redux/zones/zones.actions";
 import { AppLoader, ButtonGroup } from "../../molecules";
@@ -30,7 +30,7 @@ const ReportView = ({ match, ...rest }) => {
   } = constants;
 
   const {
-    attendances: { attendances: { payload }},
+    attendances: { zoneattendancereports: { payload }},
     zones: { zones },
     events: { events },
     loading,
@@ -48,7 +48,7 @@ const ReportView = ({ match, ...rest }) => {
   const { event, zone, from, to } = errors;
 
   const onSubmit = (data) => {
-    dispatch(createItem(attendanceActions, `${attendanceparams}/${zonesparams}`, data));
+    dispatch(createItem(zactions, `${attendanceparams}/${zonesparams}`, data));
   };
 
   const columns = useMemo(() => tableData, [tableData]);
