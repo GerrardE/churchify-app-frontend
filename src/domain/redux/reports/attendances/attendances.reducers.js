@@ -2,9 +2,6 @@ import attendancesConstants from "./attendances.constants";
 
 const initialState = {
   attendances: [],
-  zoneattendancereports: [],
-  branchattendancereports: [],
-  globalattendancereports: [],
   attendance: {},
   loading: false,
   errors: "",
@@ -39,42 +36,6 @@ const attendancesReducer = (state = initialState, action) => {
     };
 
   case attendancesConstants.GET_ATTENDANCE_FAIL:
-    return {
-      ...state,
-      errors: action.payload,
-    };
-    
-  case attendancesConstants.CREATE_ATTENDANCE_ZONE_SUCCESS:
-    return {
-      ...state,
-      zoneattendancereports: action.payload,
-    };
-
-  case attendancesConstants.CREATE_ATTENDANCE_ZONE_FAIL:
-    return {
-      ...state,
-      errors: action.payload,
-    };
-    
-  case attendancesConstants.CREATE_ATTENDANCE_BRANCH_SUCCESS:
-    return {
-      ...state,
-      branchattendancereports: action.payload,
-    };
-
-  case attendancesConstants.CREATE_ATTENDANCE_BRANCH_FAIL:
-    return {
-      ...state,
-      errors: action.payload,
-    };
-    
-  case attendancesConstants.CREATE_ATTENDANCE_GLOBAL_SUCCESS:
-    return {
-      ...state,
-      globalattendancereports: action.payload,
-    };
-
-  case attendancesConstants.CREATE_ATTENDANCE_GLOBAL_FAIL:
     return {
       ...state,
       errors: action.payload,
