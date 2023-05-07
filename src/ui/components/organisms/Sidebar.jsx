@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Logo from "@ui/assets/static/images/logo.png";
-import { Admin, SuperAdmin, BranchAdmin, ZoneAdmin, User } from "./Sidebars";
+import { Admin, SuperAdmin, SystemAdmin, BranchAdmin, ZoneAdmin, User } from "./Sidebars";
 
 const Sidebar = ({ toggleCollapse, history }) => {
   // TODO: needs refactoring
@@ -124,6 +124,21 @@ const Sidebar = ({ toggleCollapse, history }) => {
             ) : ""}
             {(user.role === "super:admin") ? (
               <SuperAdmin
+                toggleRep={toggleRep}
+                toggleReports={toggleReports}
+                multiRep={multiRep}
+                toggleMultiRep={toggleMultiRep}
+                toggleFin={toggleFin}
+                toggleFinances={toggleFinances}
+                toggle={toggle}
+                toggleSettings={toggleSettings}
+                systems={systems}
+                toggleSystems={toggleSystems}
+                history={history}
+              />
+            ) : ""}
+            {(user.role === "system:admin") ? (
+              <SystemAdmin
                 toggleRep={toggleRep}
                 toggleReports={toggleReports}
                 multiRep={multiRep}
