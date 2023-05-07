@@ -124,6 +124,19 @@ const SuperAdmin = ({
             </a>
           </li>
           <li>
+            <a className="sidebar-link" onClick={() => history.push("/settings/roles")}>
+              Roles
+            </a>
+          </li>
+          <li>
+            <a
+              className="sidebar-link"
+              onClick={() => history.push("/settings/permissions")}
+            >
+              Permissions
+            </a>
+          </li>
+          <li>
             <a className="sidebar-link" onClick={() => history.push("/settings/zones")}>
               Zones
             </a>
@@ -185,6 +198,11 @@ const SuperAdmin = ({
           </span>
         </a>
         <ul className="dropdown-menu">
+          <li>
+            <a className="sidebar-link" onClick={() => history.push("/system/configs")}>
+              Configs
+            </a>
+          </li>
           <li>
             <a className="sidebar-link" onClick={() => history.push("/system/apilogs")}>
               ApiLogs

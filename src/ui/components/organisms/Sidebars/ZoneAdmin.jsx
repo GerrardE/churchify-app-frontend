@@ -10,6 +10,14 @@ const ZoneAdmin = ({
 }) => {
   return (
     <React.Fragment>
+      <li className="nav-item mT-30 actived">
+        <a className="sidebar-link" onClick={() => history.push("/dashboard")}>
+          <span className="icon-holder">
+            <i className="c-black-500 ti-home" />
+          </span>
+          <span className="title">Dashboard</span>
+        </a>
+      </li>
       <li
         className={classnames("nav-item mT-30 dropdown actived", {
           open: toggleRep,
