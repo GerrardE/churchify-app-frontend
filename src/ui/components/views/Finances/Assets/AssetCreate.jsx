@@ -36,7 +36,28 @@ const AssetCreate = ({ props: { history }}) => {
   const fields = getFieldsArray(data, errors, register);
 
   const onSubmit = (data) => {
-    dispatch(createItem(assetActions, `/finance/${parameters}`, data));
+    const { asabaproject,
+      building,
+      financeid,
+      generator,
+      motorvehicle,
+      musicaleqpt,
+      notes,
+      others,
+      upload } = data;
+
+    const formData = new FormData();
+    formData.append("asabaproject", asabaproject);
+    formData.append("building", building);
+    formData.append("financeid", financeid);
+    formData.append("generator", generator);
+    formData.append("motorvehicle", motorvehicle);
+    formData.append("musicaleqpt", musicaleqpt);
+    formData.append("notes", notes);
+    formData.append("others", others);
+    formData.append("upload", upload[0]);
+
+    dispatch(createItem(assetActions, `/finance/${parameters}`, formData));
   };
 
   return (

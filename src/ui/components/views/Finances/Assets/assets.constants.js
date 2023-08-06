@@ -16,6 +16,30 @@ const constants = {
       accessor: "financeid",
     },
     {
+      Header: "Building",
+      accessor: "building",
+    },
+    {
+      Header: "MotorVehicle",
+      accessor: "motorvehicle",
+    },
+    {
+      Header: "Generator",
+      accessor: "generator",
+    },
+    {
+      Header: "MusicalEqpt",
+      accessor: "musicaleqpt",
+    },
+    {
+      Header: "AsabaProject",
+      accessor: "asabaproject",
+    },
+    {
+      Header: "Others",
+      accessor: "others",
+    },
+    {
       Header: "Notes",
       accessor: "notes",
     },
