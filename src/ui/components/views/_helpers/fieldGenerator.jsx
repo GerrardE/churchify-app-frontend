@@ -94,6 +94,8 @@ const getFieldsArray = (
           </div>
         ) : conf.field.includes("id") ? (
           generateDropdown(conf.field.split("id")[0], data[`${conf.field.split("id")[0]}list`], user, conf, register, errors)
+        ) : conf.datatype == ("boolean") ? (
+          generateDropdown(conf.field, data["boolist"], user, conf, register, errors)
         ) : (
           <div
             className={classnames("form-group col-md-6", {
@@ -115,13 +117,7 @@ const getFieldsArray = (
                     : ""
               }
               inputType={
-                conf.datatype == "integer"
-                  ? "number"
-                  : conf.field.includes("password")
-                    ? "password"
-                    : conf.field.includes("date")
-                      ? "date"
-                      : "text"
+                (conf.datatype == "integer") ? "number" : (conf.field.includes("password") ? "password" : (conf.field.includes("date") ? "date" : (conf.datatype == "file" ? "file" : "text")))
               }
               inputClassName={classnames("form-control", {
                 "is-invalid": errors[conf.field],
@@ -149,7 +145,6 @@ const getFieldsArray = (
 
 const generateDropdown = (item, items = [{}], user, conf, register, errors) => {
   if(item === "zone") { return generateZoneDropdown(item, items, user, conf, register, errors); }
-
   return (
     <div className="form-group col-md-6" key={conf.key}>
       <Label labelClassName="text-normal text-dark">{item.toUpperCase()}</Label>

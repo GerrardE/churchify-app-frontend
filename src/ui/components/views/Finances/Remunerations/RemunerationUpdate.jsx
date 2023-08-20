@@ -33,6 +33,7 @@ const ReceiptUpdate = ({ id, props: { history } }) => {
   data.defaults = defaults;
   data.branchlist = branches.branches;
   data.zonelist = zones.zones;
+  data.boolist = [{ id: "Yes", name: "Yes" }, { id: "No", name: "No" }];
   data.financelist = finances.finances;
 
   const fields = getFieldsArray(data, errors, register);

@@ -36,7 +36,80 @@ const PaymentCreate = ({ props: { history }}) => {
   const fields = getFieldsArray(data, errors, register);
 
   const onSubmit = (data) => {
-    dispatch(createItem(paymentActions, `/finance/${parameters}`, data));
+    const {
+      nationalofficeremittance,
+      hqbuilding,
+      zonalhqremittance,
+      salariesallowances,
+      pastorpension,
+      crusadeandmissionary,
+      personalwelfare,
+      transport,
+      accomodation,
+      donations,
+      entertainment,
+      medicalwelfare,
+      stationery,
+      churchexpenses,
+      officeexpenses,
+      rentpersonage,
+      churchrent,
+      telephoneandinternet,
+      electricity,
+      fuels,
+      subscriptions,
+      security,
+      bankcharges,
+      groupexpenses,
+      loanadvanced,
+      loanrepayed,
+      furnituremaintenance,
+      eqptmaintenance,
+      motormaintenance,
+      churchbldmaintenance,
+      parsonagemaintenance,
+      upload,
+      financeid,
+      notes,
+    } = data;
+    const formData = new FormData();
+
+    formData.append("nationalofficeremittance", nationalofficeremittance);
+    formData.append("hqbuilding", hqbuilding);
+    formData.append("zonalhqremittance", zonalhqremittance);
+    formData.append("salariesallowances", salariesallowances);
+    formData.append("pastorpension", pastorpension);
+    formData.append("crusadeandmissionary", crusadeandmissionary);
+    formData.append("personalwelfare", personalwelfare);
+    formData.append("transport", transport);
+    formData.append("accomodation", accomodation);
+    formData.append("donations", donations);
+    formData.append("entertainment", entertainment);
+    formData.append("medicalwelfare", medicalwelfare);
+    formData.append("stationery", stationery);
+    formData.append("churchexpenses", churchexpenses);
+    formData.append("officeexpenses", officeexpenses);
+    formData.append("rentpersonage", rentpersonage);
+    formData.append("churchrent", churchrent);
+    formData.append("telephoneandinternet", telephoneandinternet);
+    formData.append("electricity", electricity);
+    formData.append("fuels", fuels);
+    formData.append("subscriptions", subscriptions);
+    formData.append("security", security);
+    formData.append("bankcharges", bankcharges);
+    formData.append("groupexpenses", groupexpenses);
+    formData.append("loanadvanced", loanadvanced);
+    formData.append("loanrepayed", loanrepayed);
+    formData.append("furnituremaintenance", furnituremaintenance);
+    formData.append("eqptmaintenance", eqptmaintenance);
+    formData.append("motormaintenance", motormaintenance);
+    formData.append("churchbldmaintenance", churchbldmaintenance);
+    formData.append("parsonagemaintenance", parsonagemaintenance);
+    formData.append("upload", upload[0]);
+    formData.append("financeid", financeid);
+    formData.append("notes", notes);
+
+    dispatch(createItem(paymentActions, `/finance/${parameters}`, formData));
   };
 
   return (

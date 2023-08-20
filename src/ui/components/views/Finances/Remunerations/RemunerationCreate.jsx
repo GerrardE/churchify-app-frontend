@@ -29,6 +29,7 @@ const RemunerationCreate = ({ props: { history }}) => {
 
   data.branchlist = branches.branches;
   data.zonelist = zones.zones;
+  data.boolist = [{ id: "Yes", name: "Yes" }, { id: "No", name: "No" }];
   data.financelist = finances.finances;
   
   const { register, handleSubmit, errors } = useForm();
@@ -36,7 +37,22 @@ const RemunerationCreate = ({ props: { history }}) => {
   const fields = getFieldsArray(data, errors, register);
 
   const onSubmit = (data) => {
-    dispatch(createItem(remunerationActions, `/finance/${parameters}`, data));
+    const {
+      financeid,
+      pastorpayed,
+      fulltimepastorcount,
+      upload,
+      notes,
+    } = data;
+    const formData = new FormData();
+
+    formData.append("fulltimepastorcount", fulltimepastorcount);
+    formData.append("pastorpayed", pastorpayed);
+    formData.append("upload", upload[0]);
+    formData.append("financeid", financeid);
+    formData.append("notes", notes);
+
+    dispatch(createItem(remunerationActions, `/finance/${parameters}`, formData));
   };
 
   return (

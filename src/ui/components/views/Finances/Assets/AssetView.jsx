@@ -21,6 +21,7 @@ const AssetView = ({ match, ...rest }) => {
     canview: false,
     canedit: true,
     candelete: true,
+    candownload: true,
   };
 
   const columns = React.useMemo(

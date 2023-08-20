@@ -169,8 +169,8 @@ const Table = ({ columns, data, actions, actionItems, props, constants }) => {
                             {actionItems.candownload && (
                               <a
                                 className="td-n c-green-500 cH-purple-500 fsz-md p-5"
-                                href={row.original.url}
-                                download
+                                href={`data:${row.original.mimetype};base64, ${row.original.buffer}`}
+                                download={row.original.originalname}
                               >
                                 <i className="ti-cloud-down" />
                               </a>
