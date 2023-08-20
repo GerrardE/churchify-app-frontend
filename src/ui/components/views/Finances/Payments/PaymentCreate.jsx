@@ -62,7 +62,7 @@ const PaymentCreate = ({ props: { history }}) => {
       bankcharges,
       groupexpenses,
       loanadvanced,
-      loanrepaid,
+      loanrepayed,
       furnituremaintenance,
       eqptmaintenance,
       motormaintenance,
@@ -99,7 +99,7 @@ const PaymentCreate = ({ props: { history }}) => {
     formData.append("bankcharges", bankcharges);
     formData.append("groupexpenses", groupexpenses);
     formData.append("loanadvanced", loanadvanced);
-    formData.append("loanrepaid", loanrepaid);
+    formData.append("loanrepayed", loanrepayed);
     formData.append("furnituremaintenance", furnituremaintenance);
     formData.append("eqptmaintenance", eqptmaintenance);
     formData.append("motormaintenance", motormaintenance);
@@ -109,7 +109,7 @@ const PaymentCreate = ({ props: { history }}) => {
     formData.append("financeid", financeid);
     formData.append("notes", notes);
 
-    dispatch(createItem(paymentActions, `/finance/${parameters}`, data));
+    dispatch(createItem(paymentActions, `/finance/${parameters}`, formData));
   };
 
   return (

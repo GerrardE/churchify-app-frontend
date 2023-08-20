@@ -12,8 +12,12 @@ const constants = {
       accessor: "id",
     },
     {
+      Header: "Submittedby",
+      accessor: "user_assets.firstname",
+    },
+    {
       Header: "Finance",
-      accessor: "financeid",
+      accessor: "finance_assets.name",
     },
     {
       Header: "Building",
@@ -42,6 +46,10 @@ const constants = {
     {
       Header: "Notes",
       accessor: "notes",
+    },
+    {
+      Header: "Createdat",
+      accessor: "createdAt",
     },
   ],
 };
