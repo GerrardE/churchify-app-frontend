@@ -12,7 +12,7 @@ import GlobalFilter from "./GlobalFilter";
 import AppModal from "./TableModal";
 
 const Table = ({ columns, data, actions, actionItems, props, constants }) => {
-  const { parameters, editurl, viewurl } = constants;
+  const { parameters, editurl, viewurl, deleteurl } = constants;
   const {
     getTableProps,
     getTableBodyProps,
@@ -58,7 +58,7 @@ const Table = ({ columns, data, actions, actionItems, props, constants }) => {
       title: "Confirm Action",
       btnText: "Delete",
       actions,
-      path: `${parameters}/${id}`,
+      path: deleteurl ? `${deleteurl}/${id}` : `${parameters}/${id}`,
       props: props,
     };
     storeConfig(modalConfig);

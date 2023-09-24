@@ -39,7 +39,22 @@ const ReceiptUpdate = ({ id, props: { history } }) => {
   const fields = getFieldsArray(data, errors, register);
 
   const onSubmit = (data) => {
-    dispatch(updateItem(remunerationActions, `/finance/${parameters}/${id}`, data));
+    const {
+      financeid,
+      pastorpayed,
+      fulltimepastorcount,
+      upload,
+      notes,
+    } = data;
+    const formData = new FormData();
+
+    formData.append("fulltimepastorcount", fulltimepastorcount);
+    formData.append("pastorpayed", pastorpayed);
+    formData.append("upload", upload[0]);
+    formData.append("financeid", financeid);
+    formData.append("notes", notes);
+
+    dispatch(updateItem(remunerationActions, `/finance/${parameters}/${id}`, formData));
   };
 
   return (

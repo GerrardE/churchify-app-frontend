@@ -3,6 +3,7 @@ const constants = {
   parameter: "remuneration",
   financesparams: "finances",
   editurl: "/finances/remunerations",
+  deleteurl: "/finance/remunerations",
   actions: true,
   tableData: [
     {
