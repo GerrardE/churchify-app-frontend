@@ -5,6 +5,7 @@ const constants = {
   financesparams: "finances",
   zonesparams: "zones",
   editurl: "/finances/payments",
+  deleteurl: "/finance/payments",
   actions: true,
   tableData: [
     {
@@ -44,7 +45,7 @@ const constants = {
     { Header: "bankcharges", accessor: "bankcharges"},
     { Header: "groupexpenses", accessor: "groupexpenses"},
     { Header: "loanadvanced", accessor: "loanadvanced"},
-    { Header: "loanrepaid", accessor: "loanrepaid"},
+    { Header: "loanrepayed", accessor: "loanrepayed"},
     { Header: "furnituremaintenance", accessor: "furnituremaintenance"},
     { Header: "eqptmaintenance", accessor: "eqptmaintenance"},
     { Header: "motormaintenance", accessor: "motormaintenance"},

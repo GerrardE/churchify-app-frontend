@@ -117,7 +117,7 @@ const getFieldsArray = (
                     : ""
               }
               inputType={
-                (conf.datatype == "integer") ? "number" : (conf.field.includes("password") ? "password" : (conf.field.includes("date") ? "date" : (conf.datatype == "file" ? "file" : "text")))
+                (conf.datatype == "integer") ? "number" : (conf.field.includes("password") ? "password" : ((conf.field.includes("date") || conf.datatype == "date") ? "date" : (conf.datatype == "file" ? "file" : "text")))
               }
               inputClassName={classnames("form-control", {
                 "is-invalid": errors[conf.field],

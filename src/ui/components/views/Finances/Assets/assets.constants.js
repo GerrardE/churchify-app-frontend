@@ -5,6 +5,7 @@ const constants = {
   financesparams: "finances",
   zonesparams: "zones",
   editurl: "/finances/assets",
+  deleteurl: "/finance/assets",
   actions: true,
   tableData: [
     {

@@ -38,7 +38,48 @@ const ReceiptUpdate = ({ id, props: { history } }) => {
   const fields = getFieldsArray(data, errors, register);
 
   const onSubmit = (data) => {
-    dispatch(updateItem(receiptActions, `/finance/${parameters}/${id}`, data));
+    const {
+      financeid,
+      month,
+      offerings,
+      tithes,
+      seedfaith,
+      thanksgiving,
+      annualthanksgiving,
+      buildingprojects,
+      otherprojects,
+      crusadeandmissionary,
+      ministrydeposits,
+      assetdisposal,
+      interestincome,
+      loanrepayedbydebtors,
+      loanreceived,
+      donationreceived,
+      upload,
+      notes,
+    } = data;
+    const formData = new FormData();
+
+    formData.append("financeid", financeid);
+    formData.append("month", month);
+    formData.append("offerings", offerings);
+    formData.append("tithes", tithes);
+    formData.append("seedfaith", seedfaith);
+    formData.append("thanksgiving", thanksgiving);
+    formData.append("annualthanksgiving", annualthanksgiving);
+    formData.append("buildingprojects", buildingprojects);
+    formData.append("otherprojects", otherprojects);
+    formData.append("crusadeandmissionary", crusadeandmissionary);
+    formData.append("ministrydeposits", ministrydeposits);
+    formData.append("assetdisposal", assetdisposal);
+    formData.append("interestincome", interestincome);
+    formData.append("loanrepayedbydebtors", loanrepayedbydebtors);
+    formData.append("loanreceived", loanreceived);
+    formData.append("donationreceived", donationreceived);
+    formData.append("upload", upload[0]);
+    formData.append("notes", notes);
+
+    dispatch(updateItem(receiptActions, `/finance/${parameters}/${id}`, formData));
   };
 
   return (
