@@ -30,6 +30,9 @@ import {
   Payments,
   Finances,
   Assets,
+  Countries,
+  Cities,
+  States,
 } from "../pages";
 
 const routes = [
@@ -613,7 +616,7 @@ const routes = [
     protected: true,
   },
   /**
-   * RECEIPTS
+   * FINANCES
    */
   {
     path: "/finances/receipts",
@@ -635,7 +638,78 @@ const routes = [
     component: Receipts,
     protected: true,
   },
-
+  /**
+   * LOCALISATIONS
+   * COUNTRIES
+   */
+  {
+    path: "/system/localisation/countries",
+    component: Countries,
+    protected: true,
+  },
+  {
+    path: "/system/localisation/countries/:id",
+    component: Countries,
+    protected: true,
+  },
+  {
+    path: "/system/localisation/countries/create/country",
+    component: Countries,
+    protected: true,
+  },
+  {
+    path: "/system/localisation/countries/:id/details",
+    component: Countries,
+    protected: true,
+  },
+  /**
+   * LOCALISATIONS
+   * STATES
+   */
+  {
+    path: "/system/localisation/states",
+    component: States,
+    protected: true,
+  },
+  {
+    path: "/system/localisation/states/:id",
+    component: States,
+    protected: true,
+  },
+  {
+    path: "/system/localisation/states/create/state",
+    component: States,
+    protected: true,
+  },
+  {
+    path: "/system/localisation/states/:id/details",
+    component: States,
+    protected: true,
+  },
+  /**
+   * LOCALISATIONS
+   * CITIES
+   */
+  {
+    path: "/system/localisation/cities",
+    component: Cities,
+    protected: true,
+  },
+  {
+    path: "/system/localisation/cities/:id",
+    component: Cities,
+    protected: true,
+  },
+  {
+    path: "/system/localisation/cities/create/city",
+    component: Cities,
+    protected: true,
+  },
+  {
+    path: "/system/localisation/cities/:id/details",
+    component: Cities,
+    protected: true,
+  },
   /* DEFAULTS */
   {
     path: "/servererror",

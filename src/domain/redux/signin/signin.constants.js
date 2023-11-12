@@ -5,6 +5,7 @@ const signinConstants = {
   SIGNIN_WITH_GOOGLE_SUCCESS: "SIGNIN_WITH_GOOGLE_SUCCESS",
   SIGNIN_WITH_GOOGLE_FAIL: "SIGNIN_WITH_GOOGLE_FAIL",
   countryparams: "countries",
+  stateparams: "states",
 };
 
 export default signinConstants;

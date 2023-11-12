@@ -4,7 +4,8 @@ import { postResource } from "@infrastructure/services/api.service";
 import { authProvider } from "@infrastructure/firebase/config";
 import { getItems } from "@infrastructure/services/thunkService";
 import * as signinActions from "./signin.actions";
-import * as countriesActions from "../countries/countries.actions";
+import * as countriesActions from "../localisation/countries/countries.actions";
+// import * as statesActions from "../localisation/states/states.actions";
 import signinConstants from "./signin.constants";
 
 const signin = (data, history) => async (dispatch) => {
@@ -16,6 +17,7 @@ const signin = (data, history) => async (dispatch) => {
       history.push("/dashboard");
     }
     dispatch(getItems(countriesActions, signinConstants.countryparams));
+    // dispatch(getItems(statesActions, signinConstants.stateparams));
     dispatch(signinActions.signinLoading(false));
   } catch (errors) {
     dispatch(signinActions.signinFail(errors));
