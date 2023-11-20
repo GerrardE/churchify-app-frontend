@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { getItems, getItem, createItem } from "@infrastructure/services/thunkService";
+import { getItem, createItem } from "@infrastructure/services/thunkService";
 import * as countryActions from "@domain/redux/localisation/countries/countries.actions";
 import * as configsActions from "@domain/redux/configs/configs.actions";
 import constants from "./countries.constants";
@@ -17,7 +17,6 @@ const CountryCreate = ({ props: { history }}) => {
 
   React.useEffect(() => {
     dispatch(getItem(configsActions, `configs/${parameters}/config`));
-    dispatch(getItems(countryActions, `${parameters}`));
   }, [dispatch, parameters]);
   
   const { countries, configs } = useSelector((state) => state);
@@ -31,7 +30,7 @@ const CountryCreate = ({ props: { history }}) => {
   const fields = getFieldsArray(data, errors, register);
 
   const onSubmit = (data) => {
-    dispatch(createItem(countryActions, `/countries/${parameters}`, data));
+    dispatch(createItem(countryActions, `/${parameters}`, data));
   };
 
   return (
@@ -39,7 +38,7 @@ const CountryCreate = ({ props: { history }}) => {
       <div className="row">
         <div className="col-md-12 mb-2 mt-2">
           <a
-            onClick={() => history.push(`/countries/${parameters}`)}
+            onClick={() => history.push(`/system/localisation/${parameters}`)}
             className="btn btn-outline-primary float-right"
             role="button"
             aria-pressed="true"

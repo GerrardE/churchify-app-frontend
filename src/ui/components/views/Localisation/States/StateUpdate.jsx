@@ -22,13 +22,15 @@ const StateUpdate = ({ id, props: { history } }) => {
 
   const { register, handleSubmit, errors } = useForm();
 
-  const { countries, configs } = useSelector((state) => state);
+  const { states, configs, countries } = useSelector((state) => state);
 
   const { config: data } = configs;
 
-  const { country: defaults, loading } = countries;
+  const { state_: defaults, loading } = states;
   
   data.defaults = defaults;
+
+  data.country_list = countries.countries;
 
   const fields = getFieldsArray(data, errors, register);
 

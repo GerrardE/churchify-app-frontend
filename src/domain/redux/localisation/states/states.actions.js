@@ -27,10 +27,50 @@ const getItemFail = (data) => ({
   payload: data,
 });
 
+
+/* CREATE ITEM */
+const createItemSuccess = (data) => ({
+  type: statesConstants.CREATE_STATE_SUCCESS,
+  payload: data,
+});
+
+const createItemFail = (data) => ({
+  type: statesConstants.CREATE_STATE_FAIL,
+  payload: data,
+});
+
+/* UPDATE ITEM */
+const updateItemSuccess = (data) => ({
+  type: statesConstants.UPDATE_STATE_SUCCESS,
+  payload: data,
+});
+
+const updateItemFail = (data) => ({
+  type: statesConstants.UPDATE_STATE_FAIL,
+  payload: data,
+});
+
+/* DELETE ITEM */
+const deleteItemSuccess = (data) => ({
+  type: statesConstants.DELETE_STATE_SUCCESS,
+  payload: data,
+});
+
+const deleteItemFail = (data) => ({
+  type: statesConstants.DELETE_STATE_FAIL,
+  payload: data,
+});
+
 export {
   loading,
   getItemsSuccess,
   getItemSuccess,
   getItemsFail,
   getItemFail,
+  createItemSuccess,
+  createItemFail,
+  updateItemSuccess,
+  updateItemFail,
+  deleteItemSuccess,
+  deleteItemFail,
 };

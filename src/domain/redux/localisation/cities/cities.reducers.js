@@ -40,7 +40,42 @@ const citiesReducer = (state = initialState, action) => {
       ...state,
       errors: action.payload,
     };
+  
+  /* CREATE ITEM */
+  case citiesConstants.CREATE_CITY_SUCCESS:
+    return {
+      ...state,
+    };
 
+  case citiesConstants.CREATE_CITY_FAIL:
+    return {
+      ...state,
+      errors: action.payload,
+    };
+
+  /* UPDATE ITEM */
+  case citiesConstants.UPDATE_CITY_SUCCESS:
+    return {
+      ...state,
+    };
+
+  case citiesConstants.UPDATE_CITY_FAIL:
+    return {
+      ...state,
+      errors: action.payload,
+    };
+
+  /* DELETE ITEM */
+  case citiesConstants.DELETE_CITY_SUCCESS:
+    return {
+      ...state,
+    };
+
+  case citiesConstants.DELETE_CITY_FAIL:
+    return {
+      ...state,
+      errors: action.payload,
+    };
   default:
     return state;
   }

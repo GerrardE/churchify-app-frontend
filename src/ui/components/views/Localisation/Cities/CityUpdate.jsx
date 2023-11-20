@@ -22,13 +22,17 @@ const CityUpdate = ({ id, props: { history } }) => {
 
   const { register, handleSubmit, errors } = useForm();
 
-  const { cities, configs } = useSelector((state) => state);
+  const { cities, configs, countries, states } = useSelector((state) => state);
 
   const { config: data } = configs;
 
   const { city: defaults, loading } = cities;
   
   data.defaults = defaults;
+
+  data.state_list = states.states_;
+
+  data.country_list = countries.countries;
 
   const fields = getFieldsArray(data, errors, register);
 
@@ -44,7 +48,7 @@ const CityUpdate = ({ id, props: { history } }) => {
         </div>
         <div className="col-md-6">
           <a
-            onClick={() => history.push(`/finances/${parameters}`)}
+            onClick={() => history.push(`/system/localisation/${parameters}`)}
             className="btn btn-outline-primary float-right"
             role="button"
             aria-pressed="true"

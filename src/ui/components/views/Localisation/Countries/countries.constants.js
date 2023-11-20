@@ -2,7 +2,7 @@ const constants = {
   parameters: "countries",
   parameter: "country",
   editurl: "/system/localisation/countries",
-  deleteurl: "/system/localisation/countries",
+  deleteurl: "/countries",
   actions: true,
   tableData: [
     {

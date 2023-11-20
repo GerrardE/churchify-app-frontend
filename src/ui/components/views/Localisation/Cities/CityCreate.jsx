@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { getItems, getItem, createItem } from "@infrastructure/services/thunkService";
-import * as countryActions from "@domain/redux/localisation/cities/cities.actions";
+import { getItem, createItem } from "@infrastructure/services/thunkService";
+import * as cityActions from "@domain/redux/localisation/cities/cities.actions";
 import * as configsActions from "@domain/redux/configs/configs.actions";
 import constants from "./cities.constants";
 import { Button } from "../../../atoms";
@@ -17,10 +17,9 @@ const CityCreate = ({ props: { history }}) => {
 
   React.useEffect(() => {
     dispatch(getItem(configsActions, `configs/${parameters}/config`));
-    dispatch(getItems(countryActions, `${parameters}`));
   }, [dispatch, parameters]);
   
-  const { cities, configs } = useSelector((state) => state);
+  const { cities, configs, countries, states } = useSelector((state) => state);
   
   const { loading } = cities;
   
@@ -28,10 +27,14 @@ const CityCreate = ({ props: { history }}) => {
   
   const { register, handleSubmit, errors } = useForm();
 
+  data.country_list = countries.countries;
+
+  data.state_list = states.states_;
+
   const fields = getFieldsArray(data, errors, register);
 
   const onSubmit = (data) => {
-    dispatch(createItem(countryActions, `/cities/${parameters}`, data));
+    dispatch(createItem(cityActions, `/${parameters}`, data));
   };
 
   return (
@@ -39,7 +42,7 @@ const CityCreate = ({ props: { history }}) => {
       <div className="row">
         <div className="col-md-12 mb-2 mt-2">
           <a
-            onClick={() => history.push(`/cities/${parameters}`)}
+            onClick={() => history.push(`/system/localisation/${parameters}`)}
             className="btn btn-outline-primary float-right"
             role="button"
             aria-pressed="true"

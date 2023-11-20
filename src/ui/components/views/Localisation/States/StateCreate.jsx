@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { getItems, getItem, createItem } from "@infrastructure/services/thunkService";
-import * as countryActions from "@domain/redux/localisation/states/states.actions";
+import { getItem, createItem } from "@infrastructure/services/thunkService";
+import * as stateActions from "@domain/redux/localisation/states/states.actions";
 import * as configsActions from "@domain/redux/configs/configs.actions";
 import constants from "./states.constants";
 import { Button } from "../../../atoms";
@@ -17,21 +17,22 @@ const StateCreate = ({ props: { history }}) => {
 
   React.useEffect(() => {
     dispatch(getItem(configsActions, `configs/${parameters}/config`));
-    dispatch(getItems(countryActions, `${parameters}`));
   }, [dispatch, parameters]);
   
-  const { states, configs } = useSelector((state) => state);
+  const { states, configs, countries } = useSelector((state) => state);
   
   const { loading } = states;
   
   const { config: data } = configs;
+
+  data.country_list = countries.countries;
   
   const { register, handleSubmit, errors } = useForm();
 
   const fields = getFieldsArray(data, errors, register);
 
   const onSubmit = (data) => {
-    dispatch(createItem(countryActions, `/states/${parameters}`, data));
+    dispatch(createItem(stateActions, `/${parameters}`, data));
   };
 
   return (

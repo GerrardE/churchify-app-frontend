@@ -21,7 +21,7 @@ const CityView = ({ match, ...rest }) => {
     canview: false,
     canedit: true,
     candelete: true,
-    candownload: true,
+    candownload: false,
   };
 
   const columns = React.useMemo(

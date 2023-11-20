@@ -44,7 +44,7 @@ const CountryUpdate = ({ id, props: { history } }) => {
         </div>
         <div className="col-md-6">
           <a
-            onClick={() => history.push(`/finances/${parameters}`)}
+            onClick={() => history.push(`/system/localisation/${parameters}`)}
             className="btn btn-outline-primary float-right"
             role="button"
             aria-pressed="true"
