@@ -41,6 +41,41 @@ const statesReducer = (state = initialState, action) => {
       errors: action.payload,
     };
 
+  /* CREATE ITEM */
+  case statesConstants.CREATE_STATE_SUCCESS:
+    return {
+      ...state,
+    };
+
+  case statesConstants.CREATE_STATE_FAIL:
+    return {
+      ...state,
+      errors: action.payload,
+    };
+
+  /* UPDATE ITEM */
+  case statesConstants.UPDATE_STATE_SUCCESS:
+    return {
+      ...state,
+    };
+
+  case statesConstants.UPDATE_STATE_FAIL:
+    return {
+      ...state,
+      errors: action.payload,
+    };
+
+  /* DELETE ITEM */
+  case statesConstants.DELETE_STATE_SUCCESS:
+    return {
+      ...state,
+    };
+
+  case statesConstants.DELETE_STATE_FAIL:
+    return {
+      ...state,
+      errors: action.payload,
+    };
   default:
     return state;
   }

@@ -15,7 +15,7 @@ const logger = createLogger({
 const persistConfig = {
   key: "root",
   storage: storage,
-  whitelist: ["signin", "countries", "configs"],
+  whitelist: ["signin", "cities", "countries", "configs", "states"],
 };
 
 const persistedReducer = persistReducer(persistConfig, index);

@@ -1,6 +1,6 @@
-import * as statesActions from "@domain/redux/states/states.actions";
+import * as statesActions from "@domain/redux/localisation/states/states.actions";
 import * as branchActions from "@domain/redux/branches/branches.actions";
-import * as citiesActions from "@domain/redux/cities/cities.actions";
+import * as citiesActions from "@domain/redux/localisation/cities/cities.actions";
 import { getItems } from "@infrastructure/services/thunkService";
 import { store } from "@application/config/store/store";
 

@@ -25,3 +25,4 @@ export {
   AttendanceCreate,
 } from "./Reports";
 export * from "./Finances";
+export * from "./Localisation";

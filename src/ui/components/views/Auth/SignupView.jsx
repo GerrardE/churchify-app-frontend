@@ -10,7 +10,7 @@ import {
 import * as usersActions from "@domain/redux/users/users.actions";
 import * as configsActions from "@domain/redux/configs/configs.actions";
 import * as zonesActions from "@domain/redux/zones/zones.actions";
-import * as countriesActions from "@domain/redux/countries/countries.actions";
+import * as countriesActions from "@domain/redux/localisation/countries/countries.actions";
 import { Button } from "../../atoms";
 import AppLoader from "../../molecules/AppLoader";
 import constants from "./auth.constants";

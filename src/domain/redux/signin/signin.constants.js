@@ -4,7 +4,9 @@ const signinConstants = {
   SIGNIN_FAIL: "SIGNIN_FAIL",
   SIGNIN_WITH_GOOGLE_SUCCESS: "SIGNIN_WITH_GOOGLE_SUCCESS",
   SIGNIN_WITH_GOOGLE_FAIL: "SIGNIN_WITH_GOOGLE_FAIL",
-  countryparams: "countries",
+  countriesparams: "countries",
+  statesparams: "states",
+  citiesparams: "cities",
 };
 
 export default signinConstants;

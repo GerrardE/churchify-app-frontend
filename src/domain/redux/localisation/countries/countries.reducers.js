@@ -41,6 +41,42 @@ const countriesReducer = (state = initialState, action) => {
       errors: action.payload,
     };
 
+  /* CREATE ITEM */
+  case countriesConstants.CREATE_COUNTRY_SUCCESS:
+    return {
+      ...state,
+    };
+
+  case countriesConstants.CREATE_COUNTRY_FAIL:
+    return {
+      ...state,
+      errors: action.payload,
+    };
+
+  /* UPDATE ITEM */
+  case countriesConstants.UPDATE_COUNTRY_SUCCESS:
+    return {
+      ...state,
+    };
+
+  case countriesConstants.UPDATE_COUNTRY_FAIL:
+    return {
+      ...state,
+      errors: action.payload,
+    };
+
+  /* DELETE ITEM */
+  case countriesConstants.DELETE_COUNTRY_SUCCESS:
+    return {
+      ...state,
+    };
+
+  case countriesConstants.DELETE_COUNTRY_FAIL:
+    return {
+      ...state,
+      errors: action.payload,
+    };
+
   default:
     return state;
   }

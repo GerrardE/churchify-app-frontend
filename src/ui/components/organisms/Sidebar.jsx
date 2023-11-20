@@ -19,6 +19,8 @@ const Sidebar = ({ toggleCollapse, history }) => {
 
   const [systems, setToggleSystems] = React.useState(false);
 
+  const [localisation, setToggleLocalisation] = React.useState(false);
+
   
   const toggleSettings = () => setToggle((prevState) => !prevState);
   
@@ -31,6 +33,8 @@ const Sidebar = ({ toggleCollapse, history }) => {
   // const toggleMultiRepGen = () => setToggleMultiRepGen((prevState) => !prevState);
   
   const toggleSystems = () => setToggleSystems((prevState) => !prevState);
+
+  const toggleLocalisation = () => setToggleLocalisation((prevState) => !prevState);
 
   const { user } = useSelector((state) => state.signin);
 
@@ -149,6 +153,8 @@ const Sidebar = ({ toggleCollapse, history }) => {
                 toggleSettings={toggleSettings}
                 systems={systems}
                 toggleSystems={toggleSystems}
+                localisation={localisation}
+                toggleLocalisation={toggleLocalisation}
                 history={history}
               />
             ) : ""}
