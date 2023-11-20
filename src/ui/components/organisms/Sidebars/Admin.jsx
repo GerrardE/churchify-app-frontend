@@ -7,6 +7,7 @@ const Admin = ({
   toggleFin, toggleFinances,
   toggle, toggleSettings,
   systems, toggleSystems,
+  localisation, toggleLocalisation,
   history,
 }) => {
   return (
@@ -180,6 +181,29 @@ const Admin = ({
           </span>
         </a>
         <ul className="dropdown-menu">
+          <li
+            className={classnames("nav-item dropdown", {
+              open: localisation,
+            })}
+          >
+            <a className="sidebar-link" onClick={toggleLocalisation}>
+              <span>Localisation</span>
+              <span className="arrow">
+                <i className="ti-angle-right" />
+              </span>
+            </a>
+            <ul className="dropdown-menu">
+              <li>
+                <a onClick={() => history.push("/system/localisation/countries")}>Country</a>
+              </li>
+              <li>
+                <a onClick={() => history.push("/system/localisation/states")}>State</a>
+              </li>
+              <li>
+                <a onClick={() => history.push("/system/localisation/cities")}>City</a>
+              </li>
+            </ul>
+          </li>
           <li>
             <a className="sidebar-link" onClick={() => history.push("/system/apilogs")}>
               ApiLogs
@@ -202,6 +226,8 @@ Admin.propTypes = {
   toggleSettings: PropTypes.func.isRequired,
   systems: PropTypes.bool.isRequired,
   toggleSystems: PropTypes.func.isRequired,
+  localisation: PropTypes.bool.isRequired,
+  toggleLocalisation: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.oneOfType([PropTypes.func]).isRequired,
   }).isRequired,
