@@ -123,6 +123,8 @@ const Sidebar = ({ toggleCollapse, history }) => {
                 toggleSettings={toggleSettings}
                 systems={systems}
                 toggleSystems={toggleSystems}
+                localisation={localisation}
+                toggleLocalisation={toggleLocalisation}
                 history={history}
               />
             ) : ""}
@@ -138,6 +140,8 @@ const Sidebar = ({ toggleCollapse, history }) => {
                 toggleSettings={toggleSettings}
                 systems={systems}
                 toggleSystems={toggleSystems}
+                localisation={localisation}
+                toggleLocalisation={toggleLocalisation}
                 history={history}
               />
             ) : ""}
