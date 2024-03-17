@@ -5,6 +5,7 @@
   "main": "app.js",
   "homepage": "git+https://github.com/GerrardE/churchify-app-frontend.git#readme",
   "scripts": {
+    "start": "pm2 serve ./dist 8000 --name client --spa",
     "start:dev": "webpack-dev-server --config webpack.dev.js",
     "predeploy": "npm run build",
     "build": "npm run clean && webpack --config webpack.prod.js",
